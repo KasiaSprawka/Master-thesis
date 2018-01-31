@@ -1,0 +1,118 @@
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\usepackage{graphicx}
+\graphicspath{ {img/} }
+
+\usepackage{lettrine}
+\usepackage{lmodern}
+
+\usepackage[sc]{mathpazo}
+\usepackage{microtype}
+\usepackage{amsmath, amsfonts, amsthm, amssymb}
+\usepackage{fancyhdr}
+
+\usepackage{enumerate}
+\usepackage{paralist}
+\usepackage{url}
+
+
+\usepackage{savesym}
+
+
+\usepackage{textcomp}
+\usepackage{verbatim}
+
+\usepackage[breaklinks]{hyperref}
+
+\hypersetup{
+%	bookmarks = true,         % show bookmarks bar?
+	unicode = true,          % non-Latin characters in Acrobat’s bookmarks
+	pdftoolbar = true,        % show Acrobat’s toolbar?
+	pdfmenubar = true,        % show Acrobat’s menu?
+	pdffitwindow = false,     % window fit to page when opened
+	pdfstartview = {FitH},    % fits the width of the page to the window
+	pdftitle = {Numerical...},    % title
+	pdfauthor = {Katarzyna Sprawka},     % author
+	pdfsubject = {},   % subject of the document
+	pdfcreator = {LaTeX},   % creator of the document
+	pdfproducer = {LaTeX}, % producer of the document
+	pdfkeywords = {Pharmacokinetic moddeling} {GFR}, % list of keywords
+	pdfnewwindow = true,      % links in new window
+	colorlinks = true,       % false: boxed links; true: colored links
+	linkcolor = black,          % color of internal links
+	citecolor = black,        % color of links to bibliography
+	filecolor = black,      % color of file links
+	urlcolor = NavyBlue           % color of external links
+}
+
+\urlstyle{same}
+
+
+
+
+
+%%%%%%%%%%%OD MATEUSZA
+
+
+
+\usepackage{afterpage}
+\usepackage{booktabs}
+\usepackage{calc}
+\usepackage[center, font=normal, labelfont=bf, labelsep=period, textformat=period, belowskip=6pt, aboveskip=6pt]{caption}
+\usepackage{comment}
+\usepackage{environ}
+\usepackage{fancyhdr}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{graphics}
+\usepackage[normalem]{ulem}
+\usepackage{setspace}
+\usepackage[usenames, dvipsnames]{xcolor}
+\usepackage{tikz}
+\usepackage{pgf}
+\usepackage[numbers, sort & compress]{natbib}
+\usepackage{lipsum}
+
+
+%%%%%%%%%%%%%%%%%%
+% SETTINGS
+%%%%%%%%%%%%%%%%%%
+
+\usepackage[twoside, paper = a4paper, inner = 3cm, outer = 2.5cm, ]{geometry}
+
+% Flagi
+\newif \ifantyplagiat \antyplagiatfalse
+
+% Ustawienia strony
+\ifantyplagiat
+	\pagestyle{empty}
+\else
+	\pagestyle{fancy}
+	\headheight 35pt
+	\headwidth \textwidth
+	
+	%\fancyhf{}
+	\fancyhead[LE,RO]{{\small{\author}}\linebreak{\small\textsl{\title}}}
+	\fancyhead[RE,LO]{}
+	%\rhead{}
+	%\chead{}
+	%\lhead{{\small{\author}}\linebreak{\small\textsl{\title}}}
+\fi
+
+\textheight 21cm
+%\textwidth 15cm
+\topmargin -.5cm
+%\oddsidemargin .75cm
+%\evensidemargin .5cm
+\marginparwidth = -1cm
+\setlength{\parskip}{3pt}           %odstęp pomiędzy akapitami
+\linespread{1.5}                    %odstęp pomiędzy liniami (interlinia)
+\frenchspacing
+\urlstyle{same}
+
+
+%%%%%%%%%%%%%%%%%%
+% SETTINGS
+%%%%%%%%%%%%%%%%%%
+\newcommand{\ang}[1]{ang.~\textit{{#1}}}

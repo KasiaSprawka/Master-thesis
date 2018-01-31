@@ -1,0 +1,134 @@
+\documentclass[12pt, a4paper, twoside, titlepage]{report}
+
+%
+% File containing all the package declarations
+%
+\usepackage{./tex/mystyle}
+
+%----------------------------------------------------------------------------------------
+%	DEFINITIONS
+%----------------------------------------------------------------------------------------
+
+\def \author {Katarzyna Sprawka}
+\def \title {Numerical.........}
+\def \titlepl {Numeryczna.........}
+\def \supervisor {Prof. hab. dr inż. Andrzej Materka}
+\def \auxiliarySupervisor {Dr inż. Marek Kociński}
+
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+
+% Title page
+\include{tex/title_page}
+
+% Abstract 
+\include{tex/abstract}	
+
+% Acknowledgements
+\include{tex/acknowledgements}	
+
+% Content 
+\addcontentsline{toc}{chapter}{Contents}
+	\begin{spacing}{1.1}
+		\tableofcontents
+	\end{spacing}
+\newpage
+
+
+%Introduction
+\include{tex/introduction}
+
+% Chapter 1-Aims
+%\include{tex/aims}
+
+% Chapter - The kidney
+\include{tex/kidney}
+
+% Chapter - DCE-MRI
+\include{tex/DCE-MRI}
+
+% Chapter - The kidney
+%\include{tex/kidney}
+
+% Chapter - The kidney
+%\include{tex/kidney}
+
+% Chapter - The kidney
+%\include{tex/kidney}
+
+
+% Bibliography
+\newpage
+\phantomsection \label{sec:References}
+\addcontentsline{toc}{chapter}{References}
+\begin{spacing}{1.2}
+\bibliographystyle{ieeetr}
+\bibliography{./tex/references}
+\end{spacing}
+
+
+
+
+
+
+%----------------------------------------------------------------------------------------
+%	Section: Methods
+%----------------------------------------------------------------------------------------
+\newpage
+%\section{Methods}
+%\label{sec:Methods}
+%\input{./tex/methods}
+
+%----------------------------------------------------------------------------------------
+%	Section: Results
+%----------------------------------------------------------------------------------------
+
+\newpage
+%\section{Results}
+%\label{sec:Results}
+%\input{./tex/results}
+
+%----------------------------------------------------------------------------------------
+%	Section: Conclusions
+%----------------------------------------------------------------------------------------
+
+\newpage
+%\section{Conclusions}
+%\label{sec:Conclusions}
+%\input{./tex/conclusions}
+
+%----------------------------------------------------------------------------------------
+%	Section: Summary
+%----------------------------------------------------------------------------------------
+
+\newpage
+%\section{Summary}
+%\label{sec:Summary}
+%\input{./tex/summary}
+
+
+%----------------------------------------------------------------------------------------
+%	REFERENCE LIST
+%----------------------------------------------------------------------------------------
+%\newpage
+%\addcontentsline{toc}{section}{References}
+%\bibliographystyle{ieeetr}
+%\bibliography{./tex/references}
+
+%----------------------------------------------------------------------------------------
+%	APPENDICES
+%----------------------------------------------------------------------------------------
+
+%\newpage
+%\section*{Appendices}
+%\addcontentsline{toc}{section}{Appendices}
+%\label{sec:Appendices}
+%\input{./tex/appendices}
+
+
+\end{document}

@@ -1,0 +1,96 @@
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+
+\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
+\definecolor{jazzberryjam}{rgb}{0.65, 0.04, 0.37}
+\definecolor{magenta(dye)}{rgb}{0.79, 0.08, 0.48}
+
+
+
+\usepackage{savesym}
+\usepackage{amsmath, amsfonts, amsthm, amssymb}
+\usepackage[sc]{mathpazo} % Use the Palatino font
+\linespread{1.05} % Line spacing - Palatino needs more space between lines
+\usepackage{microtype} % Slightly tweak font spacing for aesthetics
+\usepackage{textcomp}
+
+\usepackage[hmarginratio=1:1,top=32mm,columnsep=20pt]{geometry} % Document margins
+\usepackage{multicol} % Used for the two-column layout of the document
+\usepackage[hang, small,labelfont=bf,up,textfont=it,up]{caption} % Custom captions under/above floats in tables or figures
+\usepackage{subfig}
+%\usepackage{subcaption}
+\usepackage{booktabs} % Horizontal rules in tables
+\usepackage{float} % Required for tables and figures in the multi-column environment - they need to be placed in specific locations with the [H] (e.g. \begin{table}[H])
+\usepackage{abstract} % Allows abstract customization
+\usepackage[numbers, sort&compress]{natbib}
+
+\usepackage{lettrine} % The lettrine is the first enlarged letter at the beginning of the text
+\usepackage{adforn} % For ornaments
+\usepackage{paralist} % Used for the compactitem environment which makes bullet points with less space between them
+\usepackage{enumerate}
+\usepackage{setspace}
+
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\usepackage{soul}
+\usepackage[breaklinks=true]{hyperref} % For hyperlinks in the PDF
+\usepackage{url}
+%\usepackage[hyphenbreaks]{breakurl}
+
+\usepackage{footnote}
+
+\usepackage{amsmath, mathtools}
+\numberwithin{equation}{section}
+
+\usepackage{abstract} % Allows abstract customization
+\renewcommand{\abstractnamefont}{\normalfont\bfseries} % Set the "Abstract" text to bold
+\renewcommand{\abstracttextfont}{\normalfont\small\itshape} % Set the abstract itself to small italic text
+
+\newcommand{\ftextnumero}[1]{{\fontfamily{tcmr}\selectfont\textnumero{}~#1}}
+
+\usepackage{fancyhdr} % Headers and footers
+\usepackage{verbatim}
+
+
+\frenchspacing
+\onehalfspacing
+\setlength{\parskip}{0.3em}
+\setlength{\skip\footins}{1cm}
+
+\usepackage{titlesec} % Allows customization of titles
+\renewcommand\thesection{\arabic{section}} % Roman numerals for the sections
+\renewcommand\thesubsection{\arabic{section}.\arabic{subsection}} % Roman numerals for subsections
+\titleformat{\section}[block]{\Large\scshape\centering}{\thesection.}{1em}{} % Change the look of the section titles
+\titleformat{\subsection}[block]{\large}{\thesubsection.}{1em}{} % Change the look of the section titles
+\titleformat{\subsubsection}[block]{\normalsize}{\thesubsubsection.}{1em}{} % Change the look of the section titles
+
+\hypersetup{
+    bookmarks=true,         % show bookmarks bar?
+    unicode=false,          % non-Latin characters in Acrobat’s bookmarks
+    pdftoolbar=true,        % show Acrobat’s toolbar?
+    pdfmenubar=true,        % show Acrobat’s menu?
+    pdffitwindow=false,     % window fit to page when opened
+    pdfstartview={FitH},    % fits the width of the page to the window
+    pdftitle={},    % title
+    pdfauthor={Katarzyna Sprawka},     % author
+    pdfsubject={},   % subject of the document
+    pdfcreator={},   % creator of the document
+    pdfproducer={}, % producer of the document
+    pdfkeywords={} {}, % list of keywords
+    pdfnewwindow=true,      % links in new window
+    colorlinks=true,       % false: boxed links; true: colored links
+    linkcolor=Black,          % color of internal links (change box color with linkbordercolor)
+    citecolor=NavyBlue,        % color of links to bibliography
+    filecolor=NavyBlue,      % color of file links
+    urlcolor=NavyBlue           % color of external links
+}
+\urlstyle{same}
+
+
+\usepackage{pdfpages} 
+
+
+%\usepackage{sectsty}
+%\definecolor{astral}{RGB}{46,116,181}
+%\subsectionfont{\color{astral}}
+%\sectionfont{\color{astral}}
