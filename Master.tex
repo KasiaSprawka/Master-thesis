@@ -1,3 +1,4 @@
+
 \documentclass[12pt, a4paper, twoside, titlepage]{report}
 
 %
@@ -33,18 +34,18 @@
 \include{tex/acknowledgements}	
 
 % Content 
+\phantomsection \label{sec:content}
 \addcontentsline{toc}{chapter}{Contents}
 	\begin{spacing}{1.1}
 		\tableofcontents
 	\end{spacing}
 \newpage
 
-
 %Introduction
 \include{tex/introduction}
 
 % Chapter 1-Aims and scope of the project
-%\include{tex/aims}
+\include{tex/aims}
 
 % Chapter - The kidney
 \include{tex/kidney}
@@ -71,7 +72,12 @@
 \bibliography{./tex/references}
 \end{spacing}
 
-
+\newpage
+\phantomsection \label{sec:ListOfFigures}
+	\addcontentsline{toc}{section}{List of Figures}
+	\begin{spacing}{1.0}
+		\listoffigures
+	\end{spacing}
 
 
 
