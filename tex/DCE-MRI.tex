@@ -83,15 +83,26 @@ Currently MRI is one of the widest used medical imaging techniques applied in al
 The clicical applications of MRI include diagnosis of blood vessel damages, multiple sclerosis, brain injuries, spinal cord injuries, brain strokes, blocked blood vessels, heart diseases, damages caused by a heart attack, bone infections, differnet kind of tumors and cancers and many more \cite{mriApplications}.
 
 \section{DCE-MRI}
-\textit{Dynamic Contrast Enhanced Magnetic Resonance Imaging} is actually acquisition of multiple MRI scans. During the examination a Contrast Agent (CA) is injected into the blood and the T1-weighted images are acquired. The passage of the tracer through the kidney results in changes in signal intensities over the time.
-The analysis of the obtained intensity changes as a function of time provides important functional information \cite{bokacheva2008assessment, khalifa2014models}.
+\textit{Dynamic Contrast Enhanced Magnetic Resonance Imaging} is basically the acquisition of multiple MRI scans. During the examination a Contrast Agent (CA) is injected in the peripheral vein into the bloodstream and the T1-weighted images are acquired. 
+The passage of the tracer through the Region of Interest (ROI) results in changes in signal intensities over the time.
+The analysis of the obtained intensity changes as~a function of time, $S(t)$, provides important functional information \cite{bokacheva2008assessment, khalifa2014models}.
 
 \begin{comment}
- Traditionally, this evaluation is performed by experienced observer, although this method is very subjective and strongly depends on the experience of the expert. Other technique involves fitting tissue intensity changes to pharmacokinetic models, which allows quantification of renal function \cite{khalifa2014models}. Even though this strategy is gaining more and more supporters, most of the methods still require interference of the human at some stage, which makes them vulnerable to human factors.
+Traditionally, this evaluation is performed by experienced observer, although this method is very subjective and strongly depends on the experience of the expert. Other technique involves fitting tissue intensity changes to pharmacokinetic models, which allows quantification of renal function \cite{khalifa2014models}. Even though this strategy is gaining more and more supporters, most of the methods still require interference of the human at some stage, which makes them vulnerable to human factors.
 \end{comment}
 \subsection{DCE-MRI analysis}
+There are many methods of time-courses analysis obtained during DCE-MRI. In general, they can be divided into \begin{inparaenum}[(1\upshape)]\item qualitative \item semi-quantitative \item quantitative \end{inparaenum} methods.
+\subsubsection{Qualitative analysis}
+In traditional approach, the evaluation of the time-intensity curves is performed by experienced observer via subjective visual inspection, who's task is to one of the predefined enhancement patterns, which are shown on Figure~\ref{fig:patterns}. This method do not deliver any quantitative parameters  
 
-\subsubsection{Non-parametric DCE-MRI analysis}
+\begin{figure}
+		\centering
+		\includegraphics [width =10cm]{dcemri_patterns}
+		\caption [DCE-MRI enhacement patterns]{Different DCE-MRI enhacement patterns\cite{?}}
+		\label{fig:patterns}
+	\end{figure}
 
 
-\subsubsection{Parametric analysis}
+\subsubsection{Semi-quantitative analysis}
+
+\subsubsection{Quantitative analysis}
