@@ -1,5 +1,114 @@
 \chapter{Implementation}
-	\begin{comment}
+
+\section{Materials and methods}
+\subsection{DCE-MRI aquisition}
+The dataset used in this project consists of forty DCE-MRI sequences. Each of the 20 healthy, non-smoking participants underwent two MRI examination at a~time interval of 7 days.
+The data were acquired on 32 channel 1.5 T whole-body scanner (Siemens Magnetom Avanto \cite{simens}).
+The  images covering kidneys and aorta were continuously acquired every 2.3 s for approximately 6 min in coronal-oblique plane.
+Each of 74 time volumes consisted of 30 slices.
+The aquisition matrix was 192\,x\,192 whereas the voxel size was equal to 2.2\,x\,2.2\,x\,3\,mm$^3$
+More information about aquisition of DCE-MRI data used in this project can be found in \cite{eikefjord2017dynamic}.
+
+A bolus injection \ref{ahrs}
+
+\subsection{GFR reference values}
+
+The clinical characteristic of the participants is included in Table~\ref{tab:participants}
+
+
+
+\begin{table}[h!]
+\centering
+\caption[Clinical characteristic of the participants]{Clinical characteristic of the participants. Taken from \cite{eikefjord2017dynamic}}
+\label{tab:participants}
+\begin{threeparttable}
+\rowcolors{2}{}{beaublue!50}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{m{8cm} m{2.25cm}}
+	\hline
+
+ 	Participants & 20\\
+  	Gender (female/male) &16/4\\
+  	Age (years) & 25 (20---38)\\
+  	Height [m] & 1.71 $\pm$ 00.7\\
+  	Weight [kg] & 66.2 $\pm$ 8.7\\
+  	Body mass index (BMI) [kg/m\textsuperscript{2}] & 22.6 $\pm$ 2.1\\
+  	Body surface area (BSA) [m\textsuperscript{2}]& \\
+  	Iohexol GFR [ml/min/m\textsuperscript{2}] &103 $\pm$ 10\\
+  \hline
+
+\end{tabular}
+\begin{tablenotes}%
+\footnotesize{}%
+\item This is where authors provide additional information about the data, including whatever notes are needed.
+    \end{tablenotes}
+	\end{threeparttable}
+\end{table}
+
+
+
+\subsection{Image processing and analysis}
+\subsubsection{Motion correction}
+One of the first fundamental problem encountered during DCE-MRI analysis is misalignment of 3D volumes across time slices. This misalignment of organs is a result of the patiens's respiratory motion as well as the heartbeat and bowel peristalsis and is unavoidable during examination. Studies have shown that even slight misalignment can lead to significant differences in intensity time-courses \cite{KidneySubsegmentation} and thus, motion correction of time series is essential for further analysis.
+
+In order to remove motion artifact, all files were motion-corrected across time points. For this purpose R programming language for statistical computing and graphics was used \cite{R} together with the package ANTsR \cite{ANTsR}, which provides quantification tools for biomedical images. As an initial step, for every time series, the algorithm extracted 3D volumes. Each extracted volume corresponded to data obtained in one time point. Next, the average image of the temporal volumes was calculated, which was treated as a mask for image registration. Every temporal volume was then aligned to the mask and at the end they were combined back together into 4D time series.
+
+\subsubsection{Pelvis removal}
+Due to the fact that glomelular filtration takes place in renal renal parenchyma, pelvis had to be removed from further analysis. 
+
+Resulting from the physiology of the process, the three renal compartments (cortex, medulla, pelvis) can be distinguished from each other on the basis of their time courses, as shown on Figure~\ref{fig:timecourses}. Depending on the compartment, the rapid enhancement of the signal occurs in different period, which makes the shapes of the time intensity curves very unique.
+From the \ref{fig:timecourses} it can be seen that the biggest variation is observed between pelvis and two other renal compartments.    Consequently, it can be separated by unsupervised clustering. 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics{img/timecourses}
+	\caption{Kidney compartments timecourses  \cite{KidneySubsegmentation}}
+	\label{fig:timecourses}
+\end{figure}
+
+
+\section{Results}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{comment}
+
+%\begin{equation}
+%	\label{eq:extended_toft}
+%	\nonumber C_{t}(t) = v_pC_p(t)+ K_{trans}\int_{0}^{t}C_p(t')e^{-(K_{trans}/v_e)(t-t')}dt', 
+%\end{equation}
+%where:\\
+%$v_e$ - fractional volume of the extravascular extracellular space\\
+%$v_p$ - fractional plasma volume\\
+%$K_{trans}$ - transfer constant\\
+%$C_{t}$ - Tissue concentration\\
+%C_{p}$ - Concentration in aorta (AIF)
+
+\section{DCE-MRI data acquisition}
+
+
+
+
+
+
+
+
+
+
+
+	
 \subsection{DCE-MRI data acquisition}
 The data used in this project were acquired on 32 channel 1.5 T whole-body scanner (Siemens Magnetom Avanto \cite{simens}).
 The  images covering kidneys and aorta were continuously acquired every 2.3 s for approximately 6 min in coronal-oblique plane.
@@ -7,10 +116,21 @@ Each of 74 time volumes consisted of 30 slices.
 The aquisition matrix was 192x192 whereas the voxel size was equal to 2.2x2.2x3 mm$^3$
 More information about aquisition of DCE-MRI data used in this project can be found in \cite{eikefjord2017dynamic}.
 
-\subsection{Motion correction}
-One of the first fundamental problem encountered during DCE-MRI analysis is misalignment of 3D volumes across time slices. This misalignment of organs is a result of the patiens's respiratory motion as well as the heartbeat and bowel peristalsis and is unavoidable during examination. Studies have shown that even slight misalignment can lead to significant differences in intensity time-courses \cite{KidneySubsegmentation} and thus, motion correction of time series is essential for further analysis.
+\begin{table}
+\caption{Clinical characteristic of the participants}
+\label{tab:participants}
+\begin{tabular}{l|l}
+  \hline	
+  \textbf{Variable} & \textbf{Value}
+  \hline
+  Participants & 20
+  \hline
+  Gender (female/male) 16/4
+\end{tabular}
+\end{table}
 
-In order to remove motion artifact, all files were motion-corrected across time points. For this purpose R programming language for statistical computing and graphics was used \cite{R} together with the package ANTsR \cite{ANTsR}, which provides quantification tools for biomedical images. As an initial step, for every time series, the algorithm extracted 3D volumes. Each extracted volume corresponded to data obtained in one time point. Next, the average image of the temporal volumes was calculated, which was treated as a mask for image registration. Every temporal volume was then aligned to the mask and at the end they were combined back together into 4D time series. 
+\subsection{Motion correction}
+ 
  
 \subsection{Manual labelling of kidneys and aorta} 
 \label{subsec:labelling}

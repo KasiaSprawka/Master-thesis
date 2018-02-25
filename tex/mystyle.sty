@@ -1,6 +1,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 
+\usepackage{color, colortbl}
 
 \usepackage{subfig}
 \usepackage{graphicx}
@@ -16,7 +17,8 @@
 \usepackage{booktabs}
 %\usepackage{float}
 
-
+\usepackage{tabularx}
+\usepackage[flushleft]{threeparttable}
 
 \usepackage{enumerate}
 \usepackage{paralist}
@@ -24,10 +26,13 @@
 
 
 
+
+
 \setcounter{secnumdepth}{4}
 \setcounter{tocdepth}{4}
 
 \usepackage{savesym}
+\usepackage{array}
 
 
 \usepackage{textcomp}
@@ -78,7 +83,7 @@
 \usepackage{graphics}
 \usepackage[normalem]{ulem}
 \usepackage{setspace}
-\usepackage[usenames, dvipsnames]{xcolor}
+\usepackage[usenames, dvipsnames, table]{xcolor}
 \usepackage{tikz}
 \usepackage{pgf}
 \usepackage[numbers, sort & compress]{natbib}
@@ -126,3 +131,16 @@
 % SETTINGS
 %%%%%%%%%%%%%%%%%%
 \newcommand{\ang}[1]{ang.~\textit{{#1}}}
+
+\definecolor{beaublue}{rgb}{0.74, 0.83, 0.9}
+
+
+
+\usepackage[acronym]{glossaries}
+\renewcommand{\acronymname}{List of Abbreviations}
+
+
+
+
+
+
