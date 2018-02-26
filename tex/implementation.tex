@@ -3,15 +3,42 @@
 \section{Materials and methods}
 \subsection{DCE-MRI aquisition}
 The dataset used in this project consists of forty DCE-MRI sequences. Each of the 20 healthy, non-smoking participants underwent two MRI examination at a~time interval of 7 days.
-A gadolinium-based CA GdDOTA (Gadoteric Acid) at a dose of 0.025\,mmol/kg was administrated as a bolus injection.
+A gadolinium-based CA GdDOTA (Gadoteric Acid) at a dose of 0.025\,mmol/kg was administrated as a bolus injection at 3\,ml/s.
 The data were acquired on 32 channel 1.5 T whole-body scanner (Siemens Magnetom Avanto \cite{simens}).
 The  images covering kidneys and aorta were continuously acquired every 2.3 s for approximately 6 min in coronal-oblique plane.
 Each of 74 time volumes consisted of 30 slices.
 The aquisition matrix was 192\,x\,192 whereas the voxel size was equal to 2.2\,x\,2.2\,x\,3\,mm$^3$
 More information about aquisition of DCE-MRI data used in this project can be found in \cite{eikefjord2017dynamic}.
+The few frames of the sample raw DCE-MRI sequence is shown in Figure~\ref{fig:set}.
+
+
+
+\begin{figure}
+
+\captionsetup[subfigure]{labelformat=empty,textformat=simple}
+	\centering
+	\subfloat[\textit{T} = T0]{\includegraphics[height=0.24\linewidth]{img/preview/00}}\hspace{0.005\linewidth}
+		\subfloat[\textit{T} = T9]{\includegraphics[height=0.24\linewidth]{img/preview/09}}\hspace{0.005\linewidth}
+			\subfloat[\textit{T} = T12]{\includegraphics[height=0.24\linewidth]{img/preview/12}}\hspace{0.005\linewidth}
+			\subfloat[\textit{T} = T16]{\includegraphics[height=0.24\linewidth]{img/preview/16}}\vspace{-4pt}
+			
+			\subfloat[\textit{T} = T18]{\includegraphics[height=0.24\linewidth]{img/preview/18}}\hspace{0.005\linewidth}
+		\subfloat[\textit{T} = T22]	{\includegraphics[height=0.24\linewidth]{img/preview/22}}\hspace{0.005\linewidth}
+		\subfloat[\textit{T} = T26]{\includegraphics[height=0.24\linewidth]{img/preview/26}}\hspace{0.005\linewidth}
+			\subfloat[\textit{T} = T30]{\includegraphics[height=0.24\linewidth]{img/preview/30}}\vspace{-4pt}
+
+			\subfloat[\textit{T} = T34]{\includegraphics[height=0.24\linewidth]{img/preview/34}}\hspace{0.005\linewidth}
+		\subfloat[\textit{T} = T39]	{\includegraphics[height=0.24\linewidth]{img/preview/39}}\hspace{0.005\linewidth}
+	\subfloat[\textit{T} = T55]{\includegraphics[height=0.24\linewidth]{img/preview/55}}\hspace{0.005\linewidth}
+	\subfloat[\textit{T} = T73]{\includegraphics[height=0.24\linewidth]{img/preview/73}}
+\vspace{0.5cm}
+\caption[Sample DCE-MRI sequence.]{Sample DCE-MRI sequence}
+\label{fig:set}
+\end{figure}
 
 
 \subsection{GFR reference values}
+Next to the DCE-MRI examinations, the participant had their GFR assessed by two commonly used in clinical practice chemical methods: the Serum-creatinine (SCr) and iohexol GFR tests.  
 
 The clinical characteristic of the participants is included in Table~\ref{tab:participants}
 
@@ -40,7 +67,8 @@ The clinical characteristic of the participants is included in Table~\ref{tab:pa
 \end{tabular}
 \begin{tablenotes}%
 \footnotesize{}%
-\item This is where authors provide additional information about the data, including whatever notes are needed.
+\item Values in parentheses are ranges.
+\item Plus minus values are means $\pm$ Standard Deviations (SD).
     \end{tablenotes}
 	\end{threeparttable}
 \end{table}
@@ -66,15 +94,48 @@ From the \ref{fig:timecourses} it can be seen that the biggest variation is obse
 	\label{fig:timecourses}
 \end{figure}
 
+Every of the the voxel belonging to the label of the kidney was described by the vector of seventy-four features as follows:
+\begin{equation}
+\label{eq:voxel}
+\mathbf{v_{ijk}} = [S_{T0},\; S_{T1},\;...\;,\; S_{T72},\; S_{T73}]  
+\end{equation}
+
+
+
+Raw DCE-MRI data usually has high dimension, which results in computational complexity, and thus memory and time consumption as well as numerical problems. What is more it contains a lot of noises \cite{KidneySubsegmentation}. To overcome this problems, the Principal Component Analysis (PCA) \cite{wold1987principal} was applied.
+
+PCA is a statistical procedure, which transforms the number of related features into smaller set of uncorrelated variables  \cite{pca}. These so called Principal Components (PCs) are a linear combination of the original variables \cite{dunteman1989principal}. As a result, after rotating the feature space, the first PC contains most variance and so on. In this way the dominant patterns are extracted while the noises are reduced \cite{wold1987principal}.
+
+Applying the theory to practice, each voxel belonging to the kidneys, initially described by 74 features (value of the signal intensity in 74 time points) was described by 10 PCs.
+
+\begin{equation}
+\label{eq:voxelpca}
+\mathbf{v_{ijk}} = [PC1,\; PC2,\;...\;,\; PC9,\; PC10]  
+\end{equation}
+
+In the next step, the k-means clustering \cite{kmeans} was performed in order to separate voxels into two groups: pelvis and renal parenchyma.  
+
+The k-means is an unsupervised clustering algorithm aiming to minimize the square error function given by:
+
+\begin{equation}
+	\label{eq:kmeans}
+	J = \sum_{j=1}^{k}\sum_{i=1}^{n}(||x_i-c_j||)^2,
+\end{equation}
+where $||x_i-c_j||$ is  the Euclidean distance between a data point $x_i$ and the cluster centre $c_j$ of k predefined clusters.
+
+For each of two clusters, in which signal intensity reaches its maximum $T_{max}$ was calculated. 
+Following the assumption that $T_{max\_pelvis}>T_{max\_parenchyma}$, the cluster with greater $T_{max}$ was marked as the pelvis and removed from the region of interest (ROI).
+
+
+
+
+\subsubsection{Concentration-time curves}
+
+\subsubsection{Pharmacokinetic modelling}
+
+
 
 \section{Results}
-
-
-
-
-
-
-
 
 
 
@@ -96,41 +157,7 @@ From the \ref{fig:timecourses} it can be seen that the biggest variation is obse
 %$C_{t}$ - Tissue concentration\\
 %C_{p}$ - Concentration in aorta (AIF)
 
-\section{DCE-MRI data acquisition}
 
-
-
-
-
-
-
-
-
-
-
-	
-\subsection{DCE-MRI data acquisition}
-The data used in this project were acquired on 32 channel 1.5 T whole-body scanner (Siemens Magnetom Avanto \cite{simens}).
-The  images covering kidneys and aorta were continuously acquired every 2.3 s for approximately 6 min in coronal-oblique plane.
-Each of 74 time volumes consisted of 30 slices.
-The aquisition matrix was 192x192 whereas the voxel size was equal to 2.2x2.2x3 mm$^3$
-More information about aquisition of DCE-MRI data used in this project can be found in \cite{eikefjord2017dynamic}.
-
-\begin{table}
-\caption{Clinical characteristic of the participants}
-\label{tab:participants}
-\begin{tabular}{l|l}
-  \hline	
-  \textbf{Variable} & \textbf{Value}
-  \hline
-  Participants & 20
-  \hline
-  Gender (female/male) 16/4
-\end{tabular}
-\end{table}
-
-\subsection{Motion correction}
- 
  
 \subsection{Manual labelling of kidneys and aorta} 
 \label{subsec:labelling}
@@ -171,9 +198,7 @@ where $||x_i-c_j||$ is  the Euclidean distance between a data point $x_i$ and th
 For each of two clusters, in which signal intensity reaches its maximum $T_{max}$ was calculated. 
 Following the assumption that $T_{max\_pelvis}>T_{max\_parenchyma}$, the cluster with greater $T_{max}$ was marked as the pelvis and removed from the region of interest (ROI).
 
-\subsection{Kidneys segmentation using deep learning}
 
-\input{./tex/cnn}
 
 \newpage
 \subsection{Pharmacokinetic modelling}
