@@ -1,0 +1,22 @@
+
+\usepackage[acronym,nomain,section=chapter, toc, nonumberlist]{glossaries}
+\usepackage{glossary-superragged}
+\makeglossaries
+
+\renewcommand*{\acronymname}{Abbreviations}
+\renewcommand*{\glspostdescription}{} % remove trailing dot
+%\renewcommand*{\glsclearpage}{}
+
+\renewcommand{\glsnamefont}[1]{\textbf{#1}}
+\setlength\glsdescwidth{\linewidth}
+
+%
+% BEGIN OF THE LIST
+%
+\newacronym{gfr}{GFR}{Glomerural Filtration Rate}
+\newacronym{dcemri}{DCE-MRI}{Dynamic Contrast Enhanced Magnetic Resonance Imaging}
+\newacronym{ca}{CA}{Contrast Agent}
+\newacronym{aif}{AIF}{Arterial Input Function}
+\newacronym{GdDOTA}{Gd-DOTA}{Gadoteric Acid}
+\newacronym{Gd}{Gd}{Gadolinium}
+\newacronym{rf}{RF}{Radio Frequency}

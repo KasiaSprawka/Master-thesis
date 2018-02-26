@@ -1,10 +1,10 @@
-
 \documentclass[12pt, a4paper, twoside, titlepage]{report}
 
 %
 % File containing all the package declarations
 %
 \usepackage{./tex/mystyle}
+\usepackage{./tex/abbreviations}
 
 %----------------------------------------------------------------------------------------
 %	DEFINITIONS
@@ -18,32 +18,11 @@
 
 
 %----------------------------------------------------------------------------------------
-%	ABBRIVIATIONS
-%----------------------------------------------------------------------------------------
-
-\makeglossaries
-
-\newacronym{ahrs}{AHRS}{\textbf{A}ttitude and \textbf{H}eading \textbf{R}eference \textbf{S}ystem} 
-\newacronym{api}{\textbf{API}}{\textbf{A}pplication \textbf{P}rogramming \textbf{I}nterface}%
-\newacronym{imu}{IMU}{ \textbf{I}nertial \textbf{M}easurements \textbf{U}nit}
-\newacronym{json}{JSON} { \textbf{J}ava\textbf{S}cript \textbf{O}bject \textbf{N}otation}
-\newacronym{vga}{VGA}{ \textbf{V}ideo \textbf{G}raphics \textbf{A}rray  ($640\times480$ px)}
-\newacronym{wpf}{WPF}{ \textbf{W}indows \textbf{P}resentation \textbf{F}oundation}
-\newacronym{xaml}{XAML}{ E\textbf{x}tended \textbf{A}pplication \textbf{M}arkup \textbf{L}anguage}
-
-
-%----------------------------------------------------------------------------------------
 %	BODY
 %----------------------------------------------------------------------------------------
 
 
 \begin{document}
-
-% Abbriviations
-% Abbriviations
-\glsaddall
-\printacronyms
-
 
 % Title page
 \include{tex/title_page}
@@ -53,8 +32,10 @@
 
 % Acknowledgements
 \include{tex/acknowledgements}	
+	
 
-
+% Abbriviations
+\include{tex/abb}
 
 
 % Content 
@@ -63,7 +44,9 @@
 	\begin{spacing}{1.1}
 		\tableofcontents
 	\end{spacing}
-\newpage
+%\newpage
+
+
 
 %Introduction
 \include{tex/introduction}
