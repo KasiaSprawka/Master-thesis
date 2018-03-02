@@ -101,16 +101,16 @@ First of all, every of the the voxel belonging to the label of the kidney was de
 \end{equation}
 where $S_{Tn}$ is the value of signal intensity in the time point $n$.
 
-However, feature space of seventy-four dimensions is way too much for further analysis. High dimensionality of raw DCE-MRI data results in computational complexity, and thus memory and time consumption as well as numerical problems. What is more it contains a lot of noises \cite{KidneySubsegmentation}. To overcome this problems, the Principal Component Analysis (PCA) \cite{wold1987principal} was applied.
+However, feature space of seventy-four dimensions is way too much for further analysis. High dimensionality of raw DCE-MRI data results in computational complexity, and thus memory and time consumption as well as numerical problems. What is more it contains a lot of noises \cite{KidneySubsegmentation}. To overcome this problems, the \textit{Principal Component Analysis} (PCA) \cite{wold1987principal} was applied.
 
-PCA is a statistical procedure, which transforms the number of related features into smaller set of uncorrelated variables  \cite{pca}. These so called Principal Components (PCs) are a linear combination of the original variables \cite{dunteman1989principal}. As a result, after rotating the feature space, the first PC contains most variance, the last one the least and so on. In this way the dominant patterns are extracted while the noises are reduced~\cite{wold1987principal}. Further, every of the PC is characterised by a ratio of \textit{explained variance}, which indicates the portion of the dataset’s variance lying along the axis of each PC~\cite{handson}.
+PCA is a statistical procedure, which transforms the number of related features into smaller set of uncorrelated variables  \cite{pca}. These so called \textit{Principal Components} (PCs) are a linear combination of the original variables \cite{dunteman1989principal}. As a result, after rotating the feature space, the first PC contains most variance, the last one the least and so on. In this way the dominant patterns are extracted while the noises are reduced~\cite{wold1987principal}. Further, every of the PC is characterised by a ratio of \textit{explained variance}, which indicates the portion of the dataset’s variance lying along the axis of each PC~\cite{handson}.
 
 Applying the theory to practice, each voxel belonging to the kidney, initially described by forty-four features was described by a number of PCs:
 \begin{equation}
 \label{eq:voxelpca}
 \mathbf{v_{ijk}} = [PC1,\; PC2,\;...\;,\; PCn]  
 \end{equation}
-The amount of PCs, $n$, was chosen as a minimum number of dimensions required to preserve 95\% of the data's total variance so that that the sum of the explained variances of  $n$ PCs was equal to at least 0.95 (usually between 4---6 PCs). The visual representation of the feature space with first three dimensions (PCs) for sample kidney is shown in Figure~\ref{fig:pca_plot}. Note that for beter understanding, the clusters were already marked with different colors. 
+The amount of PCs, $n$, was chosen as a minimum number of dimensions required to preserve 95\% of the data's total variance so that that the sum of the explained variances of  $n$ PCs was equal to at least 0.95 (usually between 4---6 PCs). The visual representation of the feature space with first three dimensions (PCs) for sample kidney is shown in Figure~\ref{fig:pca_plot}. Note that for better understanding, the clusters were already marked with different colors. 
 
 \begin{figure}[H]
 		\centering
@@ -119,8 +119,8 @@ The amount of PCs, $n$, was chosen as a minimum number of dimensions required to
 		\label{fig:pca_plot}
 	\end{figure}
 
-In the next step, the k-means clustering \cite{kmeans} was performed in order to separate voxels into two groups: pelvis and renal parenchyma. 
-The k-means is an unsupervised clustering algorithm aiming to divide the data into groups so that the diversity between group is maximised whereas the similarity within the group is maximised. 
+To the dimensionally reduced data, the \textit{k-means clustering} \cite{kmeans} was applied in order to separate voxels into two groups: pelvis and renal parenchyma. 
+The k-means is an unsupervised clustering algorithm aiming to divide the data into groups so that the diversity between the groups is maximised whereas the similarity within the single group is maximised. 
 
 Given a data set $X=\{ \vec{x_1}...\vec{x_n}$\} in $m$-dimensional space (what actually corresponds to the $m$ features of a sample) the algoritm's objective is to minimize the square error function given by:
 
@@ -128,31 +128,35 @@ Given a data set $X=\{ \vec{x_1}...\vec{x_n}$\} in $m$-dimensional space (what a
 	\label{eq:kmeans}
 	J = \sum_{j=1}^{k}\sum_{i=1}^{n}(||x_i-c_j||)^2,
 \end{equation}
-where $||x_i-c_j||$ is  the Euclidean distance between a data point $x_i$ and the cluster centre $c_j$ of $k$ predefined clusters. It is done by the steps Algorithm~\ref{alg:kmeans}.
+where $||x_i-c_j||$ is  the Euclidean distance between a data point $x_i$ and the cluster centre $c_j$ of $k$ predefined clusters. It is achieved by the steps summarised in Algorithm~\ref{alg:kmeans}.
 
-
-
-\vspace{10pt}
+\vspace{16pt}
 \begin{algorithm}[H]
 \footnotesize
     \SetKwInOut{Input}{Input}
     \SetKwInOut{Output}{Output}
     \SetKwFunction{RandomlyChooseCentroids}{RandomlyChooseCentroids}
-    \SetKwData{Centroids}{$c_1...c_k\leftarrow$}
+    \SetKwFunction{CalculateMeanOfPointsInCluster}{CalculateMeanOfPointsInCluster}
+    \SetKwData{Centroids}{$(\vec{c_1}...\vec{c_k})$}
+    \SetKwFunction{argminDistance}{argminDistance}
     
-    \Input{number of clusters $k$, \\set of points in $m$-dimensional space $X=\{ \vec{x_1}...\vec{x_n}$\}}
-    \Output{entities divided into clusters}
+	\Input{number of clusters $k$,\\ set of points in $m$-dimensional space: $X=\{ \vec{x_1}...\vec{x_n}$\}}
+	
+    \Output{set of cluster labels of $X$: $L = \{l(\vec{x_i})\;i \in\{1...n\}\}$ ,\\ coordinates of cluster centroids: \Centroids}
+    
+    \BlankLine
     \BlankLine
     
     
-	%\DontPrintSemicolon
-	\Centroids $\leftarrow$ \RandomlyChooseCentroids{$k$, $X$}
+	\DontPrintSemicolon
+	\Centroids $\leftarrow$ \RandomlyChooseCentroids{$k$, $X$} \Centroids$\in X$\;
     
-	\Repeat{none of $c_1...c_k$ changes}{
-assign each data point to the closest cluster centroid on the basis of Euclidian distance\;
-recalculate the $c_1...c_k$ on the basis of the mean value of the objects in clusters \;
+	\Repeat{none of \Centroids changes}{
+\tcc {assign each data point to the closest centroid on the basis of Euclidean distance}
+$l(\vec{x_i})\leftarrow$\argminDistance($\vec{x_i}$, $\vec{c_j}$) $j \in\{1...k\}$ \\
+\Centroids$\leftarrow$  \CalculateMeanOfPointsInCluster{}  \tcc*{recalculate centroids} 
 }
-	\Return{$c_1...c_k$, label of cluster assigned to every entities}
+	\Return{$L$ , \Centroids} \tcc*{points divided into clusters} 
     
     
     \SetAlgoCaptionSeparator{.}
@@ -160,11 +164,12 @@ recalculate the $c_1...c_k$ on the basis of the mean value of the objects in clu
     \label{alg:kmeans}
 \end{algorithm}
 
-\vspace{10pt}
-To segment the kidney, 
+\vspace{16pt}
+To segment the kidney, the k-means algorithm was initiated with two clusters, $k$~=~2 and performed for points (kidney voxels) in ten-dimensional space (10 PCs).
 
-For each of two clusters, in which signal intensity reaches its maximum $T_{max}$ was calculated. 
-Following the assumption that $T_{max\_pelvis}>T_{max\_parenchyma}$, the cluster with greater $T_{max}$ was marked as the pelvis and removed from the region of interest (ROI).
+Furter, for each of the identified clusters, the average time point, $T_{max}$ in which signal intensity reaches its maximum was calculated. 
+Following the assumption that $T_{max\_pelvis}>T_{max\_parenchyma}$, the cluster with greater $T_{max}$ was marked as the pelvis and removed from the \textit{Region of Interest} (ROI).
+The average time-intensity curves for two detected clusters in k-means clustering algorithm for sample kidney are presented in Figure~\ref{fig:clusters}. On can easily note the wash in phase in pelvis takes place much later than in renal parenchyma. The results of the segmentation in turn are shown in Figure \ref{fig:segmentation}.  
 
 
 \begin{figure}[H]
@@ -172,12 +177,26 @@ Following the assumption that $T_{max\_pelvis}>T_{max\_parenchyma}$, the cluster
 	\centering
 	{\includegraphics[width = \textwidth]{clusters}\label{fig:tcluster1}}
 	
-\caption[g]{a}
+\caption[Average time courses for two clusters detected in k-means algorithm]{Average time courses for two clusters detected in k-means algorithm performed for sample kidney}
 \label{fig:clusters}
 \end{figure}
 
+\begin{figure}[H]
+\captionsetup[subfloat]{captionskip=0.5cm}
+	\centering
+	\subfloat[\textit{T1}-weighted image of a brain]{\includegraphics[width=0.48\textwidth ]{kidney_pelvis}}\hspace{0.02\textwidth}
+	\subfloat[\textit{T2}-weighted image of a brain]{\includegraphics[width=0.48\textwidth]{no_pelvis}}\\	
+\vspace{0.5cm}
+\caption[Comparison of \textit{T\textsubscript{1}}- and \textit{T\textsubscript{2}}-weighted images]{Note that the images were normalised within extracted slices for better visualisation}
+\label{fig:segmentation}
+\end{figure}
+
+
+
 \subsubsection{Concentration-time curves}
-For each of the kidney, as well as for the aorta, the mean intensities in each time point were calculated. Assuming the linear relation between tracer concentration and signal intensity $S(t)$ \cite{lim2013prediction}, the tracer concentration can be expressed as:
+For each of the kidney, as well as for the aorta, the mean intensities in each time point were calculated. 
+
+Assuming the linear relation between tracer concentration and signal intensity $S(t)$ \cite{lim2013prediction}, the tracer concentration can be expressed as:
 
 
 \begin{equation}
