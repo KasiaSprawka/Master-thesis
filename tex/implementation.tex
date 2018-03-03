@@ -175,7 +175,7 @@ The average time-intensity curves for two detected clusters in k-means clusterin
 \begin{figure}[H]
 %\captionsetup[subfloat]{captionskip=0.5cm}
 	\centering
-	{\includegraphics[width = \textwidth]{clusters2}\label{fig:tcluster1}}
+	\includegraphics[width = \textwidth]{clusters2}
 	
 \caption[Average time courses for two clusters detected in k-means algorithm]{Average time courses for two clusters detected in k-means algorithm performed for sample kidney}
 \label{fig:clusters}
@@ -194,7 +194,7 @@ The average time-intensity curves for two detected clusters in k-means clusterin
 \subsubsection{Concentration-time curves}
 Having labelled the proper ROI, the time has come for the principal part of the analysis, namely pharmacokinetic modelling.
 All PK models used during quantitative DCE-MRI analysis call for determining both the tissue, $C_t(t)$, and blood plasma, $C_p(t)$, concentration as a~function of time. In our case, the $C_t(t)$ is the mean concentration in renal parenchyma, whereas the
-$C_p(t)$, or so called arterial input function (AIF), is a concentration in a blood vessel feeding the kidney (aorta) \cite{khalifa2014models}. 
+$C_p(t)$, can be derived from  Arterial Input Function, which is a concentration in a blood vessel feeding the kidney (aorta) \cite{khalifa2014models}. 
 Thus, they were calculated in the next steps of the project.  
 
 For each of the kidney, as well as for the aorta, the mean intensities of the voxels included in the particular labels were calculated at the each time point and the time courses were plotted. Sample time courses are shown in Figure~\ref{fig:temporal_points}.
@@ -203,7 +203,7 @@ For each of the kidney, as well as for the aorta, the mean intensities of the vo
 \begin{figure}[H]
 %\captionsetup[subfloat]{captionskip=0.5cm}
 	\centering
-	{\includegraphics[width = \textwidth]{temporal_points}\label{fig:temporal_points}}
+	\includegraphics[width = \textwidth]{temporal_points}
 	
 \caption[a]{a}
 \label{fig:temporal_points}
@@ -219,20 +219,79 @@ Assuming the linear relation between tracer concentration and signal intensity $
 	\label{eq:conversion}
 	C(t) = S(t)-S_0,
 \end{equation}
-  
 where $S_0$ is the baseline signal, which is the average signal intensity among the time before the administration of CA. 
-In order to determine $S_0$, the time point before rapid signal drop, $T_{baseline}$ had to be found  as marked with red dot in Figure \ref{fig:temporal_points}.
+In order to determine $S_0$, the time point before rapid signal increase, $T_{baseline}$ had to be found  as marked with red dot in Figure \ref{fig:temporal_points}.
 %%% Experimenting with two methods, not decided yet %%%%
 
-To achieve it, firstly, for every time course under analysis, its derivative was calculated. Further, because the   
+To achieve it, firstly, for the purposes of the examination of the function changes, the median filter  with the $kernel\;size = 5$ was applied in order to smooth the signal and eliminate artificial  peaks and valleys, see Figure~\ref{fig:median}  
+In next step, for every intensity time course under analysis, its derivative was calculated. The derivative describes the instantaneous rate of change of the function. It tells how fast the output of the function (signal intensity) changes compared to the independent variable (time) \cite{calculus} and seems to be a perfect solution to the problem, which comes down to the finding the most rapid signal change. 
+Because of one's interests is detection only of the function's increases, not decreases, the points, in which the derivative is negative were neglected, $S'(t)<0\leftarrow0$. So modified derivative of the sample kidney and aorta are shown in Figure~\ref{fig:derivative}.
 
+Now, all that had to be done to find $t_{baseline}$ was to find the point, in which the derivative of the signal intensity time course reaches its maximum, $t_{baseline}=argmax\;S'(t)$. Having it determined, the $S_0$ was calculated as the mean signal intensity value from the beginning of the measurement ($t=0$) to $t_{baseline}$. Finally, the CA concentration in the tissue and aorta were calculated according to the Formula~\ref{eq:conversion}. The results of intensity-concentration conversion for sample time curves are shown in Figure~\ref{fig:conversion}. 
+
+\begin{figure}[H]
+%\captionsetup[subfloat]{captionskip=0.5cm}
+	\centering
+	\includegraphics[width = \textwidth]{clusters2}
+\caption[Average time courses for two clusters detected in k-means algorithm]{Average time courses for two clusters detected in k-means algorithm performed for sample kidney}
+\label{fig:median}
+\end{figure}
+
+\begin{figure}[H]
+%\captionsetup[subfloat]{captionskip=0.5cm}
+	\centering
+	\includegraphics[width = \textwidth]{clusters2}
+\caption[Average time courses for two clusters detected in k-means algorithm]{Average time courses for two clusters detected in k-means algorithm performed for sample kidney}
+\label{fig:derivative}
+\end{figure}
+
+\begin{figure}[H]
+%\captionsetup[subfloat]{captionskip=0.5cm}
+	\centering
+	\includegraphics[width = \textwidth]{clusters2}
+\caption[Average time courses for two clusters detected in k-means algorithm]{Average time courses for two clusters detected in k-means algorithm performed for sample kidney}
+\label{fig:conversion}
+\end{figure}
+
+
+\subsubsection{Pharmacokinetic modelling}
+\paragraph{Toft's model}
+The two compartment Toft's model \cite{tofts1991measurement} assuemes the diffusion of the tracer from the blood plasma at rate specified by the transfer constant $K_{trans}$ $(min^{-1})$ and returns at the rate $k_{ep} = K_{trans}/v_e$ $(min^{-1})$. In this model the assumption $C_t(t) = v_eC_e(t)$ is made, which means that plasma contribution is neglected. The blood plasma concentration $C_p$ is specified by AIF. According to the Toft's model the CA concentraion is specified by the formula:
  
+\begin{equation}
+	\label{eq:toft}
+	C_{t}(t) = K_{trans}\int_{0}^{t}C_p(t')e^{-(K_{trans}/v_e)(t-t')}dt'  
+\end{equation}
+
+\paragraph{Extended Toft's model}
+While the Toft's model neglects intravascular contribution assuming weak vascularization of the tissue, the Extended Toft's model \ref{tofts1997modeling} does take it into account. The tissue concentration is described by the formula:
+\begin{align}
+	\label{eq:extended_toft}
+	\nonumber C_{t}(t) &= v_pC_p(t)+\\ 
+	&+ K_{trans}\int_{0}^{t}C_p(t')e^{-(K_{trans}/v_e)(t-t')}dt', 
+\end{align}
+where $v_p$ is the fractional plasma volume. 
+
+In Toft's and extended Toft's models the free parameters $K_{trans}$, $v_e$ and $v_p$ are estimated by fitting the model to obtained in DCE-MRI examinations time concentration curves.  
+
+\paragraph{Patlak plot}
+Another proposed approach is the graphical one called Patlak plot \cite{patlak1983graphical}. Patlak plot neglects $k_{ep}$ due to the low permeability and short examination time. As a result tissue concentration is expressed as:
+
+\begin{equation}
+	\label{eq:patlak}
+	C_{t}(t) =v_pC_p(t) + K_{trans}\int_{0}^{t}C_p(t')dt'  
+\end{equation}
+The above equation is the linearised as:
+\begin{equation}
+	\label{eq:patlak_lin}
+	Y = K_{trans}X +v_p,  
+\end{equation}
+where $Y=C_t(t)/C_p(t)$ and $X=\int_{0}^{t}C_p(t')dt'/C_p(t)$. The free parameters $K_{trans}$ an $v_p$ can be then estimating by constructing a linear plot and calculating its slope and intercept respectively.
 
 
+\subsubsection{GFR estimation}
 
-
-
-
+\section{Results}
 
 
 
@@ -299,38 +358,7 @@ Obtained time-concentration curves were then fitted to the described in the next
 
 
 
-\subsubsection{Toft's model}
-The two compartment Toft's model \cite{tofts1991measurement} assuemes the diffusion of the tracer from the blood plasma at rate specified by the transfer constant $K_{trans}$ $(min^{-1})$ and returns at the rate $k_{ep} = K_{trans}/v_e$ $(min^{-1})$. In this model the assumption $C_t(t) = v_eC_e(t)$ is made, which means that plasma contribution is neglected. The blood plasma concentration $C_p$ is specified by AIF. According to the Toft's model the CA concentraion is specified by the formula:
- 
-\begin{equation}
-	\label{eq:toft}
-	C_{t}(t) = K_{trans}\int_{0}^{t}C_p(t')e^{-(K_{trans}/v_e)(t-t')}dt'  
-\end{equation}
 
-\subsubsection{Extended Toft's model}
-While the Toft's model neglects intravascular contribution assuming weak vascularization of the tissue, the Extended Toft's model \ref{tofts1997modeling} does take it into account. The tissue concentration is described by the formula:
-\begin{align}
-	\label{eq:extended_toft}
-	\nonumber C_{t}(t) &= v_pC_p(t)+\\ 
-	&+ K_{trans}\int_{0}^{t}C_p(t')e^{-(K_{trans}/v_e)(t-t')}dt', 
-\end{align}
-where $v_p$ is the fractional plasma volume. 
-
-In Toft's and extended Toft's models the free parameters $K_{trans}$, $v_e$ and $v_p$ are estimated by fitting the model to obtained in DCE-MRI examinations time concentration curves.  
-
-\subsubsection{Patlak plot}
-Another proposed approach is the graphical one called Patlak plot \cite{patlak1983graphical}. Patlak plot neglects $k_{ep}$ due to the low permeability and short examination time. As a result tissue concentration is expressed as:
-
-\begin{equation}
-	\label{eq:patlak}
-	C_{t}(t) =v_pC_p(t) + K_{trans}\int_{0}^{t}C_p(t')dt'  
-\end{equation}
-The above equation is the linearised as:
-\begin{equation}
-	\label{eq:patlak_lin}
-	Y = K_{trans}X +v_p,  
-\end{equation}
-where $Y=C_t(t)/C_p(t)$ and $X=\int_{0}^{t}C_p(t')dt'/C_p(t)$. The free parameters $K_{trans}$ an $v_p$ can be then estimating by constructing a linear plot and calculating its slope and intercept respectively.
 
 \subsubsection{GFR estimation}
 Having calculated the $K_{trans}$ parameter the glomelural filtration rate can be computed according to the formula:
