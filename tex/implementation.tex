@@ -175,7 +175,7 @@ The average time-intensity curves for two detected clusters in k-means clusterin
 \begin{figure}[H]
 %\captionsetup[subfloat]{captionskip=0.5cm}
 	\centering
-	\includegraphics[width = \textwidth]{clusters2}
+	\includegraphics[width = \textwidth]{clusters}
 	
 \caption[Average time courses for two clusters detected in k-means algorithm]{Average time courses for two clusters detected in k-means algorithm performed for sample kidney}
 \label{fig:clusters}
@@ -232,15 +232,15 @@ Now, all that had to be done to find $t_{baseline}$ was to find the point, in wh
 \begin{figure}[H]
 %\captionsetup[subfloat]{captionskip=0.5cm}
 	\centering
-	\includegraphics[width = \textwidth]{clusters2}
-\caption[Average time courses for two clusters detected in k-means algorithm]{Average time courses for two clusters detected in k-means algorithm performed for sample kidney}
+	\includegraphics[width = \textwidth]{median2}
+\caption[]{}
 \label{fig:median}
 \end{figure}
 
 \begin{figure}[H]
 %\captionsetup[subfloat]{captionskip=0.5cm}
 	\centering
-	\includegraphics[width = \textwidth]{clusters2}
+	\includegraphics[width = \textwidth]{derivative}
 \caption[Average time courses for two clusters detected in k-means algorithm]{Average time courses for two clusters detected in k-means algorithm performed for sample kidney}
 \label{fig:derivative}
 \end{figure}
@@ -248,7 +248,7 @@ Now, all that had to be done to find $t_{baseline}$ was to find the point, in wh
 \begin{figure}[H]
 %\captionsetup[subfloat]{captionskip=0.5cm}
 	\centering
-	\includegraphics[width = \textwidth]{clusters2}
+	\includegraphics[width = \textwidth]{conversion}
 \caption[Average time courses for two clusters detected in k-means algorithm]{Average time courses for two clusters detected in k-means algorithm performed for sample kidney}
 \label{fig:conversion}
 \end{figure}
@@ -265,11 +265,18 @@ where HCT is s the volume percentage of red blood cells in blood. In this study,
 Finally, the long-awaited PK modelling could have been performed. The models of choice were the Toft's model, Extended Toft's model, Patlak model and 2-Compartment Exchange model 
  
 \paragraph{Toft's model}
+
+
 The two compartment Toft's model \cite{tofts1991measurement} assuemes the diffusion of the tracer from the blood plasma at rate specified by the transfer constant $K_{trans}$ $(min^{-1})$ and returns at the rate $k_{ep} = K_{trans}/v_e$ $(min^{-1})$. In this model the assumption $C_t(t) = v_eC_e(t)$ is made, which means that plasma contribution is neglected. The blood plasma concentration $C_p$ is specified by AIF. According to the Toft's model the CA concentraion is specified by the formula:
  
 \begin{equation}
 	\label{eq:toft}
-	C_{t}(t) = K_{trans}\int_{0}^{t}C_p(t')e^{-(K_{trans}/v_e)(t-t')}dt'  
+	\frac{dC_{t}(t)}{dt} = K_{trans}(C_a(t)-C_t(t)/v_e)
+\end{equation} 
+ 
+\begin{equation}
+	\label{eq:toft2}
+	C_{t}(t) =C_p\circledast K_{trans}e^{-k_{ep}t} =K_{trans}\int_{0}^{t}C_p(t')e^{-k_{ep}(t-\tau)}d\tau  
 \end{equation}
 
 \paragraph{Extended Toft's model}
