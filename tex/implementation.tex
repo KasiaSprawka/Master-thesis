@@ -255,6 +255,15 @@ Now, all that had to be done to find $t_{baseline}$ was to find the point, in wh
 
 
 \subsubsection{Pharmacokinetic modelling}
+Having determined the AIF and the concentration time course for the renal parenchyma, almost all components necessary for the renal  quantitative evaluation were obtained. Almost, but not all. One should take into consideration the fact that AIF is the concentration of CA in the blood of the aorta, which consist of both the red blood cells and the blood plasma. All PK models, however, require the concentration only in the blood plasma. Thus the \textit{hematocrit} (HCT) correction were performed as follows:
+\begin{equation}
+	\label{eq:hematocrit}
+	C_{p} = C_{AIF} / (1-HCT),
+\end{equation}
+where HCT is s the volume percentage of red blood cells in blood. In this study, the value was taken from the literature as an average population value and was equal to $HCT=0.43$ \cite{hematocrit}.
+
+Finally, the long-awaited PK modelling could have been performed. The models of choice were the Toft's model, Extended Toft's model, Patlak model and 2-Compartment Exchange model 
+ 
 \paragraph{Toft's model}
 The two compartment Toft's model \cite{tofts1991measurement} assuemes the diffusion of the tracer from the blood plasma at rate specified by the transfer constant $K_{trans}$ $(min^{-1})$ and returns at the rate $k_{ep} = K_{trans}/v_e$ $(min^{-1})$. In this model the assumption $C_t(t) = v_eC_e(t)$ is made, which means that plasma contribution is neglected. The blood plasma concentration $C_p$ is specified by AIF. According to the Toft's model the CA concentraion is specified by the formula:
  
