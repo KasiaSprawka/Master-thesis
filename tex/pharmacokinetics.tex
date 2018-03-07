@@ -25,7 +25,7 @@ This chapter deals with the approach of PK modelling giving the brief inside in 
 
 
 \section{The tracer kinetic theory} 
-The general tracer kinetic theory is based on mass conservation principle and PK models are formulated as mass balance equations. 
+The compartment PK models describe complex blood-tissue exchanges. The general tracer kinetic theory is based on mass conservation principle and PK models are formulated as mass balance equations. 
 \begin{figure}[H]
 \captionsetup[subfloat]{captionskip=0.5cm}
 	\centering
@@ -108,13 +108,27 @@ Finally the tracer concentration in the tissue can be expressed as:
 
 The described above physical and mathematical background was shorten so that to indroduce very basics and explain enough but not too much on the theory of PK models. If the reader is interested, I kindly refer to the original sources \cite{sourbron2011scope}. 
 
-There exist numerous PK compartment models used in DCE-MRI analysis and every of them is based on different assumptions and simplifications, which are not proper in all cases. The choice of the model depends on such factors as a type of a~tissue under concideration, the quality of data, the possibility of obtaining AIF and many more. One should, however, remember that no mathematical equations will ever describe the living organism accurately in 100\% as there are no two samples of tissues behaving exactly in the same way. The most widely used PK models include: \textit{Toft and Keromode} (TK), \textit{Extended TK} (ETK), \textit{Two-compartment Exchange} (2CXM) and \textit{Patlak} (PM) models.  
+There exist numerous PK compartment models used in DCE-MRI analysis and every of them is based on different assumptions and simplifications, which are not proper in all cases. The choice of the model depends on such factors as a type of a~tissue under concideration, the quality of data, the possibility of obtaining AIF and many more. One should, however, remember that no mathematical equations will ever describe the living organism accurately in 100\% as there are no two samples of tissue behaving exactly in the same way. The most widely used PK models include: \textit{Toft and Keromode} (TK), \textit{Extended TK} (ETK), \textit{Two-compartment Exchange} (2CXM) and \textit{Patlak} (PM) models.  
 
-
-\section{Intensity to concentration conversion}-
 \section{Arterial Input Function}
-All PK models require the qquistition Arterial Input Function
+The quantitative approaches of DCE-MRI analysis require obtaining the input function delivering the tracer to the system. From the physiological point of view, the tracer is delivered to the tissue of interest through the feeding arteries, so the input function becomes the plasma concentration, $C_p$ in these vessels. Plasma concentration can be obtained from so called \textit{Arterial Input Function} (AIF), which describes the changes of the tracer concentration in the feeding blood vessel. The tracer kinetics in the artery differs significantly from this of the tissue. The changes in plasma concentration are fast and sharp and it is of great importance to cover the rapid peak of the signal or else the important information about the tissue will be lost.   
+In general there are three approaches of acquiring the AIF:
+\begin{enumerate}
+\item{\textbf{Gold standard AIF}} is obtained by blood sampling during DCE-MRI examination.
+Although its accuracy strongly depends on the frequency of collected samples, this method usually allows accurate measurement of the AIF, but is inconvenient for both the patient and the exterminer.
+What is more, in some cases, for example during DCE-MRI of a breast, blood collection close to the tissue of interest is impossible to perform due to the lack of big vessels in this region \cite{khalifa2014models, barnes2012practical}. 
+\item{\textbf{DCE-MRI AIF}} is determined directly from the obtained DCE-MRI data. In this approach The time-varying signal intensity from the region containing large feeding artery is converted into the tracer concentration in this way estimating the AIF. The major limitation is that it is not always possible to cover the the desired artery in the DCE-MRI acquisition field, for example during imaging small lesions in a breast \cite{khalifa2014models}.   
+\item{\textbf{Population-based AIF}} is obtained by averaging the AIF of the group of subjects to be used in subsequent studies of the similar subjects. Because the need of acquiring subject-specific AIF is eliminated, the temporal resolution of the DCE-MRI can be decreased (CA tissue kinetics is slower than in the blood) in the same time increasing the quality of the images or the spatial resolution. The biggest disadvantage of this method is possible variance between individual AIFs. 
+\end{enumerate}
 
+
+
+\section{Intensity to concentration conversion}
+As the PK models describe kinetics of the system in terms of the CA concentration in the tissue and the output of DCE-MRI examination is the signal intensity as a~function of time, the conversion of the signal intensity to concentration is indispensable. 
+As long as the relationship between CA concentration and the signal intensity  is linear, and the same for both the tissue and the blood in case of acquiring AIF from DCE-MRI images, the conversion comes down to the substarcting the baseline so that the concentration before the tracer arrival is at the level of 0. This conditions are satisfied at low doses of CA.
+
+At high doses of the CA, however, this linearity is not true anymore due to the saturation effect of the signal. Non-linearity adds one more complication to the DCE-MRI examination. In such case, in order to convert the signal intensity into the CA concentration, the  pre-contrast $T_1$ values before the tracer injection have to be measured. 
+ 
 
 
 
