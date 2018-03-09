@@ -35,7 +35,7 @@ The compartment PK models describe complex blood-tissue exchanges. The general t
 \caption[ddd]{aa}
 \label{fig:model}
 \end{figure}
-\noindent Given the tissue with with at least one inlet and one outlet, see Figure~\ref{fig:model}a, the time-varying tracer concentration in the tissue, $C_t(t)$ can be expressed as:
+\noindent Given the tissue with with at least one inlet and one outlet, see Figure~\ref{fig:model}a, the time-varying tracer concentration in the tissue, $C_t(t)$ can be expressed as \cite{thesis}:
 \begin{equation}
 C_t(t) = \frac{M_t(t)}{V_t},
 \label{eq:pk1}
@@ -124,33 +124,19 @@ What is more, in some cases, for example during DCE-MRI of a breast, blood colle
 
 
 \section{Intensity to concentration conversion}
-As the PK models describe kinetics of the system in terms of the CA concentration in the tissue and the output of DCE-MRI examination is the signal intensity as a~function of time, the conversion of the signal intensity to concentration is indispensable. 
+Because the PK models describe kinetics of the system in terms of the CA concentration in the tissue and the output of DCE-MRI examination is the signal intensity as a~function of time, the conversion of the signal intensity to concentration is indispensable. 
 As long as the relationship between CA concentration and the signal intensity  is linear, and the same for both the tissue and the blood in case of acquiring AIF from DCE-MRI images, the conversion comes down to the substarcting the baseline so that the concentration before the tracer arrival is at the level of 0. This conditions are satisfied at low doses of CA.
 
-At high doses of the CA, however, this linearity is not true anymore due to the saturation effect of the signal. Non-linearity adds one more complication to the DCE-MRI examination. In such case, in order to convert the signal intensity into the CA concentration, the  pre-contrast $T_1$ values before the tracer injection have to be measured. 
+At high doses of the CA, however, this linearity is not true anymore due to the saturation effect of the signal. Non-linearity adds one more complication to the DCE-MRI examination. In such case, in order to convert the signal intensity into the CA concentration, the native relaxation time, $T_{10}$, which is the value of $T_1$ before the tracer injection, has to be measured. Then, the values can be substituted to the formula \ref{eq:conversion} and the CA concentration can be obtained.
  
+ \begin{equation}
+ \frac{1}{T_1(t)} = \frac{1}{T_{10}}+r_1C_t(t)
+ \label{eq:conversion}
+ \end{equation}
 
+ \begin{equation}
+ S(t)  = k[H]\frac{sin\alpha(1-e^{-TR/T_1(t)})}      {1-(cos\alpha)e^{-TR/T_1(t)}}e^{-T_E/T_2^*},
+ \label{eq:conversion2}
+ \end{equation}
+where $k$ i a scaling constant dependent i.e on the scanner parameters, temperature or pressure, $[H]$ is the proton density, $TR$ is the repetition time, $T_1$ and $T_2^*$ are spin-lattice and spin-to-spin relaxation times respectively and $\alpha$ is the RF flip angle.   
 
-
-
-
-\begin{comment}
-
-
-
-
-
-
-
-
-
-
-The compartment PK models decribe complex
-blood-tissue exchanges and their theory
-is based on the differential mass balance equations
-[29]. An example of the system decribed
-by two compartments is presented on Figure 5.
-	
-
-
-\end{comment}
