@@ -3,7 +3,7 @@
 
 The ideal output obtained from DCE-MRI analysis would be some reliable quantitative physiological parameters of the tissue under examination. Numerical results, however, always call for some mathematical description of the system under examination. 
 
-The time-dependent distribution and deposition of a substance in a living system can be described by Phamacokinetic (PK) models~\cite{gerlowski1983physiologically}. First attempts of depicting the organism by a set of components were performed by Torsten Teorell in 1937. He then created a model of whole body shown in Figure \ref{fig:pk_draft} and decried the processes inside by a set of diferentail equations in the same time presenting  their solutions~\cite{pkfather}. Teorell is now considered  a father of \textit{Pharmacokinetic} (PK) modelling. 
+The time-dependent distribution and deposition of a substance in a living system can be described by Phamacokinetic (PK) models~\cite{gerlowski1983physiologically}. First attempts of depicting the organism by a set of components were performed by Torsten Teorell in 1937. He then created a model of whole body shown in Figure \ref{fig:pk_draft} and described the processes inside by a set of differential equations in the same time presenting  their solutions~\cite{pkfather}. Teorell is now considered  a father of \textit{Pharmacokinetic} (PK) modelling. 
 
 \begin{figure}[t]
 		\centering
@@ -12,7 +12,7 @@ The time-dependent distribution and deposition of a substance in a living system
 		\label{fig:pk_draft}
 	\end{figure}
 
-PK models aim to characterise a physiologic system, not nesseserly the whole body, by decomposing it into interacting compartments. Every of them is a homogenous, well-mixed space with the uniform tracer distribution \cite{PMID:20540902}.
+PK models aim to characterise a physiologic system, not necessarily the whole body, by decomposing it into interacting compartments. Every of them is a homogenous, well-mixed space with the uniform tracer distribution \cite{PMID:20540902}.
 Thus, the multicompartment system reaches the equilibrum in different time.  PK models have very wide clinical application: from estimating the optimal drug dose to determining safe working environment while working with toxins  \cite{gerlowski1983physiologically}.
 
 Given the fact that the contrast agent used in DCE-MRI examination can be considered as a substance flowing through the organism, Pharmacokintetic modelling can also be used in analysis of so obtained data.   
@@ -25,18 +25,19 @@ This chapter deals with the approach of PK modelling giving the brief inside in 
 
 
 \section{The tracer kinetic theory} 
-The compartment PK models describe complex blood-tissue exchanges. The general tracer kinetic theory is based on mass conservation principle and PK models are formulated as mass balance equations \cite{khalifa2014models, thesis} 
+The compartment PK models describe complex blood-tissue exchanges. The general tracer kinetic theory is based on  principle of mass conservation and PK models are formulated as mass balance equations \cite{khalifa2014models, thesis}. 
 \begin{figure}[H]
 \captionsetup[subfloat]{captionskip=0.5cm}
 	\centering
 	\subfloat [An arbitrary tissue]{\includegraphics[width=0.5\linewidth]{model1}\label{fig:model1}}
 	\subfloat[An arbitrary multi-compartment model]{\includegraphics[width=0.5\linewidth]{model2}\label{fig:model2}}\\	
 \vspace{0.5cm}
-\caption[An arbitrary multi-compartment model]{An Arbitrary tissue with a possible compartmental architecture. The system has inlet and outlet. The indicator in the volume of distribution is
-indicated in white. The system is a square while the compartments are oval-shaped. $J_{12}$ and $J_{12}$ are fluxes between compartments}
+\caption[An arbitrary multi-compartment model]{An arbitrary tissue with a possible compartmental architecture. The system (square) has one inlet and one outlet.
+The tracer in the volume of distribution is
+indicated in dark green in (a). $J_{12}$ and $J_{21}$ are fluxes between compartments (oval shaped)}
 \label{fig:model}
 \end{figure}
-\noindent Given the tissue with with at least one inlet and one outlet, see Figure~\ref{fig:model}a, the time-varying tracer concentration in the tissue, $C_t(t)$ can be expressed as \cite{thesis}:
+\noindent Given the tissue with at least one inlet and one outlet (see Figure~\ref{fig:model}a), the time-varying tracer concentration in the tissue, $C_t(t)$ can be expressed as \cite{thesis}:
 \begin{equation}
 C_t(t) = \frac{M_t(t)}{V_t},
 \label{eq:pk1}
@@ -46,7 +47,7 @@ where $M_t(t)$ is the amount of tracer in the tissue (in mmol) and $V_t$ is the 
 J(t) = \frac{1}{V_t}\frac{\partial M_t(t)}{\partial t}
 \label{eq:pk2}
 \end{equation} 
-Let' now consider an arbitrary multi-compartment model composed of $n$ interacting compartments. Then, the outlet of one compartment is in the same time the inlet of another, see Figure~\ref{fig:model}b. The tissue concentration in such a system is defined as \cite{thesis}:   
+Let's now consider an arbitrary multi-compartment model composed of $n$ interacting compartments. Then, the outlet of one compartment is in the same time the inlet of another, see Figure~\ref{fig:model}b. The tissue concentration in such a system is defined as \cite{thesis}:   
 \begin{equation}
 C_t(t) = \sum_{j=1}^{n}v_jC_j(t),
 \label{eq:pk3}
@@ -54,13 +55,13 @@ C_t(t) = \sum_{j=1}^{n}v_jC_j(t),
 where $v_j\leq1$ is the \textit{fractional volume} (dimensionless) of $j$th compartment and $C_j$ is the concentration of tracer in this compartment. 
 From the principle of the conservation of the mass it is known that no amount of the indicator is neither created nor destroyed in the tissue. Under such condition, applying the mass balance equation to the every of the compartments, the change of the total amount of substance in the compartment is given by \cite{thesis}:
 \begin{equation}
-\frac{dM_j(t)}{dt} = \sum_{i}^{I}\frac{M_i(t)}{\partial t}-\sum_{o}^{O}\frac{M_o(t)}{\partial t} ,
+\frac{dM_j(t)}{dt} = \sum_{i=1}^{I}\frac{M_i(t)}{\partial t}-\sum_{o=1}^{O}\frac{M_o(t)}{\partial t} ,
 \label{eq:pk4}
 \end{equation}
 where $I$ and $O$ are the number of inlets and outlets of the compartment respectively. 
 After normalisation to the unit tissue volume \cite{thesis}:
 \begin{equation}
-vj\frac{dC_j(t)}{dt} = \sum_{i}^{I}J_i(t)-\sum_{o}^{O}J_o(t) ,
+vj\frac{dC_j(t)}{dt} = \sum_{i=1}^{I}J_i(t)-\sum_{o=1}^{O}J_o(t) ,
 \label{eq:pk5}
 \end{equation}
 The mass conservation principle implies that the amount of the substance transported from a compartment $i$ to a compartment $j$ per unit time is equal to the amount of the given substance leaving the $i$. This leads to the formula \cite{thesis}:
@@ -73,7 +74,7 @@ where $k_{ep}$ is so called \textit{rate constant} (in min$^{-1}$). Again, after
 J_{ij}(t) = K_{trans}C_i(t),
 \label{eq:pk7}
 \end{equation}
-where $K_{trans}=k_{ep}v_j$ is \textit{transfer constant} (in ml$^{-1}$). $K_{trans}$ combines both the flow and tissue permeability. Some models allow their separate estimation by differentiating the \textit{flow} $F$ by the \textit{permeability surface area product}, $PS$ \cite{thesis}. 
+where $K_{trans}=k_{ep}v_j$ is \textit{transfer constant} (in ml$^{-1}$). $K_{trans}$ combines both the flow and tissue permeability. Some approaches allow their separate estimation by differentiating the \textit{flow} $F$ by the \textit{permeability surface area product}, $PS$ \cite{thesis}. 
 
 \subsection{Linear stationary systems}
 All PK models are based on two fundamental assumptions, without which solving the models' equations would not be possible: that the system is linear and stationary. Hence the response of the influx is proportional to the dose of the injected tracer \cite{thesis, sourbron2011scope} 
@@ -85,7 +86,7 @@ the tissue concentration can be obtained by convolving the concentration of trac
 	\label{eq:convolution}
 	C_{t}(t) = C_{in}(t)\circledast h(t) = \int_{0}^{t}C_{in}(\tau)h(t-\tau)d\tau 
 \end{equation}
-When the only inlet of the examined tissue is an artery, the input function corresponds to the function of plasma concentration at the entrance of the system and can be derived from so called \textit{Arterial Input Function} (AIF), $C_{in} = C_{p}$. The IRF in terms can be found by applying the Laplace transform to the appropriate mass balance equations \cite{thesis}.
+When the only inlet of the examined tissue is an artery, the input function corresponds to the function of plasma concentration at the entrance of the system and can be derived from so-called \textit{Arterial Input Function} (AIF), $C_{in} = C_{p}$. The IRF in terms can be found by applying the Laplace transform to the appropriate mass balance equations \cite{thesis}.
 \newpage
 
 \subsection{One-compartment model}
@@ -93,33 +94,38 @@ For better understanding, the above theory will be explained on an example one-c
 \begin{equation}
 v_1\frac{dC_1(t)}{dt} = K_{trans}(C_{in}(t)-C_1(t)),
 \end{equation}
-where the $v_1$ is fractional volume of the compartment. From the Formula \ref{eq:pk3} \cite{thesis}:
+where the $v_1$ is the fractional volume of the compartment. From the Formula \ref{eq:pk3} \cite{thesis}:
 \begin{equation}
 \frac{dC_t(t)}{dt} = K_{trans}(C_{in}(t)-C_t(t)/v_1),
 \label{eq:laplace}
 \end{equation}
-Now, the IRF of the tissue is obtained by applying the Laplace transform to the above equation. As a result \cite{thesis}:
+Assuming that $C_{in}$ is a short pulse of concentration, $C_{in}=\delta(t)$ the IRF of the tissue can be obtained by applying the Laplace transform to the Formula \ref{eq:laplace}: 
+
+\begin{equation}
+\mathcal{L}\{\dot{h}\}(s) = K_{trans}(\mathcal{L}\{\delta\}(s)) - \frac{K_{trans}}{v_1}(\mathcal{L}\{h\}(s))
+\end{equation}
+The solution is \cite{thesis}:
 \begin{equation}
 h(t) = K_{trans}e^{-k_{ep}t}
 \end{equation}
-Finally the tracer concentration in the tissue can be expressed as \cite{thesis}:
+Finally, according to the Formula~\ref{eq:convolution}, the tracer concentration in the tissue can be expressed as \cite{thesis}:
 \begin{equation}
 	C_{t}(t) = C_{in}(t)\circledast  K_{trans}e^{-k_{ep}t} 
 \end{equation}
 
 
-The described above physical and mathematical background was shorten so that to indroduce very basics and explain enough but not too much on the theory of PK models. If the reader is interested, I kindly refer to the original sources \cite{sourbron2011scope, thesis}. 
+The described above physical and mathematical background was shortened so that to indroduce very basics and explain enough but not too much on the theory of PK models. If the reader is interested, I kindly refer to the original sources \cite{sourbron2011scope, thesis}. 
 
 There exist numerous PK compartment models used in DCE-MRI analysis and every of them is based on different assumptions and simplifications, which are not proper in all cases. The choice of the model depends on such factors as a type of a~tissue under concideration, the quality of data, the possibility of obtaining AIF and many more \cite{khalifa2014models}. One should, however, remember that no mathematical equations will ever describe the living organism accurately in 100\% as there are no two samples of tissue behaving exactly in the same way. The most widely used PK models include: \textit{Toft and Keromode} (TK), \textit{Extended TK} (ETK), \textit{Two-compartment Exchange} (2CXM) and \textit{Patlak} (PM) models.  
 
 \section{Arterial Input Function}
-The quantitative approaches of DCE-MRI analysis require obtaining the input function delivering the tracer to the system. From the physiological point of view, the tracer is delivered to the tissue of interest through the feeding blood vessels, so the input function becomes the plasma concentration, $C_p$ in these vessels. Plasma concentration can be obtained from so called \textit{Arterial Input Function} (AIF), which describes the changes of the tracer concentration in the feeding blood source. Its tracer kinetics differs significantly from this of the tissue. The changes in plasma concentration are fast and sharp and it is of great importance to cover the rapid peak of the signal or else the important information about the tissue will be lost \cite{khalifa2014models, jackson2005dynamic, barnes2012practical}.   
+The quantitative approaches of DCE-MRI analysis require obtaining the input function delivering the tracer to the system. From the physiological point of view, the tracer is delivered to the tissue of interest through the feeding blood vessels, so the input function becomes the plasma concentration, $C_p$ in these vessels. Plasma concentration can be obtained from so-called \textit{Arterial Input Function} (AIF), which describes the changes of the tracer concentration in the feeding blood source. Its tracer kinetics differs significantly from this of the tissue. The changes in plasma concentration are fast and sharp and it is of great importance to cover the rapid peak of the signal or else the important information about the tissue will be lost \cite{khalifa2014models, jackson2005dynamic, barnes2012practical}.   
 In general there are three approaches of acquiring the AIF:
 \begin{enumerate}
 \item{\textbf{Gold standard AIF}} is obtained by blood sampling during DCE-MRI examination.
-Although its accuracy strongly depends on the frequency of collected samples, this method usually allows accurate measurement of the AIF, but is inconvenient for both the patient and the exterminer.
+Although its accuracy strongly depends on the frequency of collected samples, this method usually allows accurate measurement of the AIF, but is inconvenient for both the patient and the examiner.
 What is more, in some cases, for example during DCE-MRI of a breast, blood collection close to the tissue of interest is impossible to perform due to the lack of big vessels in this region \cite{khalifa2014models, barnes2012practical}. 
-\item{\textbf{DCE-MRI AIF}} is determined directly from the obtained DCE-MRI data. In this approach The time-varying signal intensity from the region containing large feeding artery is converted into the tracer concentration in this way estimating the AIF. The major limitation is that it is not always possible to cover the the desired artery in the DCE-MRI acquisition field, for example during imaging small lesions in a breast \cite{khalifa2014models}.   
+\item{\textbf{DCE-MRI AIF}} is determined directly from the obtained DCE-MRI data. In this approach the time-varying signal intensity from the region containing large feeding artery is converted into the tracer concentration in this way estimating the AIF. The major limitation is that it is not always possible to cover the the desired artery in the DCE-MRI acquisition field, for example during imaging small lesions in a breast \cite{khalifa2014models}.   
 \item{\textbf{Population-based AIF}} is obtained by averaging the AIF of the group of subjects to be used in subsequent studies of the similar subjects. Because the need of acquiring subject-specific AIF is eliminated, the temporal resolution of the DCE-MRI can be decreased (CA tissue kinetics is slower than in the blood) in the same time increasing the quality of the images or the spatial resolution. The biggest disadvantage of this method is possible variance between individual AIFs \cite{jackson2005dynamic}. 
 \end{enumerate}
 
@@ -127,21 +133,21 @@ What is more, in some cases, for example during DCE-MRI of a breast, blood colle
 
 \section{Intensity to concentration conversion}
 Because the PK models describe kinetics of the system in terms of the CA concentration in the tissue and the output of DCE-MRI examination is the signal intensity as a~function of time, the conversion of the signal intensity to concentration is indispensable. 
-As long as the relationship between CA concentration and the signal intensity  is linear, and the same for both the tissue and the blood in case of acquiring AIF from DCE-MRI images, the conversion comes down to the substarcting the baseline so that the concentration before the tracer arrival is at the level of 0. This conditions are satisfied at low doses of CA \cite{khalifa2014models}.
+As long as the relationship between CA concentration and the signal intensity  is linear, and the same for both the tissue and the blood in case of acquiring AIF from DCE-MRI images, the conversion boils down to the substarcting the baseline so that the concentration before the tracer arrival is at the level of 0. This conditions are satisfied at low doses of CA \cite{khalifa2014models}.
 
-At high doses of the CA, however, this linearity is not true anymore due to the saturation effect of the signal. Non-linearity adds one more complication to the DCE-MRI examination. In such case, in order to convert the signal intensity into the CA concentration, the maps of the native relaxation time, $T_{10}$, which is the value of $T_1$ before the tracer injection, have to be measured. Then, the values can be substituted to the Formulas \ref{eq:conversion}, \ref{eq:conversion3} and the CA concentration can be obtained \cite{khalifa2014models, jackson2005dynamic, barnes2012practical}.
+At high doses of the CA, however, this linearity is not true anymore due to the saturation effect of the signal. Non-linearity adds one more complication to the DCE-MRI examination. In such case, in order to convert the signal intensity into the CA concentration, the maps of the native relaxation time, $T_{10}$, which is the value of $T_1$ before the tracer injection, have to be measured. Then, the values can be substituted to the Formulas \ref{eq:conversion2}, \ref{eq:conversion3} and the CA concentration can be obtained \cite{khalifa2014models, jackson2005dynamic, barnes2012practical}.
 
 
 The dependency between the CA concentration in the tissue, $C_t(t)$  and the relaxation rate, $1/T_1(t)$ is given by the Solomon-Bloembergen equation \cite{jackson2005dynamic}:
  \begin{equation}
  \frac{1}{T_1(t)} = \frac{1}{T_{10}}+r_1C_t(t),
- \label{eq:conversion}
+ \label{eq:conversion2}
  \end{equation}
 where $r_1$ is the spin-lattice relaxation constant depending on temperature, field strength and the chemical structure of the tracer. On the other hand, under the certain assumptions, the magnitude of the signal during the standard DCE-MRI can be predicted by \cite{khalifa2014models, jackson2005dynamic}:
   \begin{equation}
- S(t)  = M_0\frac{sin\alpha(1-e^{-TR/T_1(t)})}      {1-(cos\alpha)e^{-TR/T_1(t)}}
+ S(t)  = M_0\frac{\sin\alpha(1-e^{-TR/T_1(t)})}      {1-(\cos\alpha)e^{-TR/T_1(t)}}
  \label{eq:conversion3}
  \end{equation} 
-where $M_0$ i a scaling constant dependent i.e on the scanner parameters and the proton density, $TR$ is the repetition time, $T_1$ is spin-lattice and relaxation time and $\alpha$ is the RF flip angle.
+where $M_0$ is a scaling constant dependent i.e. on the scanner parameters and the proton density, $TR$ is the repetition time, $T_1$ is spin-lattice and relaxation time and $\alpha$~is the RF flip angle.
 
 Having calculated the AIF and the tissue CA concentrations, the obtained concentration time courses can be fitted to an appropriate PK model. 
