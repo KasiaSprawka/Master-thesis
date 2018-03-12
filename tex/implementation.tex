@@ -289,39 +289,33 @@ where $C_p$ is plasma concentartion, $C_a$ is concentration in the aorta defined
 Finally, the long-awaited PK modelling could have been performed. The models of choice were the Toft's model, Extended Toft's model, Patlak model and 2-Compartment Exchange model. 
  
 \paragraph{Toft's model}
-\begin{comment}
-The assumption underlying the TM is that the eect of vascular tracer can be ignored,
-i.e. that the vascular signal is small in comparison to the tissue signal. For this
-purpose the modelling of the tracer transport through an extracellular extravascular
-compartment (with fractional volume ve) suces. When considering a simple diusion
-mechanism active transport processes and dierences in viscosity or pressure can be
-neglected. In this case the transport of indicator Ktrans into and out of the EES is
-assumed to be the same in both directions. For such a one-compartment system the
-mass balance equation is known from the previous section:
-with a negligible
-amount of intravascular trace
-\end{comment}
-
-\textit{The Tofts model} \cite{tofts1991measurement} (TM) assumes the diffusion of the tracer from the blood plasma at rate specified by the transfer constant $K_{trans}$ $(min^{-1})$ and its return at the rate $k_{ep} = K_{trans}/v_e$ $(min^{-1})$. This model assumes that the amount of intravascular tracer is negligible comparing to the tissue signal. This assumption leads to: $C_t(t) = v_eC_e(t)$. According to the Tofts model, the tissue concentration is specified by the formula \cite{tofts2010t1, tofts1991measurement}:
- 
+\textit{The Tofts Model} \cite{tofts1991measurement} (TM) According to (TM) model  the tracer is distributed in two compartments intra- and \textit{Extravascular extra-cellular space} (EES).
+The tracer diffuses from the blood plasma at rate specified by the transfer constant $K_{trans}$ $(min^{-1})$ and its return at the rate $k_{ep} = K_{trans}/v_e$ $(min^{-1})$. This model assumes, however, that the amount of intravascular (plasma) tracer is negligible comparing to the tissue signal. The total tissue concentration , $C_t(t)$ is then given by\cite{khalifa2014models}:
+\begin{equation}
+C_t(t) = v_eC_e(t),
+\end{equation}
+where $v_e$ is EES fractional volume and $C_e(t)$ is EES concentration. The system can be described by mass balance equation  \cite{tofts2010t1, sourbron2011scope}: 
 \begin{equation}
 	\label{eq:toft}
-	\frac{dC_{t}(t)}{dt} = K_{trans}(C_p(t)-C_t(t)/v_e)
+	\frac{dC_{t}(t)}{dt} = K_{trans}(C_p(t)-C_t(t)/v_e),
 \end{equation} 
-The solution obtained according to the procedure presented in Chapter~\ref{chapter:pk} is:
+where  and $C_p(t)$ is blood plasma concentration, The solution obtained according to the procedure presented in Chapter~\ref{chapter:pk} is:
 \begin{equation}
 	\label{eq:toft2}
 	C_{t}(t) =C_p\circledast K_{trans}e^{-k_{ep}t} =K_{trans}\int_{0}^{t}C_p(t')e^{-k_{ep}(t-\tau)}d\tau  
 \end{equation}
 
-\paragraph{Extended Toft's model}
-While the Toft's model neglects intravascular contribution assuming weak vascularization of the tissue, the Extended Toft's model \ref{tofts1997modeling} does take it into account. The tissue concentration is described by the formula:
-\begin{align}
+\paragraph{Extended Tofts model}
+While the Tofts model neglects intravascular contribution assuming weak vascularization of the tissue, the \textit{Extended Tofts model} (ETK) \cite{tofts1997modeling} does take it into account. According to ETK, the tissue concentration is described by the formula \cite{sourbron2011scope, khalifa2014models}:
+\begin{equation}
+C_t(t) = v_pC_p(t) + v_eC_e(t),
+\end{equation}
+where $v_p$ is fractional plasma volume. The solution is similar to the previous model with addition of plasma contribution \cite{sourbron2011scope}:
+\begin{equation}
 	\label{eq:extended_toft}
-	\nonumber C_{t}(t) &= v_pC_p(t)+\\ 
-	&+ K_{trans}\int_{0}^{t}C_p(t')e^{-(K_{trans}/v_e)(t-t')}dt', 
-\end{align}
-where $v_p$ is the fractional plasma volume. 
+	C_{t}(t) =v_pC_p(t) + C_p\circledast K_{trans}e^{-k_{ep}t} = v_pC_p(t)+K_{trans}\int_{0}^{t}C_p(t')e^{-k_{ep}(t-\tau)}d\tau 
+\end{equation}
+
 
 In Toft's and extended Toft's models the free parameters $K_{trans}$, $v_e$ and $v_p$ are estimated by fitting the model to obtained in DCE-MRI examinations time concentration curves.  
 
@@ -344,75 +338,3 @@ where $Y=C_t(t)/C_p(t)$ and $X=\int_{0}^{t}C_p(t')dt'/C_p(t)$. The free paramete
 
 \section{Results}
 
-
-
-\begin{comment}
-
-
-
- 
-\subsection{Manual labelling of kidneys and aorta} 
-\label{subsec:labelling}
-  
- 
-
-
-\newpage
-\subsection{Pharmacokinetic modelling}
-The time-dependent distribution and disposition of a substance in a living system can be described by phamacokinetic (PK) models~\cite{gerlowski1983physiologically}. They aim to characterise a physiologic system by decomposing them into interacting compartments. Every of them is a homogenous, well-mixed space with the uniform tracer distribution \cite{PMID:20540902}.
-
-
-
-
-PK models have very wide clinical application: from estimating the optimal drug dose to determining safe working environment while working with toxins  \cite{gerlowski1983physiologically}.
-Given the fact that the contrast agent used in DCE-MRI examination can be considered as a substance flowing through the organism, pharmacokintetic modelling can also be used in analysis of so obtained data.   
-This approach, called the parametric one, is based on fitting mathematical model to acquired tissue concentration time courses. In this way, the quantitative parameters can be assessed, which cannot be overestimated while evaluating the renal function. 
- 
-
-\begin{figure*}[t]
-	\centering
-	\includegraphics[width = 11cm]{img/diagram2}
-	\caption{An example two compartment model \cite{khalifa2014models}.}
-	\label{fig:diagram2}
-\end{figure*}
-
-The compartment PK models decribe complex blood-tissue exchanges and their theory is based on the differential mass balance equations \cite{sourbron2011tracer}. 
-An example of the system decribed by two compartments is presented on Figure \ref{fig:diagram2}.
-
-
-\subsubsection{Concentration time courses}
-  
-
- 
-
-
-
-\begin{figure*}
-	\centering
-	\subfloat[Kidney time course]{\includegraphics[width=6 cm]{img/timecourse_kidney}}\quad
-	\subfloat[Aorta time course]{\includegraphics[width=6 cm]{img/timecourse_aorta}}\\		
-\caption{Sample average time-courses for renal parenchyma (a) and aorta (b). The last point of baseline is marked with red dot.}
-\label{fig:point}
-\end{figure*}
-
-Obtained time-concentration curves were then fitted to the described in the next sections PK models.
-
-
-
-
-
-\subsubsection{GFR estimation}
-Having calculated the $K_{trans}$ parameter the glomelural filtration rate can be computed according to the formula:
-\begin{equation}
-	\label{eq:gfr}
-	GFR = K_{trans}V_{parenchyma}(1-H_{ct}) 
-\end{equation}
-
-\begin{figure*}
-	\centering
-	\includegraphics[height = 18cm]{img/methods}
-	\caption{}
-	\label{fig:methods}
-\end{figure*}
-
-\end{comment}
