@@ -111,12 +111,27 @@
 	\headwidth \textwidth
 	
 	%\fancyhf{}
-	\fancyhead[LE,RO]{{\small{\author}}\linebreak{\small\textsl{\title}}}
-	\fancyhead[RE,LO]{}
+	%\fancyhead[LE,RO]{{\small{\author}}\linebreak{\small\textsl{\title}}}
+	%\fancyhead[RE,LO]{}
+	\fancyhead[]{}
+	\renewcommand{\headrulewidth}{0pt}
 	%\rhead{}
 	%\chead{}
 	%\lhead{{\small{\author}}\linebreak{\small\textsl{\title}}}
+
 \fi
+
+%\fancypagestyle{plain}{
+%	\fancyhead[LE,RO,RE,LO]{}
+%	\fancyfoot[]{}
+%	\renewcommand{\headrulewidth}{0pt}
+%}
+%
+%\fancypagestyle{pagenumberingonly}{
+%	\fancyhead[LE,RO,RE,LO]{}
+%	\fancyfoot[C]{\thepage}
+%	\renewcommand{\headrulewidth}{0pt}
+%}
 
 \textheight 21cm
 %\textwidth 15cm

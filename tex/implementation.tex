@@ -1,60 +1,56 @@
 \chapter{Implementation}
 \section{DCE-MRI renography}
-When the Contrast Agent is injected into the bloodstream, it travels through the aorta to the 
-Chemicals such as
+When the Contrast Agent is injected into the bloodstream, is starts its journey in the organism. It travels in the blood through the abdominal aorta, which branches  into the left and right renal arteries supplying the kidneys.  
 
-
-Gadolinium-based Contrast Agent that are freely filtered but neither reabsorbed nor secreted by the kidneys
-can be used for calculating the Glomerular Filtration Rate.
+Firstly, the CA reaches the renal cortex, where where a portion of it is filtered by the glomerulus from the blood to the Bowman's capsule in the process of glomerular filtration. Next, it is passed by the renal tubule to the renal medulla to finally be collected by the collecting system.   
+Chemicals such as Gadolinium-based markers used in DCE-MRI that are freely filtered but neither reabsorbed nor secreted by the kidneys can be used for estimating the Glomerular Filtration Rate in quantitative DCE-MRI analysis.
 \begin{comment}
 This chapter describes in details the implemented method of the quantitative analysis of the kidney's function. Firstly, the subsequent steps of image processing and analysis are presented and the, the performance of the chosen PK models is compared. The aim is to chose the model, which would be the best for GFR estimation and to draw a conclusion if it can be considered a robust, reliable method for future applications. 
 \end{comment}
-This part of the thesis describes in details the implemented method of the quantitative analysis of the kidney's function from DCE-MRI. The chapter leads the reader through the subsequent steps of image processing and analysis to finally compare the performance of the chosen PK models. The aim is to chose the model, which allows obtaining the best results for GFR estimation on the give data and to draw a conclusion if it can be considered a robust, reliable method for future applications. 
 
+This part of the thesis describes in details the implemented method of the quantitative analysis of the kidney's function from DCE-MRI. The chapter leads the reader through the subsequent steps of image processing and analysis to finally compare the performance of the chosen PK models. The aim is to choose the model, which allows obtaining the best results for GFR estimation on the give data and to draw a conclusion if it can be considered a robust, reliable method for future applications. 
 
 \section{Materials and methods}
 \subsection{DCE-MRI aquisition}
-The dataset used in this project consists of forty DCE-MRI sequences. Each of the 20 healthy, non-smoking participants underwent two MRI examination at a~time interval of 7 days.
-A gadolinium-based CA GdDOTA (Gadoteric Acid) at a dose of 0.025\,mmol/kg was administrated as a bolus injection at 3\,ml/s.
-The data were acquired on 32 channel 1.5 T whole-body scanner (Siemens Magnetom Avanto \cite{simens}).
-The  images covering kidneys and aorta were continuously acquired every 2.3 s for approximately 6 min in coronal-oblique plane.
-Each of 74 time volumes consisted of 30 slices.
+The dataset used in this project consists of forty DCE-MRI sequences. Each of the twenty healthy, non-smoking participants underwent two MRI examination at a~time interval of 7 days.
+GdDOTA (Gadoteric Acid), which is a Gadolinium-based CA,  at a dose of 0.025\,mmol/kg was administrated as a bolus injection at 3\,ml/s in an antecubital vein followed by a 20 mL saline flush.
+The examinations were performed on 32 channel 1.5 T whole-body scanner (Siemens Magnetom Avanto \cite{simens}) with a gradient strength\,=\,45\,mT/m and slew rate\,=\,200\,mT/m/ms using a~standard six-channel body matrix coil and table-mounted six-channel spine matrix coil for signal reception.
+The 74 volumes, each consisting of 30 slices, covering the kidneys and the aorta were continuously acquired every 2.3 s for approximately 6 min in coronal-oblique plane.
 The aquisition matrix was 192\,x\,192 whereas the voxel size was equal to 2.2\,x\,2.2\,x\,3\,mm$^3$
+Th parameters of the used spoiled gradient recalled 3D FLASH pulse-sequence were echo time, $TE=0.8$\,ms, repetition time, $TR=2.36$\,ms, flip angle, $\alpha= 20^{\circ}$.
+
 More information about aquisition of DCE-MRI data used in this project can be found in \cite{eikefjord2017dynamic}.
 The few frames of the sample raw DCE-MRI sequence is shown in Figure~\ref{fig:set}.
-
+\newpage
 
 
 \begin{figure}[H]
 
 \captionsetup[subfigure]{labelformat=empty,textformat=simple}
 	\centering
-	\subfloat[\textit{T} = T0]{\includegraphics[height=0.24\linewidth]{img/preview/00}}\hspace{0.005\linewidth}
-		\subfloat[\textit{T} = T9]{\includegraphics[height=0.24\linewidth]{img/preview/09}}\hspace{0.005\linewidth}
-			\subfloat[\textit{T} = T12]{\includegraphics[height=0.24\linewidth]{img/preview/12}}\hspace{0.005\linewidth}
-			\subfloat[\textit{T} = T16]{\includegraphics[height=0.24\linewidth]{img/preview/16}}\vspace{-4pt}
+	\subfloat[\textit{T} = 0\,Tp]{\includegraphics[height=0.24\linewidth]{img/preview/00}}\hspace{0.005\linewidth}
+		\subfloat[\textit{T} = 9\,Tp]{\includegraphics[height=0.24\linewidth]{img/preview/09}}\hspace{0.005\linewidth}
+			\subfloat[\textit{T} = 12\,Tp]{\includegraphics[height=0.24\linewidth]{img/preview/12}}\hspace{0.005\linewidth}
+			\subfloat[\textit{T} = 16\,Tp]{\includegraphics[height=0.24\linewidth]{img/preview/16}}\vspace{-4pt}
 			
-			\subfloat[\textit{T} = T18]{\includegraphics[height=0.24\linewidth]{img/preview/18}}\hspace{0.005\linewidth}
-		\subfloat[\textit{T} = T22]	{\includegraphics[height=0.24\linewidth]{img/preview/22}}\hspace{0.005\linewidth}
-		\subfloat[\textit{T} = T26]{\includegraphics[height=0.24\linewidth]{img/preview/26}}\hspace{0.005\linewidth}
-			\subfloat[\textit{T} = T30]{\includegraphics[height=0.24\linewidth]{img/preview/30}}\vspace{-4pt}
+			\subfloat[\textit{T} = 18\,Tp]{\includegraphics[height=0.24\linewidth]{img/preview/18}}\hspace{0.005\linewidth}
+		\subfloat[\textit{T} = 22\,Tp]	{\includegraphics[height=0.24\linewidth]{img/preview/22}}\hspace{0.005\linewidth}
+		\subfloat[\textit{T} = 26\,Tp]{\includegraphics[height=0.24\linewidth]{img/preview/26}}\hspace{0.005\linewidth}
+			\subfloat[\textit{T} = 30\,Tp]{\includegraphics[height=0.24\linewidth]{img/preview/30}}\vspace{-4pt}
 
-			\subfloat[\textit{T} = T34]{\includegraphics[height=0.24\linewidth]{img/preview/34}}\hspace{0.005\linewidth}
-		\subfloat[\textit{T} = T39]	{\includegraphics[height=0.24\linewidth]{img/preview/39}}\hspace{0.005\linewidth}
-	\subfloat[\textit{T} = T55]{\includegraphics[height=0.24\linewidth]{img/preview/55}}\hspace{0.005\linewidth}
-	\subfloat[\textit{T} = T73]{\includegraphics[height=0.24\linewidth]{img/preview/73}}
+			\subfloat[\textit{T} = 34\,Tp]{\includegraphics[height=0.24\linewidth]{img/preview/34}}\hspace{0.005\linewidth}
+		\subfloat[\textit{T} = 39\,Tp]	{\includegraphics[height=0.24\linewidth]{img/preview/39}}\hspace{0.005\linewidth}
+	\subfloat[\textit{T} = 55\,Tp]{\includegraphics[height=0.24\linewidth]{img/preview/55}}\hspace{0.005\linewidth}
+	\subfloat[\textit{T} = 73\, Tp]{\includegraphics[height=0.24\linewidth]{img/preview/73}}
 \vspace{0.5cm}
-\caption[Sample DCE-MRI sequence.]{Sample DCE-MRI sequence}
+\caption[Sample DCE-MRI sequence of the healthy kidneys.]{Sample DCE-MRI of the healthy kidneys sequence. Tp is a given time point. Firstly the signal enhancement is observed in the renal cortex. Later, the tracer travels to the renal medulla and finally is collected by the collecting system.}
 \label{fig:set}
 \end{figure}
 
 
 \subsection{GFR reference values}
-Next to the DCE-MRI examinations, the participant had their GFR assessed by two commonly used in clinical practice chemical methods: the Serum-creatinine (SCr) and iohexol GFR tests.  
-
-The clinical characteristic of the participants is included in Table~\ref{tab:participants}
-
-
+Next to the DCE-MRI examinations, the participant had their GFR assessed by two commonly used in clinical practice chemical methods: the Serum-creatinine (SCr) blood test and iohexol-GFR tests. Creatinine is an endogenous indicator, which allows estimating GFR from validated algorithms.
+Iohexol in terms is an exogenous marker which is used for accurate GFR measurement. The clinical characteristic of the participants is included in Table~\ref{tab:participants}
 
 \begin{table}[h!]
 \centering
@@ -63,17 +59,18 @@ The clinical characteristic of the participants is included in Table~\ref{tab:pa
 \begin{threeparttable}
 \rowcolors{2}{}{beaublue!50}
 \renewcommand{\arraystretch}{1.25}
-\begin{tabular}{m{8cm} m{2.25cm}}
+\begin{tabular}{m{7cm} m{4cm}}
 	\hline
 
  	Participants & 20\\
   	Gender (female/male) &16/4\\
-  	Age (years) & 25 (20---38)\\
+  	Age (years) & 25 (20--38)\\
   	Height [m] & 1.71 $\pm$ 00.7\\
   	Weight [kg] & 66.2 $\pm$ 8.7\\
-  	Body mass index (BMI) [kg/m\textsuperscript{2}] & 22.6 $\pm$ 2.1\\
-  	Body surface area (BSA) [m\textsuperscript{2}]& \\
-  	Iohexol GFR [ml/min/m\textsuperscript{2}] &103 $\pm$ 10\\
+  	Body Mass Index (BMI) [kg/m\textsuperscript{2}] & 22.6 $\pm$ 2.1\\
+  	Body Surface Area (BSA) [m\textsuperscript{2}]& 1.77 $\pm$ 0.14 (1.5--2.0) \\
+  	Iohexol GFR [ml/min/m\textsuperscript{2}] &103 $\pm$ 10 (87--125)\\
+  	SCr GFR [ml/min/m\textsuperscript{2}] & 110 $\pm$ 15 (81--128)\\
   \hline
 
 \end{tabular}
@@ -85,44 +82,62 @@ The clinical characteristic of the participants is included in Table~\ref{tab:pa
 	\end{threeparttable}
 \end{table}
 
-
-
 \subsection{Image processing and analysis}
+
 \subsubsection{Motion correction}
 One of the first fundamental problem encountered during DCE-MRI analysis is misalignment of 3D volumes across time slices. This misalignment of organs is a result of the patiens's respiratory motion as well as the heartbeat and bowel peristalsis and is unavoidable during examination. Studies have shown that even slight misalignment can lead to significant differences in intensity time-courses \cite{KidneySubsegmentation} and thus, motion correction of time series is essential for further analysis.
 
-In order to remove motion artifact, all files were motion-corrected across time points. For this purpose R programming language for statistical computing and graphics was used \cite{R} together with the package ANTsR \cite{ANTsR}, which provides quantification tools for biomedical images. As an initial step, for every time series, the algorithm extracted 3D volumes. Each extracted volume corresponded to data obtained in one time point. Next, the average image of the temporal volumes was calculated, which was treated as a mask for image registration. Every temporal volume was then aligned to the mask and at the end they were combined back together into 4D time series.
+In order to remove 	the motion artifact, all files were motion-corrected across time points. For this purpose R programming language for statistical computing and graphics was used \cite{R} together with the package ANTsR \cite{ANTsR}, which provides quantification tools for biomedical images. 
+
+As an initial step, for every time series, the algorithm extracted 3D volumes. Each extracted volume corresponded to data obtained in one time point. Next, the average image of the temporal volumes was calculated, which was a target image for image registration. Every temporal volume was then aligned to it and at the end they were combined back together into 4D time series.
+As the misalignment concerns the inner structures, not the whole body and various organs have spatially variant geometric differences the modality of choice was the  \textit{Symmetric Normalisation} algorithm (SyN), which is the non-rigid deformable transformation utilizing \textit{Cross-correlation} (CC) as a similarity metric \cite{avants2011reproducible, avants2008symmetric, el2016current}. 
+
+\subsubsection{Manual labelling}
+In the next step, the labels of the whole left and right kidney were created. For this purpose, 3D volumes were extracted for every time frame and the slice with maximal signal enhancement of the kidneys was chosen (usually between 12--17 time slice). On this image, left and right kidney were manually delineated in coronal plane using ITK-Snap software \cite{itk-snap}. Additionally, few voxels of aorta (15--20) were labelled on maximal aortic enhancement time slice (9--10) . So obtained labels were then combined and propagated across the time points. The sample labels are shown in Figure~\ref{fig:labels}
+All further analysis was implemented in Python programming language~v.~3.6 \cite{python}.
+
+\begin{figure}
+\captionsetup[subfloat]{captionskip=0.5cm}
+	\centering
+	\subfloat[Labels of the left and right kidneys ]{\includegraphics[width=0.48\textwidth ]{kidneys}}\hspace{0.02\textwidth}
+	\subfloat[Label of aorta]{\includegraphics[width=0.48\textwidth]{aorta}}\\	
+\vspace{0.5cm}
+\caption[Sample labels of kidneys and aorta]{Sample labels of kidneys and aorta. Green and red are labels of the right and left kidney respectively, whereas yellow is the aorta label}
+\label{fig:labels}
+\end{figure}
 
 \subsubsection{Pelvis removal}
-Due to the fact that glomelular filtration takes place in renal renal parenchyma, pelvis had to be removed from further analysis. 
+Due to the fact that glomerular filtration takes place in renal renal parenchyma, pelvis had to be removed from the further analysis. 
 
-Resulting from the physiology of the process, the three renal compartments (cortex, medulla, pelvis) can be distinguished from each other on the basis of their time courses, as shown on Figure~\ref{fig:timecourses}. Depending on the compartment, the rapid enhancement of the signal occurs in different period, which makes the shapes of the time intensity curves very unique.
-From the \ref{fig:timecourses} it can be seen that the biggest variation is observed between pelvis and two other renal compartments.    Consequently, it can be separated by unsupervised clustering. 
+Resulting from the physiology of the process, the three renal compartments (cortex, medulla, pelvis) can be distinguished from each other on the basis of their time courses, as shown in Figure~\ref{fig:timecourses}. Depending on the compartment, the rapid enhancement of the signal occurs in different period, which makes the shapes of the time intensity curves very unique.
+From the \ref{fig:timecourses} it can be seen that the biggest variation is observed between pelvis and two other renal compartments.
+Consequently, it can be separated by unsupervised clustering.
+\vspace{0.5cm}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics{img/timecourses}
-	\caption{Kidney compartments timecourses  \cite{KidneySubsegmentation}}
+	\includegraphics[width=11cm]{img/timecourses}
+	\caption[Kidney compartments timecourses]{Kidney compartments timecourses \cite{KidneySubsegmentation}}
 	\label{fig:timecourses}
 \end{figure}
 
 First of all, every of the the voxel belonging to the label of the kidney was described by the vector of seventy-four features as follows:
 \begin{equation}
 \label{eq:voxel}
-\mathbf{v_{ijk}} = [S_{T0},\; S_{T1},\;...\;,\; S_{T72},\; S_{T73}],
+\mathbf{v_{ijk}} = [S(0),\; S(1),\;...\;,\; S(72),\; S(73)],
 \end{equation}
-where $S_{Tn}$ is the value of signal intensity in the time point $n$.
+where $S(n)$ is the value of signal intensity in the time point $n$.
 
-However, feature space of seventy-four dimensions is way too much for further analysis. High dimensionality of raw DCE-MRI data results in computational complexity, and thus memory and time consumption as well as numerical problems. What is more it contains a lot of noises \cite{KidneySubsegmentation}. To overcome this problems, the \textit{Principal Component Analysis} (PCA) \cite{wold1987principal} was applied.
+However, feature space of seventy-four dimensions is way too much for further analysis. High dimensionality of raw DCE-MRI data results in computational complexity, and thus memory and time consumption as well as numerical problems. What is more it contains a lot of noises \cite{KidneySubsegmentation}. To overcome this problems, the \textit{Principal Component Analysis} (PCA) \cite{pca} was applied.
 
-PCA is a statistical procedure, which transforms the number of related features into smaller set of uncorrelated variables  \cite{pca}. These so called \textit{Principal Components} (PCs) are a linear combination of the original variables \cite{dunteman1989principal}. As a result, after rotating the feature space, the first PC contains most variance, the last one the least and so on. In this way the dominant patterns are extracted while the noises are reduced~\cite{wold1987principal}. Further, every of the PC is characterised by a ratio of \textit{explained variance}, which indicates the portion of the dataset’s variance lying along the axis of each PC~\cite{handson}.
+PCA is a statistical procedure, which transforms the number of interrelated features into smaller set of uncorrelated variables. These so called \textit{Principal Components} (PCs) are a linear combination of the original variables \cite{dunteman1989principal}. As a result, after rotating the feature space, the first PC contains most variance, the last one the least and so on. In this way the dominant patterns are extracted while the noises are reduced~\cite{pca, jolliffe1986principal}. Further, every of the PC is characterised by a ratio of \textit{explained variance}, which indicates the portion of the dataset’s variance lying along the axis of each PC~\cite{handson}.
 
 Applying the theory to practice, each voxel belonging to the kidney, initially described by forty-four features was described by a number of PCs:
 \begin{equation}
 \label{eq:voxelpca}
 \mathbf{v_{ijk}} = [PC1,\; PC2,\;...\;,\; PCn]  
 \end{equation}
-The amount of PCs, $n$, was chosen as a minimum number of dimensions required to preserve 95\% of the data's total variance so that that the sum of the explained variances of  $n$ PCs was equal to at least 0.95 (usually between 4---6 PCs). The visual representation of the feature space with first three dimensions (PCs) for sample kidney is shown in Figure~\ref{fig:pca_plot}. Note that for better understanding, the clusters were already marked with different colors. 
+The amount of PCs, $n$, was chosen as a minimum number of dimensions required to preserve 95\% of the data's total variance so that that the sum of the explained variances of  $n$ PCs was equal to at least 0.95 (usually between 4--6 PCs). The visual representation of the feature space with first three dimensions (PCs) for sample kidney is shown in Figure~\ref{fig:pca_plot}. Note that for better understanding, the clusters were already marked with different colors. 
 
 \begin{figure}[H]
 		\centering
@@ -131,16 +146,16 @@ The amount of PCs, $n$, was chosen as a minimum number of dimensions required to
 		\label{fig:pca_plot}
 	\end{figure}
 
-To the dimensionally reduced data, the \textit{k-means clustering} \cite{kmeans} was applied in order to separate voxels into two groups: pelvis and renal parenchyma. 
-The k-means is an unsupervised clustering algorithm aiming to divide the data into groups so that the diversity between the groups is maximised whereas the similarity within the single group is maximised. 
+To the dimensionally reduced data, the \textit{k-means clustering}} was applied in order to separate voxels into two groups: pelvis and renal parenchyma. 
+The k-means is an unsupervised clustering algorithm aiming to divide the data into groups so that the diversity between the groups is maximised whereas the similarity within the single group is maximised  \cite{kmeans}. 
 
-Given a data set $X=\{ \vec{x_1}...\vec{x_n}$\} in $m$-dimensional space (what actually corresponds to the $m$ features of a sample) the algoritm's objective is to minimize the square error function given by:
+Given a data set $X=\{ \vec{x_1}...\vec{x_n}$\} in $m$-dimensional space (what actually corresponds to the $m$ features of a sample) the algoritm's objective is to minimize the square error function given by  \cite{kmeans, alsabti1997efficient}:
 
 \begin{equation}
 	\label{eq:kmeans}
-	J = \sum_{j=1}^{k}\sum_{i=1}^{n}(||x_i-c_j||)^2,
+	J = \sum_{j=1}^{k}\sum_{x_i \in S_j}(||x_i-c_j||)^2,
 \end{equation}
-where $||x_i-c_j||$ is  the Euclidean distance between a data point $x_i$ and the cluster centre $c_j$ of $k$ predefined clusters. It is achieved by the steps summarised in Algorithm~\ref{alg:kmeans}.
+where $||x_i-c_j||$ is  the Euclidean distance between a data point $x_i$ and the cluster centre $c_j$ of cluster $S_j$ from $k$ predefined clusters. It is achieved by the steps summarised in Algorithm~\ref{alg:kmeans}.
 
 \vspace{16pt}
 \begin{algorithm}[H]
@@ -181,7 +196,7 @@ To segment the kidney, the k-means algorithm was initiated with two clusters, $k
 
 Furter, for each of the identified clusters, the average time point, $T_{max}$ in which signal intensity reaches its maximum was calculated. 
 Following the assumption that $T_{max\_pelvis}>T_{max\_parenchyma}$, the cluster with greater $T_{max}$ was marked as the pelvis and removed from the \textit{Region of Interest} (ROI).
-The average time-intensity curves for two detected clusters in k-means clustering algorithm for sample kidney are presented in Figure~\ref{fig:clusters}. On can easily note the wash in phase in pelvis takes place much later than in renal parenchyma. The results of the segmentation in turn are shown in Figure \ref{fig:segmentation}.  
+The average time-intensity curves for two detected clusters in k-means clustering algorithm for sample kidney are presented in Figure~\ref{fig:clusters}. One can easily note the wash-in phase in pelvis takes place much later than in renal parenchyma. The results of the segmentation in turn are shown in Figure \ref{fig:segmentation}.  
 
 
 \begin{figure}[H]
@@ -206,10 +221,10 @@ The average time-intensity curves for two detected clusters in k-means clusterin
 \subsubsection{Concentration-time curves}
 Having labelled the proper ROI, the time has come for the principal part of the analysis, namely pharmacokinetic modelling.
 All PK models used during quantitative DCE-MRI analysis call for determining both the tissue, $C_t(t)$, and blood plasma, $C_p(t)$, concentration as a~function of time. In our case, the $C_t(t)$ is the mean concentration in renal parenchyma, whereas the
-$C_p(t)$, can be derived from  Arterial Input Function, which is a concentration in a blood vessel feeding the kidney (aorta) \cite{khalifa2014models}. 
+$C_p(t)$, can be derived from  AIF, which is a concentration in a blood vessel feeding the kidney (aorta).
 Thus, they were calculated in the next steps of the project.  
 
-For each of the kidney, as well as for the aorta, the mean intensities of the voxels included in the particular labels were calculated at the each time point and the time courses were plotted. Sample time courses are shown in Figure~\ref{fig:temporal_points}.
+For each of the kidney, as well as for the aorta, the mean intensities of the voxels included in the particular labels were calculated at the each time point and the intensity time courses were plotted. Sample time courses are shown in Figure~\ref{fig:temporal_points}.
 
 \vspace{10pt}
 \begin{figure}[H]
@@ -217,35 +232,31 @@ For each of the kidney, as well as for the aorta, the mean intensities of the vo
 	\centering
 	\includegraphics[width = \textwidth]{temporal_points}
 	
-\caption[a]{a}
+\caption[Sample average time-intensity curves for a kidney and aorta with marked last points of the baseline]{Sample average time-intensity curves for a kidney and aorta. Red dot is $T_{baseline}$, the last point of the baseline}
 \label{fig:temporal_points}
 \end{figure}
 
 
 
 
-Assuming the linear relation between tracer concentration and signal intensity $S(t)$ \cite{lim2013prediction}, the tracer concentration can be expressed as:
-
-
+Assuming the linear relation between tracer concentration and signal intensity $S(t)$ dictated by the low dose of Ga-based CA, the tracer concentration can be expressed as:
 \begin{equation}
 	\label{eq:conversion}
 	C(t) = S(t)-S_0,
 \end{equation}
 where $S_0$ is the baseline signal, which is the average signal intensity among the time before the administration of CA. 
 In order to determine $S_0$, the time point before rapid signal increase, $T_{baseline}$ had to be found  as marked with red dot in Figure \ref{fig:temporal_points}.
-%%% Experimenting with two methods, not decided yet %%%%
 
-To achieve it, firstly, for the purposes of the examination of the function changes, the median filter  with the $kernel\;size = 5$ was applied in order to smooth the signal and eliminate artificial  peaks and valleys, see Figure~\ref{fig:median}  
+To achieve it, firstly, for the purposes of the examination of the function changes, the median filter  with the $kernel\;size = 5$ was applied in order to smooth the signal and eliminate artificial  peaks and valleys, as shown in Figure~\ref{fig:median}  
 In next step, for every intensity time course under analysis, its derivative was calculated. The derivative describes the instantaneous rate of change of the function. It tells how fast the output of the function (signal intensity) changes compared to the independent variable (time) \cite{calculus} and seems to be a perfect solution to the problem, which comes down to the finding the most rapid signal change. 
 Because of one's interests is detection only of the function's increases, not decreases, the points, in which the derivative is negative were neglected, $S'(t)<0\leftarrow0$. So modified derivative of the sample kidney and aorta are shown in Figure~\ref{fig:derivative}.
 
-Now, all that had to be done to find $t_{baseline}$ was to find the point, in which the derivative of the signal intensity time course reaches its maximum, $t_{baseline}=argmax\;S'(t)$. Having it determined, the $S_0$ was calculated as the mean signal intensity value from the beginning of the measurement ($t=0$) to $t_{baseline}$. Finally, the CA concentration in the tissue and aorta were calculated according to the Formula~\ref{eq:conversion}. The results of intensity-concentration conversion for sample time curves are shown in Figure~\ref{fig:conversion}. 
-
+Now, all that had to be done to find $t_{baseline}$ was to find the point, in which the derivative of the signal intensity time course reaches its maximum, $t_{baseline}~=~argmax\;S'(t)$. Having it determined, the $S_0$ was calculated as the mean signal intensity value from the beginning of the measurement ($t=0$) to $t_{baseline}$. Finally, the CA concentration in the tissue and aorta were calculated according to the Formula~\ref{eq:conversion}. The results of intensity-concentration conversion for sample time curves are shown in Figure~\ref{fig:conversion}. 
 \begin{figure}[H]
 %\captionsetup[subfloat]{captionskip=0.5cm}
 	\centering
 	\includegraphics[width = \textwidth]{median2}
-\caption[]{}
+\caption[Sample average time-intensity curves for a kidney and aorta with applied median filter]{Sample average time-intensity curves for a kidney and aorta with applied median filter. Note that cut peak of the aorta's signal is a result of the median filter and is present only during baseline removal step}
 \label{fig:median}
 \end{figure}
 
@@ -253,7 +264,7 @@ Now, all that had to be done to find $t_{baseline}$ was to find the point, in wh
 %\captionsetup[subfloat]{captionskip=0.5cm}
 	\centering
 	\includegraphics[width = \textwidth]{derivative}
-\caption[Average time courses for two clusters detected in k-means algorithm]{Average time courses for two clusters detected in k-means algorithm performed for sample kidney}
+\caption[Positive derivative of the sample kidney and aorta intensity time courses]{Positive derivative of a sample kidney and aorta intensity time courses. The horizontal line indicates the time point, in which the derivative reaches its maximal value}
 \label{fig:derivative}
 \end{figure}
 
@@ -261,33 +272,43 @@ Now, all that had to be done to find $t_{baseline}$ was to find the point, in wh
 %\captionsetup[subfloat]{captionskip=0.5cm}
 	\centering
 	\includegraphics[width = \textwidth]{conversion}
-\caption[Average time courses for two clusters detected in k-means algorithm]{Average time courses for two clusters detected in k-means algorithm performed for sample kidney}
+\caption[Time courses of a sample kidney and aorta after intensity-concentration conversion]{Time-intensity curves of a sample kidney and aorta converted into concentration-time curves}
 \label{fig:conversion}
 \end{figure}
 
 
 \subsubsection{Pharmacokinetic modelling}
 
-gadolinium-based contrast agents distribute in plasma rather than whole blood, their effective plasma concentrations must be considered
-Having determined the AIF and the concentration time course for the renal parenchyma, almost all components necessary for the renal  quantitative evaluation were obtained. Almost, but not all. One should take into consideration the fact that AIF is the concentration of CA in the blood of the aorta, which consist of both the red blood cells and the blood plasma. All PK models, however, require the concentration only in the blood plasma. Thus the \textit{hematocrit} (HCT) correction were performed as follows:
+Having determined the AIF and the concentration time course for the renal parenchyma, almost all components necessary for the renal  quantitative evaluation were obtained. Almost, but not all. One should take into consideration the fact that AIF is the concentration of CA in the blood of the aorta, which consist of both the red blood cells and the blood plasma. Gadolinium-based Contrast Agents, however, distribute in plasma rather than whole blood, so their effective plasma concentrations must be considered. Thus the \textit{Hematocrit} (Hct) correction were performed as follows \cite{tofts2010t1}:
 \begin{equation}
 	\label{eq:hematocrit}
-	C_{p} = C_{AIF} / (1-Hct),
+	C_{p}(t) = C_{a}(t) / (1-Hct),
 \end{equation}
-where Hct is s the volume percentage of red blood cells in blood. In this study, the value was taken from the literature as an average population value and was equal to $HCT=0.43$ \cite{hematocrit}.
+where $C_p$ is plasma concentartion, $C_a$ is concentration in the aorta defined by AIF and $Hct$ is s the volume percentage of red blood cells in blood. In this study, the value was taken from the literature as an average population value and was equal to $Hct=0.42$ \cite{tofts2010t1}.
 
-Finally, the long-awaited PK modelling could have been performed. The models of choice were the Toft's model, Extended Toft's model, Patlak model and 2-Compartment Exchange model 
+Finally, the long-awaited PK modelling could have been performed. The models of choice were the Toft's model, Extended Toft's model, Patlak model and 2-Compartment Exchange model. 
  
 \paragraph{Toft's model}
+\begin{comment}
+The assumption underlying the TM is that the eect of vascular tracer can be ignored,
+i.e. that the vascular signal is small in comparison to the tissue signal. For this
+purpose the modelling of the tracer transport through an extracellular extravascular
+compartment (with fractional volume ve) suces. When considering a simple diusion
+mechanism active transport processes and dierences in viscosity or pressure can be
+neglected. In this case the transport of indicator Ktrans into and out of the EES is
+assumed to be the same in both directions. For such a one-compartment system the
+mass balance equation is known from the previous section:
+with a negligible
+amount of intravascular trace
+\end{comment}
 
-
-The two compartment Toft's model \cite{tofts1991measurement} assuemes the diffusion of the tracer from the blood plasma at rate specified by the transfer constant $K_{trans}$ $(min^{-1})$ and returns at the rate $k_{ep} = K_{trans}/v_e$ $(min^{-1})$. In this model the assumption $C_t(t) = v_eC_e(t)$ is made, which means that plasma contribution is neglected. The blood plasma concentration $C_p$ is specified by AIF. According to the Toft's model the CA concentraion is specified by the formula:
+\textit{The Tofts model} \cite{tofts1991measurement} (TM) assumes the diffusion of the tracer from the blood plasma at rate specified by the transfer constant $K_{trans}$ $(min^{-1})$ and its return at the rate $k_{ep} = K_{trans}/v_e$ $(min^{-1})$. This model assumes that the amount of intravascular tracer is negligible comparing to the tissue signal. This assumption leads to: $C_t(t) = v_eC_e(t)$. According to the Tofts model, the tissue concentration is specified by the formula \cite{tofts2010t1, tofts1991measurement}:
  
 \begin{equation}
 	\label{eq:toft}
-	\frac{dC_{t}(t)}{dt} = K_{trans}(C_a(t)-C_t(t)/v_e)
+	\frac{dC_{t}(t)}{dt} = K_{trans}(C_p(t)-C_t(t)/v_e)
 \end{equation} 
- 
+The solution obtained according to the procedure presented in Chapter~\ref{chapter:pk} is:
 \begin{equation}
 	\label{eq:toft2}
 	C_{t}(t) =C_p\circledast K_{trans}e^{-k_{ep}t} =K_{trans}\int_{0}^{t}C_p(t')e^{-k_{ep}(t-\tau)}d\tau  
@@ -327,22 +348,12 @@ where $Y=C_t(t)/C_p(t)$ and $X=\int_{0}^{t}C_p(t')dt'/C_p(t)$. The free paramete
 
 \begin{comment}
 
-%\begin{equation}
-%	\label{eq:extended_toft}
-%	\nonumber C_{t}(t) = v_pC_p(t)+ K_{trans}\int_{0}^{t}C_p(t')e^{-(K_{trans}/v_e)(t-t')}dt', 
-%\end{equation}
-%where:\\
-%$v_e$ - fractional volume of the extravascular extracellular space\\
-%$v_p$ - fractional plasma volume\\
-%$K_{trans}$ - transfer constant\\
-%$C_{t}$ - Tissue concentration\\
-%C_{p}$ - Concentration in aorta (AIF)
 
 
  
 \subsection{Manual labelling of kidneys and aorta} 
 \label{subsec:labelling}
-In the next step, labels of both left and right kidney were created. For this purpose, 3D volumes were extracted for every time frame and the image with maximal signal enhancement was chosen (usually between 12--17 time slice). On this image, left and right kidney were manually delineated in coronal plane using ITK-Snap software \cite{itk-snap}. Additionally, few voxels of aorta (15--20) were labelled. So obtained labels were then propagated across the time points. All further analysis was implemented in Python programming language v. 3.6 \cite{python}.  
+  
  
 
 

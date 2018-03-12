@@ -1,11 +1,12 @@
 
 \usepackage[acronym,nomain,section=chapter, toc, nonumberlist]{glossaries}
+%, nogroupskip
 \usepackage{glossary-superragged}
 \makeglossaries
 
 \renewcommand*{\acronymname}{Abbreviations}
 \renewcommand*{\glspostdescription}{} % remove trailing dot
-%\renewcommand*{\glsclearpage}{}
+\renewcommand{\glsclearpage}{\clearpage}
 
 \renewcommand{\glsnamefont}[1]{\textbf{#1}}
 \setlength\glsdescwidth{\linewidth}
@@ -30,4 +31,7 @@
 \newacronym{pkm}{PK (models/modelling)}{Pharmacokinetic (models/modelling)}
 \newacronym{hct}{Hct}{Hematocrit}
 \newacronym{irf}{IRF}{Impulse Response Function}
+\newacronym{bsa}{BSA}{Body Surface Area}
+\newacronym{syn}{SyN}{Symmetric Normalisation}
+\newacronym{cc}{CC}{Cross-correlation}
 

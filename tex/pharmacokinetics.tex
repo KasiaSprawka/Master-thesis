@@ -55,13 +55,12 @@ C_t(t) = \sum_{j=1}^{n}v_jC_j(t),
 where $v_j\leq1$ is the \textit{fractional volume} (dimensionless) of $j$th compartment and $C_j$ is the concentration of tracer in this compartment. 
 From the principle of the conservation of the mass it is known that no amount of the indicator is neither created nor destroyed in the tissue. Under such condition, applying the mass balance equation to the every of the compartments, the change of the total amount of substance in the compartment is given by \cite{thesis}:
 \begin{equation}
-\frac{dM_j(t)}{dt} = \sum_{i=1}^{I}\frac{M_i(t)}{\partial t}-\sum_{o=1}^{O}\frac{M_o(t)}{\partial t} ,
+\frac{dM_j(t)}{dt} = \sum_{i \in Inlets}\frac{M_i(t)}{\partial t}-\sum_{o \in Outlets}\frac{M_o(t)}{\partial t} 
 \label{eq:pk4}
 \end{equation}
-where $I$ and $O$ are the number of inlets and outlets of the compartment respectively. 
 After normalisation to the unit tissue volume \cite{thesis}:
 \begin{equation}
-vj\frac{dC_j(t)}{dt} = \sum_{i=1}^{I}J_i(t)-\sum_{o=1}^{O}J_o(t) ,
+vj\frac{dC_j(t)}{dt} = \sum_{i \in Inlets}J_i(t)-\sum_{o \in Outlets}J_o(t) ,
 \label{eq:pk5}
 \end{equation}
 The mass conservation principle implies that the amount of the substance transported from a compartment $i$ to a compartment $j$ per unit time is equal to the amount of the given substance leaving the $i$. This leads to the formula \cite{thesis}:
@@ -96,15 +95,14 @@ v_1\frac{dC_1(t)}{dt} = K_{trans}(C_{in}(t)-C_1(t)),
 \end{equation}
 where the $v_1$ is the fractional volume of the compartment. From the Formula \ref{eq:pk3} \cite{thesis}:
 \begin{equation}
-\frac{dC_t(t)}{dt} = K_{trans}(C_{in}(t)-C_t(t)/v_1),
+\frac{dC_t(t)}{dt} = K_{trans}(C_{in}(t)-C_t(t)/v_1)
 \label{eq:laplace}
 \end{equation}
-Assuming that $C_{in}$ is a short pulse of concentration, $C_{in}=\delta(t)$ the IRF of the tissue can be obtained by applying the Laplace transform to the Formula \ref{eq:laplace}: 
-
+Assuming that $C_{in}$ is a short pulse of concentration, $C_{in}=\delta(t)$, the IRF of the tissue can be obtained by applying the Laplace transform to the Formula \ref{eq:laplace}: 
 \begin{equation}
 \mathcal{L}\{\dot{h}\}(s) = K_{trans}(\mathcal{L}\{\delta\}(s)) - \frac{K_{trans}}{v_1}(\mathcal{L}\{h\}(s))
 \end{equation}
-The solution is \cite{thesis}:
+Making use of the properties of the Laplace transform, the solution is \cite{thesis}:
 \begin{equation}
 h(t) = K_{trans}e^{-k_{ep}t}
 \end{equation}
