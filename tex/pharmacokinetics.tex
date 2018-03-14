@@ -42,7 +42,7 @@ indicated in dark green in (a). $J_{12}$ and $J_{21}$ are fluxes between compart
 C_t(t) = \frac{M_t(t)}{V_t},
 \label{eq:pk1}
 \end{equation}
-where $M_t(t)$ is the amount of tracer in the tissue (in mmol) and $V_t$ is the volume of the tissue (mL). The \textit{flux} (mmol/mL/min) in terms, is the amount of the tracer, which travels through an inlet or outlet per unit time. After the normalisation to the unit tissue volume the flux can be expressed as \cite{thesis}:
+where $M_t(t)$ is the amount of tracer in the tissue [mmol] and $V_t$ is the volume of the tissue [mL]. The \textit{flux} [mmol/mL/min] in terms, is the amount of the tracer, which travels through an inlet or outlet per unit time. After the normalisation to the unit tissue volume the flux can be expressed as \cite{thesis}:
 \begin{equation}
 J(t) = \frac{1}{V_t}\frac{\partial M_t(t)}{\partial t}
 \label{eq:pk2}
@@ -52,7 +52,7 @@ Let's now consider an arbitrary multi-compartment model composed of $n$ interact
 C_t(t) = \sum_{j=1}^{n}v_jC_j(t),
 \label{eq:pk3}
 \end{equation}
-where $v_j\leq1$ is the \textit{fractional volume} (dimensionless) of $j$th compartment and $C_j$ is the concentration of tracer in this compartment. 
+where $v_j\leq1$ is the \textit{fractional volume} [dimensionless] of $j$th compartment and $C_j$ is the concentration of tracer in this compartment. 
 From the principle of the conservation of the mass it is known that no amount of the indicator is neither created nor destroyed in the tissue. Under such condition, applying the mass balance equation to the every of the compartments, the change of the total amount of substance in the compartment is given by \cite{thesis}:
 \begin{equation}
 \frac{dM_j(t)}{dt} = \sum_{i \in Inlets}\frac{M_i(t)}{\partial t}-\sum_{o \in Outlets}\frac{M_o(t)}{\partial t} 
@@ -68,12 +68,12 @@ The mass conservation principle implies that the amount of the substance transpo
 \frac{\partial M_{ij}(t)}{\partial t} = k_{ep}M_i,
 \label{eq:pk6}
 \end{equation}
-where $k_{ep}$ is so called \textit{rate constant} (in min$^{-1}$). Again, after the normalisation to the unit tissue volume \cite{thesis}:
+where $k_{ep}$ is so called \textit{rate constant} [min$^{-1}$]. Again, after the normalisation to the unit tissue volume \cite{thesis}:
 \begin{equation}
 J_{ij}(t) = K_{trans}C_i(t),
 \label{eq:pk7}
 \end{equation}
-where $K_{trans}=k_{ep}v_j$ is \textit{transfer constant} (in ml$^{-1}$). $K_{trans}$ combines both the flow and tissue permeability. Some approaches allow for their separate estimation by differentiating the \textit{flow} $F$ by the \textit{permeability surface area product}, $PS$ \cite{thesis}. 
+where $K_{trans}=k_{ep}v_j$ is \textit{transfer constant} [min$^{-1}$]. $K_{trans}$ combines both the flow and tissue permeability. Some approaches allow for their separate estimation by differentiating the \textit{flow} $F$ by the \textit{permeability surface area product}, $PS$ \cite{thesis}. 
 
 \subsection{Linear stationary systems}
 All PK models are based on two fundamental assumptions, without which solving the models' equations would not be possible: that the system is linear and stationary. Hence the response of the influx is proportional to the dose of the injected tracer \cite{thesis, sourbron2011scope} 
