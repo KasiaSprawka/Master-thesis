@@ -8,7 +8,7 @@ Chemicals such as Gadolinium-based markers used in DCE-MRI that are freely filte
 This chapter describes in details the implemented method of the quantitative analysis of the kidney's function. Firstly, the subsequent steps of image processing and analysis are presented and the, the performance of the chosen PK models is compared. The aim is to chose the model, which would be the best for GFR estimation and to draw a conclusion if it can be considered a robust, reliable method for future applications. 
 \end{comment}
 
-This part of the thesis describes in details the implemented method of the quantitative analysis of the kidney's function from DCE-MRI. The chapter leads the reader through the subsequent steps of image processing and analysis to finally compare the performance of the chosen PK models. The aim is to choose the model, which allows obtaining the best results for GFR estimation on the give data and to draw a conclusion if it can be considered a robust, reliable method for future applications. 
+This part of the thesis describes in details the implemented method of the quantitative analysis of the kidney's function from DCE-MRI. The chapter leads the reader through the subsequent steps of image processing and analysis to finally compare the performance of the chosen PK models. The aim is to choose the model, which allows for obtaining the best results for GFR estimation on the give data and to draw a conclusion if it can be considered a robust, reliable method for future applications. 
 
 \section{Materials and methods}
 \subsection{DCE-MRI aquisition}
@@ -49,7 +49,7 @@ The few frames of the sample raw DCE-MRI sequence is shown in Figure~\ref{fig:se
 
 
 \subsection{GFR reference values}
-Next to the DCE-MRI examinations, the participant had their GFR assessed by two commonly used in clinical practice chemical methods: the Serum-creatinine (SCr) blood test and iohexol-GFR tests. Creatinine is an endogenous indicator, which allows estimating GFR from validated algorithms.
+Next to the DCE-MRI examinations, the participant had their GFR assessed by two commonly used in clinical practice chemical methods: the Serum-creatinine (SCr) blood test and iohexol-GFR tests. Creatinine is an endogenous indicator, which allows for estimating GFR from validated algorithms.
 Iohexol in terms is an exogenous marker which is used for accurate GFR measurement. The clinical characteristic of the participants is included in Table~\ref{tab:participants}
 
 \begin{table}[h!]
@@ -286,55 +286,135 @@ Having determined the AIF and the concentration time course for the renal parenc
 \end{equation}
 where $C_p$ is plasma concentartion, $C_a$ is concentration in the aorta defined by AIF and $Hct$ is s the volume percentage of red blood cells in blood. In this study, the value was taken from the literature as an average population value and was equal to $Hct=0.42$ \cite{tofts2010t1}.
 
-Finally, the long-awaited PK modelling could have been performed. The models of choice were the Toft's model, Extended Toft's model, Patlak model and 2-Compartment Exchange model. 
+Finally, the long-awaited PK modelling could have been performed. The models of choice were the Tofts and Kermode model, Extended Tofts and Kermode model, Patlak-Rutland model and 2-Compartment Exchange model. The aim is to obtainn value of the transfer constant $K_trans$ (min$^-1$), which corresponds to the GFR per unit tissue volume.
  
-\paragraph{Toft's model}
-\textit{The Tofts Model} \cite{tofts1991measurement} (TM) According to (TM) model  the tracer is distributed in two compartments intra- and \textit{Extravascular extra-cellular space} (EES).
-The tracer diffuses from the blood plasma at rate specified by the transfer constant $K_{trans}$ $(min^{-1})$ and its return at the rate $k_{ep} = K_{trans}/v_e$ $(min^{-1})$. This model assumes, however, that the amount of intravascular (plasma) tracer is negligible comparing to the tissue signal. The total tissue concentration , $C_t(t)$ is then given by\cite{khalifa2014models}:
+\paragraph{Tofts add Kermode model.}
+According to the \textit{Tofts and Kermode} (TK) model)\cite{tofts1991measurement} the tracer is distributed in two compartments intra- and \textit{Extravascular extra-cellular space} (EES).
+The tracer diffuses from the blood plasma at rate specified by the transfer constant $K_{trans}$ $(min^{-1})$ and returns at the reverse tranfer rate $k_{ep} = K_{trans}/v_e$ $(min^{-1})$. This model assumes, however, that the amount of intravascular (plasma) tracer is negligible comparing to the tissue signal. The total tissue concentration, 
+\newpage
+\noindent $C_t(t)$, is then given by\cite{khalifa2014models}:
 \begin{equation}
 C_t(t) = v_eC_e(t),
 \end{equation}
-where $v_e$ is EES fractional volume and $C_e(t)$ is EES concentration. The system can be described by mass balance equation  \cite{tofts2010t1, sourbron2011scope}: 
+\noindent where $v_e$ is EES fractional volume and $C_e(t)$ is EES concentration. The system can be described by mass balance equation  \cite{khalifa2014models, tofts1999estimating}: 
 \begin{equation}
 	\label{eq:toft}
 	\frac{dC_{t}(t)}{dt} = K_{trans}(C_p(t)-C_t(t)/v_e),
 \end{equation} 
-where  and $C_p(t)$ is blood plasma concentration, The solution obtained according to the procedure presented in Chapter~\ref{chapter:pk} is:
+where  and $C_p(t)$ is blood plasma concentration, The solution obtained according to the procedure presented in Chapter~\ref{chapter:pk} is \cite{sourbron2011scope, khalifa2014models}:
 \begin{equation}
 	\label{eq:toft2}
-	C_{t}(t) =C_p\circledast K_{trans}e^{-k_{ep}t} =K_{trans}\int_{0}^{t}C_p(t')e^{-k_{ep}(t-\tau)}d\tau  
+	C_{t}(t) =C_p\circledast K_{trans}e^{-k_{ep}t} =K_{trans}\int_{0}^{t}C_p(\tau)e^{-k_{ep}(t-\tau)}d\tau  
 \end{equation}
-
-\paragraph{Extended Tofts model}
-While the Tofts model neglects intravascular contribution assuming weak vascularization of the tissue, the \textit{Extended Tofts model} (ETK) \cite{tofts1997modeling} does take it into account. According to ETK, the tissue concentration is described by the formula \cite{sourbron2011scope, khalifa2014models}:
+\paragraph{Extended Tofts and Keromode model.}
+While the Tofts model neglects intravascular contribution assuming weak vascularization of the tissue, the \textit{Extended Tofts and Kermode} (ETK) model \cite{tofts1997modeling} does take it into account. According to ETK, the tissue concentration is described by the formula \cite{tofts2010t1, khalifa2014models}:
 \begin{equation}
 C_t(t) = v_pC_p(t) + v_eC_e(t),
+\label{eq:etk}
 \end{equation}
-where $v_p$ is fractional plasma volume. The solution is similar to the previous model with addition of plasma contribution \cite{sourbron2011scope}:
+where $v_p$ is fractional plasma volume. The differential eqation decribing EES compartment is \cite{sourbron2011scope}:
+\begin{equation}
+	\label{eq:etoft}
+	v_e\frac{dC_{e}(t)}{dt} = K_{trans}(C_p(t)-C_e(t))
+\end{equation}
+Solving the equation and substituting to \ref{eq:etk} the tissue concentration comes up to \cite{khalifa2014models, tofts2010t1}:
 \begin{equation}
 	\label{eq:extended_toft}
-	C_{t}(t) =v_pC_p(t) + C_p\circledast K_{trans}e^{-k_{ep}t} = v_pC_p(t)+K_{trans}\int_{0}^{t}C_p(t')e^{-k_{ep}(t-\tau)}d\tau 
+	C_{t}(t) =v_pC_p(t) + C_p\circledast K_{trans}e^{-k_{ep}t} = v_pC_p(t)+K_{trans}\int_{0}^{t}C_p(\tau)e^{-k_{ep}(t-\tau)}d\tau 
 \end{equation}
+\newpage
 
-
-In Toft's and extended Toft's models the free parameters $K_{trans}$, $v_e$ and $v_p$ are estimated by fitting the model to obtained in DCE-MRI examinations time concentration curves.  
-
-\paragraph{Patlak plot}
-Another proposed approach is the graphical one called Patlak plot \cite{patlak1983graphical}. Patlak plot neglects $k_{ep}$ due to the low permeability and short examination time. As a result tissue concentration is expressed as:
-
+In TK and ETK models the free parameters $K_{trans}$, $v_e$ and $v_p$ are estimated by fitting the model to obtained in DCE-MRI examinations time-concentration curves.  
+\paragraph{Patlak-Rutland model.}
+Unlike the TK and ETK models, the \textit{Patlak-Rutland} model \cite{patlak1983graphical} assumes that reverse transfer constant from EES to the plasma, $k_{ep}$, in negligibly small, because of the short time of the measurement (tracer do not have time to return) and low permeability \cite{khalifa2014models}. 
+Similarly to the ETK, the tissue concentration is equal to the:
+\begin{equation}
+C_t(t) = v_pC_p(t) + v_eC_e(t),
+\label{eq:patlak1}
+\end{equation}
+However, the tracer change in EES is equal to \cite{thesis,patlak1983graphical}: 
+\begin{equation}
+	\label{eq:patlak2}
+	v_e\frac{dC_{e}(t)}{dt} = K_{trans}C_p(t)
+\end{equation}
+Solving the Equation \ref{eq:patlak2} and substituting into Formula \ref{eq:patlak2} \cite{khalifa2014models, patlak1983graphical}: 
 \begin{equation}
 	\label{eq:patlak}
-	C_{t}(t) =v_pC_p(t) + K_{trans}\int_{0}^{t}C_p(t')dt'  
+	C_{t}(t) =v_pC_p(t) + K_{trans}\int_{0}^{t}C_p(\tau)d\tau  
 \end{equation}
-The above equation is the linearised as:
+To obtain the free parameters, the concentration time courses obtained from DCE-MRI examination can be fitted directly to the Formula \ref{eq:patlak} or the graphical approach called the \textit{Patlak plot} can be applied. In this approach the above equation is linearised as \cite{khalifa2014models, patlak1983graphical}:  
 \begin{equation}
 	\label{eq:patlak_lin}
 	Y = K_{trans}X +v_p,  
 \end{equation}
-where $Y=C_t(t)/C_p(t)$ and $X=\int_{0}^{t}C_p(t')dt'/C_p(t)$. The free parameters $K_{trans}$ an $v_p$ can be then estimating by constructing a linear plot and calculating its slope and intercept respectively.
+where $Y=C_t(t)/C_p(t)$ and $X=\int_{0}^{t}C_p(\tau)d\tau/C_p(t)$. The free parameters $K_{trans}$ and $v_p$ can be then estimating by constructing a linear plot and calculating its slope and intercept respectively.
+In this project, the data was fitted to the Formula \ref{eq:patlak}. 
+\newpage
+\paragraph{Two-Compartment Exchange model}While the all previous described models allows for estimating transfer constant $K_{trans}$ incorporating both the plasma blood flow, $F_b$, and the surface permeability, $PS$, \textit{Two-Compartment Exchange} (2CXM) model enables their separate estimation. 
+
+Similarly to PR and ETK models the tissue concentration is expressed as \cite{khalifa2014models}:
+\begin{equation}
+C_t(t) = v_pC_p(t) + v_eC_e(t)
+\label{eq:2cxm}
+\end{equation}
+The system is described by a pair of mass balance differential equations:  
+\begin{equation}
+v_p\frac{dC_p(t)}{dt} = F_p(C_a(t)-C_p(t))+PS(C_e(t)-C_p(t))
+\label{eq:2cxm2}
+\end{equation}
+\begin{equation}
+v_e\frac{dC_e(t)}{dt} = PS(C_p(t)-C_e(t))
+\label{eq:2cxm3}
+\end{equation}
+The solution comes up to \cite{khalifa2014models}:
+\begin{align}
+	\label{eq:2cxm4}
+	\nonumber C_{t}(t) &=F_p Be^{-m_1t}+(1-B)e^{-m_2t}\circledast C_a =\\
+	&= \int_{0}^{t} F_{p} \left( Be^{-m_1\tau} + (1-B)e^{-m_2\tau} \right) C_{a}(t-\tau)dt'
+\end{align}
+where $m_1$,$m_2$ and $B$ are defined as:
+\begin {equation} 
+m_1 = \frac{1}{2}(a+b+\sqrt{(a+b)^2-4bc})
+\end{equation}
+\begin {equation} 
+\nonumber m_2 = \frac{1}{2}(a+b-\sqrt{(a+b)^2-4bc}
+\end{equation}
+\begin {equation} 
+\nonumber B = \frac{m_2-c}{m_2-m_1}, 
+\end{equation}
+where
+\begin{equation}
+a = \frac{F_p+PS}{v_p},\qquad b = \frac{PS}{v_e},\qquad c = \frac{F_p}{v_p}
+\end{equation}
+The $K_{trans}$ can be then obtained by:
+\begin{equation}
+K_{trans} = \frac{PSF_p}{PS+F_p}
+\end{equation}
+
+Sample concentration time course fitted to different models is shown in Figure~\ref{fig:fit} 
+
+\begin{figure}[H]
+\captionsetup[subfloat]{captionskip=0.5cm}
+	\centering
+	\subfloat[TK model fit; $K_{trans}$ = ]{\includegraphics [width=0.48\linewidth]{tk1}\label{fig:t1plot}}\hspace{0.03\linewidth}
+	\subfloat[ETK model fit; $K_{trans}$ = ]{\includegraphics[width=0.48\linewidth]{etk1}\label{fig:t2plot}}\\	
+	\subfloat[PR model fit; $K_{trans}$ = ]{\includegraphics [width=0.48\linewidth]{tk1}\label{fig:t1plot}}\hspace{0.03\linewidth}
+	\subfloat[2CXM model fit; $K_{trans}$ = ]{\includegraphics[width=0.48\linewidth]{etk1}\label{fig:t2plot}}\\	
+\vspace{0.5cm}
+\caption[An example of models fit]{\textit{T\textsubscript{1}} and \textit{T\textsubscript{2}} contrast mechanisms \cite{biomedical_hanbook_imaging}}
+\label{fig:fit}
+\end{figure}
 
 
 \subsubsection{GFR estimation}
-
+Having estimated the transfer constant $K_{trans}$ the \textit{Single Kidney GFR} (SKGFR) could have been calculated according to the formula:
+\begin{equation}
+SKGFR = K_{trans}V_{parenchyma},
+\end{equation}
+where $V_{parenchyma}$ is the parenchymal volume (in mL) of the examined kidney given by:
+\begin{equation}
+V_{parenchyma} = nV_{voxel},
+\end{equation}
+where $n$ is the number of voxels included in the kidney label whereas $V_{voxel}$ is the volume of the voxel (2.2\,x\,2.2\,x\,3\,mm$^3$ = 0.14252 mL). Total GFR for each dataset was then calculated by summing SKGFR of the left and right kidneys. All obtained GFR values were standardised per standard BSA (1.73\,m$^2$).
 \section{Results}
 
