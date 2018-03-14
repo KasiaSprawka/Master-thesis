@@ -286,7 +286,7 @@ Having determined the AIF and the concentration time course for the renal parenc
 \end{equation}
 where $C_p$ is plasma concentartion, $C_a$ is concentration in the aorta defined by AIF and $Hct$ is s the volume percentage of red blood cells in blood. In this study, the value was taken from the literature as an average population value and was equal to $Hct=0.42$ \cite{tofts2010t1}.
 
-Finally, the long-awaited PK modelling could have been performed. The models of choice were the Tofts and Kermode model, Extended Tofts and Kermode model, Patlak-Rutland model and 2-Compartment Exchange model. The aim is to obtainn value of the transfer constant $K_trans$ (min$^-1$), which corresponds to the GFR per unit tissue volume.
+Finally, the long-awaited PK modelling could have been performed. The models of choice were the Tofts and Kermode model, Extended Tofts and Kermode model, Patlak-Rutland model and 2-Compartment Exchange model. The aim is to obtainn value of the transfer constant $K_trans$ (min$^-1$), which corresponds to the GFR per unit tissue volume. The fit was performed by using non-linear least squares analysis.
  
 \paragraph{Tofts add Kermode model.}
 According to the \textit{Tofts and Kermode} (TK) model)\cite{tofts1991measurement} the tracer is distributed in two compartments intra- and \textit{Extravascular extra-cellular space} (EES).
@@ -350,14 +350,16 @@ To obtain the free parameters, the concentration time courses obtained from DCE-
 where $Y=C_t(t)/C_p(t)$ and $X=\int_{0}^{t}C_p(\tau)d\tau/C_p(t)$. The free parameters $K_{trans}$ and $v_p$ can be then estimating by constructing a linear plot and calculating its slope and intercept respectively.
 In this project, the data was fitted to the Formula \ref{eq:patlak}. 
 \newpage
-\paragraph{Two-Compartment Exchange model}While the all previous described models allows for estimating transfer constant $K_{trans}$ incorporating both the plasma blood flow, $F_b$, and the surface permeability, $PS$, \textit{Two-Compartment Exchange} (2CXM) model enables their separate estimation. 
-
+\paragraph{Two-Compartment Exchange Model}While the all previous described models allows for estimating transfer constant $K_{trans}$ incorporating both the plasma blood flow, $F_b$, and the surface permeability, $PS$, \textit{Two-Compartment Exchange Model} (2CXM) enables their separate estimation. 
+According to 2CXM The plasma compartment, the plasma compartment has an arterial inlet and a venous outlet of the same plasma flow, $Fp$. 
+The tracer exchanges between the two compartments: EES and intravascular plasma, at a symmetric rate quantified by the permeability surface product, $PS$.
+Because the CA leaves the system the model is referred to as an open system. 
 Similarly to PR and ETK models the tissue concentration is expressed as \cite{khalifa2014models}:
 \begin{equation}
 C_t(t) = v_pC_p(t) + v_eC_e(t)
 \label{eq:2cxm}
 \end{equation}
-The system is described by a pair of mass balance differential equations:  
+The system is described by a pair of mass balance differential equations \cite{khalifa2014models}:  
 \begin{equation}
 v_p\frac{dC_p(t)}{dt} = F_p(C_a(t)-C_p(t))+PS(C_e(t)-C_p(t))
 \label{eq:2cxm2}
@@ -366,13 +368,13 @@ v_p\frac{dC_p(t)}{dt} = F_p(C_a(t)-C_p(t))+PS(C_e(t)-C_p(t))
 v_e\frac{dC_e(t)}{dt} = PS(C_p(t)-C_e(t))
 \label{eq:2cxm3}
 \end{equation}
-The solution comes up to \cite{khalifa2014models}:
+Note that in 2CXM the CA concentration in the plasma of the feeding artery is denotated as $C_a$ ($C_p$ in previous models) whereas $C_p$ is CA concentration in intravascular plasma. The solution comes up to \cite{khalifa2014models}:
 \begin{align}
 	\label{eq:2cxm4}
 	\nonumber C_{t}(t) &=F_p Be^{-m_1t}+(1-B)e^{-m_2t}\circledast C_a =\\
-	&= \int_{0}^{t} F_{p} \left( Be^{-m_1\tau} + (1-B)e^{-m_2\tau} \right) C_{a}(t-\tau)dt'
+	&= \int_{0}^{t} F_{p} \left( Be^{-m_1\tau} + (1-B)e^{-m_2\tau} \right) C_{a}(t-\tau)d\tau
 \end{align}
-where $m_1$,$m_2$ and $B$ are defined as:
+where $m_1$, $m_2$ and $B$ are defined as:
 \begin {equation} 
 m_1 = \frac{1}{2}(a+b+\sqrt{(a+b)^2-4bc})
 \end{equation}
@@ -393,18 +395,17 @@ K_{trans} = \frac{PSF_p}{PS+F_p}
 
 Sample concentration time course fitted to different models is shown in Figure~\ref{fig:fit} 
 
-\begin{figure}[H]
+\begin{figure}
 \captionsetup[subfloat]{captionskip=0.5cm}
 	\centering
-	\subfloat[TK model fit; $K_{trans}$ = ]{\includegraphics [width=0.48\linewidth]{tk1}\label{fig:t1plot}}\hspace{0.03\linewidth}
-	\subfloat[ETK model fit; $K_{trans}$ = ]{\includegraphics[width=0.48\linewidth]{etk1}\label{fig:t2plot}}\\	
-	\subfloat[PR model fit; $K_{trans}$ = ]{\includegraphics [width=0.48\linewidth]{tk1}\label{fig:t1plot}}\hspace{0.03\linewidth}
-	\subfloat[2CXM model fit; $K_{trans}$ = ]{\includegraphics[width=0.48\linewidth]{etk1}\label{fig:t2plot}}\\	
+	\subfloat[TK model fit; $K_{trans}$ = 0.64 min$^{-1}$ ]{\includegraphics [width=0.48\linewidth]{tk2}\label{fig:t1plot}}\hspace{0.03\linewidth}
+	\subfloat[ETK model fit; $K_{trans}$ = 0.56 min$^{-1}$]{\includegraphics[width=0.48\linewidth]{etk2}\label{fig:t2plot}}\\ \vspace{0.5cm}	
+	\subfloat[PR model fit; $K_{trans}$ = 0.22 min$^{-1}$]{\includegraphics [width=0.48\linewidth]{pr2}\label{fig:t1plot}}\hspace{0.03\linewidth}
+	\subfloat[2CXM model fit; $K_{trans}$ = 1.0 min$^{-1}$]{\includegraphics[width=0.48\linewidth]{2cxm2}\label{fig:t2plot}}\\	
 \vspace{0.5cm}
-\caption[An example of models fit]{\textit{T\textsubscript{1}} and \textit{T\textsubscript{2}} contrast mechanisms \cite{biomedical_hanbook_imaging}}
+\caption[An example of models fit]{Sample concentration time course fitted to different PK models: (a) Tofts and Kermode model (b) Extended Tofts and Kermode model (c) Patlak-Rutland model (d) Two-Compartment Exchange Model}
 \label{fig:fit}
 \end{figure}
-
 
 \subsubsection{GFR estimation}
 Having estimated the transfer constant $K_{trans}$ the \textit{Single Kidney GFR} (SKGFR) could have been calculated according to the formula:
