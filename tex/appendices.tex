@@ -1,12 +1,178 @@
-\subsection*{\textbf{Appendix A:} The abstract accepted for ECR (the European Congress of Radiology)}
+% 
+% Plik zawierający załączniki
+%
+	
+	% Otoczenie dla załączników. 
+	% #1 to etykieta do odwołań \ref
+	% #2 określa, czy załącznik ma być widoczny (\visibletrue lub \visiblefalse)
+	\newcounter{zalacznik}
+	\renewcommand{\thezalacznik}{\Alph{zalacznik}}
+	\NewEnviron{zalacznik}[2] {%
+		\newif \ifvisible
+		#2%
+		\ifvisible
+			\newpage%
+			\refstepcounter{zalacznik}\label{#1}%
+			\section*{Załącznik~\thezalacznik}%
+			\vfill\BODY\vfill
+		\fi
+	}
+	
+%░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░░░░░░░░░░░░░░░░░░
+	\begin{zalacznik}{appx:TabelaParametrowKlatt}{\visibletrue}
+	\def\objasnienieCV{Parametry oznaczone symbolem ,,V" mogą być zmieniane dynamicznie.\\Parametry oznaczone symbolem ,,C" mają stałą wartość i~służą do ogólnej konfiguracji syntezatora.}	
+	
+		\begin{table}[!hbp]
+			\centering
+			\caption[Lista parametrów syntezatora Klatta]{Lista parametrów syntezatora Klatta~\cite{book:Styger}.}
+			\label{tab:TabelaParametrowKlatt}
+			\vspace*{6pt}
+			\begin{minipage}{\textwidth}
+				\centering
+				\begin{tabular}{lllll}
+					\toprule[1.2pt]
+					Symbol & C\slash V\footnote{\objasnienieCV{}} & Min. & Max. & Nazwa \\
+					\midrule
+					DU & C & 30 & 5000 & Duration of the utterance (ms) \\
+					NWS & C & 1 & 20 & Update interval for parameter reset (ms) \\
+					SR & C & 5000 & 20000 & Output sampling rate (Hz)  \\
+					NF & C & 1 & 6 & Number of formants in cascade branch \\
+					SW & C & 0 & 1 & 0=Cascade, 1=Parallel tract excitation by AV \\
+					G0 & C & 0 & 80 & Overall gain scale factor (dB) \\
+					F0 & V & 0 & 500 & Fundamental frequency (Hz)  \\
+					AV & V & 0 & 80 & Amplitude of voicing (dB)  \\
+					AVS & V & 0 & 80 & Amplitude of quasi-sinusoidal voicing (dB) \\
+					FGP & V & 0 & 600 & Frequency of glottal resonator RGP \\
+					BGP & V & 50 & 2000 & Bandwidth of glottal resonator RGP \\
+					FGZ & V & 0 & 5000 & Frequency of glottal anti-resonator RGZ \\
+					BGZ & V & 100 & 9000 & Bandwidth of glottal anti-resonator RGZ \\
+					BGS & V & 100 & 1000 & Bandwidth of glottal resonator RGS \\
+					AH & V & 0 & 80 & Amplitude of aspiration (dB)  \\
+					AF & V & 0 & 80 & Amplitude of frication (dB)  \\
+					F1 & V & 180 & 1300 & Frequency of 1st formant (Hz) \\
+					B1 & V & 30 & 1000 & Bandwidth of 1st formant (Hz) \\
+					\ldots &&&& \ldots \\
+	%				F2 & V & 550 & 3000 & Frequency of 2nd formant (Hz) \\
+	%				B2 & V & 40 & 1000 & Bandwidth of 2nd formant (Hz) \\
+	%				F3 & V & 1200 & 4800 & Frequency of 3rd formant (Hz) \\
+	%				B3 & V & 60 & 1000 & Bandwidth of 3rd formant (Hz) \\
+	%				F4 & V & 2400 & 4990 & Frequency of 4th formant (Hz) \\
+	%				B4 & V & 100 & 1000 & Bandwidth of 4th formant (Hz) \\
+	%				F5 & V & 3000 & 6000 & Frequency of 5th formant (Hz) \\
+	%				B5 & V & 100 & 1500 & Bandwidth of 5th formant (Hz) \\
+					F6 & V & 4000 & 6500 & Frequency of 6th formant (Hz) \\
+					B6 & V & 100 & 4000 & Bandwidth of 6th formant (Hz) \\
+					FNP & V & 180 & 700 & Frequency of nasal pole (Hz) \\
+					BNP & V & 40 & 1000 & Bandwidth of nasal pole (Hz) \\
+					FNZ & V & 180 & 800 & Frequency of nasal zero (Hz) \\
+					BNZ & V & 40 & 1000 & Bandwidth of nasal zero (Hz) \\
+					AN & V & 0 & 80 & Amplitude of nasal formant (dB) \\
+					A1 & V & 0 & 80 & Amplitude of 1st formant (dB) \\
+					A2 & V & 0 & 80 & Amplitude of 2nd formant (dB) \\
+					\ldots &&&& \ldots \\
+	%				A3 & V & 0 & 80 & Amplitude of 3rd formant (dB) \\
+	%				A4 & V & 0 & 80 & Amplitude of 4th formant (dB) \\
+	%				A5 & V & 0 & 80 & Amplitude of 5th formant (dB) \\
+					A6 & V & 0 & 80 & Amplitude of 6th formant (dB) \\
+					AB & V & 0 & 80 & Amplitude of bypass path (dB) \\
+					\bottomrule[1.5pt]
+				\end{tabular}\par
+				\vspace{-0.75\skip\footins}
+				\renewcommand{\footnoterule}{}
+			\end{minipage}
+		\end{table}
+	\end{zalacznik}
+	
+%░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░░░░░░░░░░░░░░░░░░
+	\begin{zalacznik}{appx:PlytkaSTM32F4}{\visibletrue}
+		\begin{figure}[ht!]
+			\centering
+			\includegraphics[trim = 0.0cm 0.0cm 0.0cm 0.0cm, clip = false]{Ilustracje/ZdjecieSTM32F4.pdf}
+			\caption{Płytka ewaluacyjna \textit{STM32F4Discovery}}
+			\label{fig:PlytkaSTM32F4}
+		\end{figure}
+	\end{zalacznik}
+	
 
-\begin{center}
+%░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░░░░░░░░░░░░░░░░░░
+	\begin{zalacznik}{appx:SchematFunkcjonalnySTM32F407VGT6}{\visiblefalse}
+	
+		\begin{figure}[ht!]
+			\centering
+			\includegraphics[trim = 0.0cm 0.0cm 0.0cm 0.0cm, clip = false, height = 18cm]{Ilustracje/SchematFunkcjonalnySTM32F407VGT6.pdf}
+	%		\addtocounter{appendixfig}{1}
+			\caption[Schemat funkcjonalny mikrokontrolera STM32F407VGT6]{Schemat funkcjonalny mikrokontrolera STM32F407VGT6}
+	%		\addtocounter{figure}{-1}
+			\label{fig:SchematFunkcjonalnySTM32F407VGT6}
+		\end{figure}
+		
+	\end{zalacznik}
+	
+%░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░░░░░░░░░░░░░░░░░░
+	\begin{zalacznik}{appx:SchematPolaczeniowyMCU}{\visibletrue}
+	
+		\begin{figure}[ht!]
+			\centering
+			\includegraphics[trim = 0.0cm 0.0cm 0.0cm 0.0cm, clip = false, width = 0.8\textwidth]{Ilustracje/SchematPolaczeniowyMCU.pdf}
+	%		\addtocounter{appendixfig}{1}
+			\caption[Schemat funkcjonalny mikrokontrolera STM32F407VGT6]{Schemat funkcjonalny mikrokontrolera STM32F407VGT6}
+	%		\addtocounter{figure}{-1}
+			\label{fig:SchematPolaczeniowyMCU}
+		\end{figure}
+		
+	\end{zalacznik}
+	
+%░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░░░░░░░░░░░░░░░░░░
+	\begin{zalacznik}{appx:eSpeakEditExtendedOkno}{\visibletrue}
+		\begin{figure}[ht!]
+			\centering
+			\includegraphics[angle = 90, height = 0.88\textheight]{Ilustracje/eSpeakEditExtendedOkno43.png}
+			\caption{Główne okno programu \textit{eSpeak--Edit Extended}}
+			\label{fig:eSpeakEditExtendedOkno}
+		\end{figure}
+	\end{zalacznik}
+	
+%░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░░░░░░░░░░░░░░░░░░
+	\begin{zalacznik}{appx:AlfabetIPA}{\visiblefalse}
 
-\includegraphics[trim={0 3.5cm 0 1cm},clip,height = 19 cm]{appendices/abstract}
+		\begin{figure}[ht]
+		\begin{minipage}[t]{15cm}
+			\centering
+			\includegraphics[height = 16cm]{Ilustracje/Pelny-alfabet-IPA.pdf}
+	%		\caption []{Tabela alfabetu IPA.}
+			\label{fig:Pelny-alfabet-IPA}
+			\end{minipage}
+		\end{figure}
+	
+	\end{zalacznik}
+	
+%░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░░░░░░░░░░░░░░░░░░
+	\begin{zalacznik}{appx:ListaTagowSSML}{\visiblefalse}
+	
+		\begin{table}[h]
+			\centering
+			\caption{Lista rozpoznawanych tagów SSML.}
+			\label{tab:ListaTagowSSML}
+			\vspace*{6pt}
+			\begin{tabular}{c p{5cm}}
+				\toprule[1.2pt]
+				Mnemonik & \\
+				\midrule[1.2pt]
+				$<$speak$>$ & xml:base \\ 
+				$<$voice$>$ & • \\ 
+				$<$prosody$>$ & • \\ 
+				$<$say-as$>$ & • \\ 
+				$<$mark$>$ name & • \\ 
+				$<$s$>$ & • \\ 
+				$<$p$>$ & • \\ 
+				$<$sub$>$ alias & • \\ 
+				$<$tts:style$>$ & • \\ 
+				$<$audio$>$ src & • \\ 
+				$<$emphasis$>$ & • \\ 
+				$<$break$>$ & • \\
+				\bottomrule[1.5pt]
+			\end{tabular}
+		\end{table}
+		
+	\end{zalacznik}
 
-\end{center}
-
-\newpage
-\subsection*{\textbf{Appendix B:} The code implemented for pharmacokinetic modelling}
-
-Under cleaning

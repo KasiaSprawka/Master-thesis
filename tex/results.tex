@@ -1,42 +1,56 @@
-The segmentation of the pelvis was evaluated with Dice similarity coefficient given by the formula:
+\section{Results}
+The developed algorithm was evaluated on ten MRI sequences of ten different participants. For every of the participant one of the two  MRI sequences was chosen randomly.
+
+The segmentation of the pelvis was evaluated with \textit{Dice Similarity Coefficient} (DSC) given by the formula:
 \begin{equation}
 	\label{eq:dice}
-	DS = \dfrac{2|A}{•},
+	DSC = \dfrac{2|A\cap{}B|}{|A|+|B|},
 \end{equation}
-where $||x_i-c_j||$ is  the Euclidean distance between a data point $x_i$ and the cluster centre $c_j$ of k predefined clusters. 
-The segmentation of the pelvis obtained for the sample kidney is shown on the Figure \ref{fig:kidney_segmented}. 
-
-The example of the time concentration curves after baseline removal for the kidney and aorta are shown on Figure \ref{fig:removed_baseline}. 
-
-Fitting of the time course for different pharmacokinetic models  is illustreted on the Figure~\ref{fig:models}.
+where |A| and |B| are the number of voxels in pelvis detected  in automatic segmentation and the number of voxels in ground truth labelled organoleptically, respectively.
+The average accuracy of the pelvis segmentation was equal to DSC~=~0.87$\pm$0.06.
 
 
+\begin{landscape}
+\begin{table}
+\centering
+\caption[Clinical characteristic of the participants]{Clinical characteristic of the participant \cite{eikefjord2017dynamic}.}
+\label{tab:results}
+\begin{threeparttable}
+\rowcolors{4}{}{beaublue!50}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{c c c c c c c c c c c c c c c}
+	\toprule
+	\multirow{2}{*}{\textbf{Subject no.}}&
+	\multirow{2}{*}{\textbf{mGFR}}&
+	\multirow{2}{*}{\textbf{eGFR}}&
+	\multicolumn{3}{c}{\textbf{TK}} &
+    \multicolumn{3}{c}{\textbf{ETK}} &
+    \multicolumn{3}{c}{\textbf{PR}}&
+    \multicolumn{3}{c}{\textbf{2CXM}}\\
+    &&& \textbf{L} & \textbf{P} & \textbf{T}  & \textbf{L} & \textbf{P} & \textbf{T} & \textbf{L} & \textbf{P} & \textbf{T} & \textbf{L} & \textbf{P} & \textbf{T}\\ 
+    \hline
+    
+    %\rowcolors{2}{}{beaublue!50}
+  	1 &&&&&&&&&&&&&&\\
+  	2 &&&&&&&&&&&&&&\\
+  	3 &&&&&&&&&&&&&&\\
+  	4 &&&&&&&&&&&&&&\\
+  	5 &&&&&&&&&&&&&&\\
+  	6 &&&&&&&&&&&&&&\\
+  	7 &&&&&&&&&&&&&&\\
+  	8 &&&&&&&&&&&&&&\\
+  	9 &&&&&&&&&&&&&&\\
+  	10 &&&&&&&&&&&&&&\\
 
-\begin{figure*}[h!]
-	\centering
-	\subfloat[Segmented kidney]{\includegraphics[height=4 cm]{img/kidney_pelvis}}\quad
-	\subfloat[Parenchymal volume]{\includegraphics[height=4 cm]{img/no_pelvis}}\\	
-	\caption{The sample segmented kidney (a) and parenchymal volume with removed pelvis (b) purple - renal parenchyma, blue - renal pelvis.}
-\label{fig:kidney_segmented}
-\end{figure*}
+  \bottomrule
 
-
-\begin{figure*}[h!]
-	\centering
-	\subfloat[Kidney time course]{\includegraphics[width=7 cm]{img/kidney_no_baseline}}\quad
-	\subfloat[Aorta time course]{\includegraphics[width=7 cm]{img/aorta_no_baseline}}\\	
-\caption{Sample average time-concentration curves for renal parenchyma (a) and aorta (b). The red curve shows the original data while the blue one - after baseline removal.}
-\label{fig:removed_baseline}
-\end{figure*}
-
-\begin{figure*}[h!]
-	\centering
-	\subfloat[Toft's model]{\includegraphics[width=4.5 cm]{img/tk}}\quad
-	\subfloat[Extended Toft's model]{\includegraphics[width=4.5 cm]{img/etk}}\quad
-	\subfloat[Patlak model]{\includegraphics[width=4.5 cm]{img/patlak}}\\	
-\caption{Fit of the time-concentration curve of sample kidney to three different PK models.}
-\label{fig:models}
-\end{figure*}
-
-\newpage
-
+\end{tabular}
+\begin{tablenotes}%
+\footnotesize{}%
+\item Values in parentheses are ranges.
+\item Plus minus values are means $\pm$ Standard Deviations (SD).
+\item L R are SKGFR for left and right kidneys respectively and T is total GFR
+    \end{tablenotes}
+	\end{threeparttable}
+\end{table}
+\end{landscape}
