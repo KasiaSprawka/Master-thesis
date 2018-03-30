@@ -15,6 +15,7 @@
 \def \titlepl {Numeryczna ocena funkcjonowania nerek na podstawie obrazów DCE-MRI}
 \def \supervisor {Prof. hab. dr inż. Andrzej Materka}
 \def \auxiliarySupervisor {Dr inż. Marek Kociński}
+\def \datazdania {1 kwietnia 2018}
 
 
 %----------------------------------------------------------------------------------------
@@ -91,70 +92,16 @@
 	\end{spacing}
 	
 %List of Tables
-\newpage
+{\let\clearpage\relax
 \phantomsection \label{sec:ListOfTables}
 	\addcontentsline{toc}{chapter}{List of Tables}
 	\begin{spacing}{1.0}
 		\listoftables
-	\end{spacing}
+	\end{spacing}}
 
+%Oswiadczenie
+\include{tex/oswiadczenie}
 
-
-
-%----------------------------------------------------------------------------------------
-%	Section: Methods
-%----------------------------------------------------------------------------------------
-\newpage
-%\section{Methods}
-%\label{sec:Methods}
-%\input{./tex/methods}
-
-%----------------------------------------------------------------------------------------
-%	Section: Results
-%----------------------------------------------------------------------------------------
-
-\newpage
-%\section{Results}
-%\label{sec:Results}
-%\input{./tex/results}
-
-%----------------------------------------------------------------------------------------
-%	Section: Conclusions
-%----------------------------------------------------------------------------------------
-
-\newpage
-%\section{Conclusions}
-%\label{sec:Conclusions}
-%\input{./tex/conclusions}
-
-%----------------------------------------------------------------------------------------
-%	Section: Summary
-%----------------------------------------------------------------------------------------
-
-\newpage
-%\section{Summary}
-%\label{sec:Summary}
-%\input{./tex/summary}
-
-
-%----------------------------------------------------------------------------------------
-%	REFERENCE LIST
-%----------------------------------------------------------------------------------------
-%\newpage
-%\addcontentsline{toc}{section}{References}
-%\bibliographystyle{ieeetr}
-%\bibliography{./tex/references}\\
-
-
-%----------------------------------------------------------------------------------------
-%	APPENDICES
-%----------------------------------------------------------------------------------------
-
-%\newpage
-%\section*{Appendices}
-%\addcontentsline{toc}{section}{Appendices}
-%\label{sec:Appendices}
-%\input{./tex/appendices}
 
 
 \end{document}

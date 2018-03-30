@@ -56,9 +56,9 @@ Iohexol in terms is an exogenous marker which is used for accurate GFR measureme
 \caption[Clinical characteristic of the participants]{Clinical characteristic of the participants \cite{eikefjord2017dynamic}}
 \label{tab:participants}
 \begin{threeparttable}
-\rowcolors{2}{}{beaublue!50}
+\rowcolors{2}{}{middleblue!30}
 \renewcommand{\arraystretch}{1.25}
-\begin{tabular}{m{7cm} m{4cm}}
+\begin{tabular}{L{7cm} R{4cm}}
 	\toprule
 
  	Participants & 20\\
@@ -106,7 +106,7 @@ All further analysis was implemented in Python programming language~v.~3.6 \cite
 \end{figure}
 
 \subsubsection{Pelvis removal}
-Due to the fact that glomerular filtration takes place in renal renal parenchyma, pelvis had to be removed from the further analysis. 
+Due to the fact that glomerular filtration takes place in renal renal parenchyma, pelvis had to be removed from further analysis. 
 \newpage
 Resulting from the physiology of the process, the three renal compartments (cortex, medulla, pelvis) can be distinguished from each other on the basis of their time courses, as shown in Figure~\ref{fig:timecourses}. Depending on the compartment, the rapid enhancement of the signal occurs in different periods, which makes the shapes of the time intensity curves very unique.
 From the Figure~\ref{fig:timecourses} it can be seen that the highest variation is observed between pelvis and two other renal compartments.
@@ -120,7 +120,7 @@ Consequently, it can be separated by unsupervised clustering.
 	\label{fig:timecourses}
 \end{figure}
 
-First of all, every of the the voxel included in the label of the kidney was described by the vector of seventy-four features as follows:
+First of all, each voxel included in the label of the kidney was described by the vector of seventy-four features as follows:
 \begin{equation}
 \label{eq:voxel}
 \mathbf{v_{ijk}} = [S(0),\; S(1),\;...\;,\; S(72),\; S(73)],
@@ -230,7 +230,7 @@ For each of the kidney, as well as for the aorta, the mean intensities of the vo
 	\centering
 	\includegraphics[width = \textwidth]{temporal_points}
 	
-\caption[Sample average time-intensity curves for a kidney and aorta with marked last points of the baseline]{Sample average time-intensity curves for a kidney and aorta. Red dot is $T_{baseline}$, the last point of the baseline}
+\caption[Sample average time-intensity curves for a kidney and aorta with marked last points of the baseline]{Sample average time-intensity curves for a kidney and aorta. Red dot is $t_{baseline}$, the last point of the baseline}
 \label{fig:temporal_points}
 \end{figure}
 
@@ -246,10 +246,10 @@ where $S_0$ is the baseline signal, which is the average signal intensity among 
 In order to determine $S_0$, the time point before rapid signal increase, $T_{baseline}$ had to be found  as marked with red dot in Figure \ref{fig:temporal_points}.
 
 To achieve it, firstly, for the purposes of the examination of the function changes, the median filter  with the $kernel\;size = 5$ was applied in order to smooth the signal and eliminate artificial  peaks and valleys, as shown in Figure~\ref{fig:median}  
-In next step, for every intensity time course under analysis, its derivative was calculated. The derivative describes the instantaneous rate of change of the function. It tells how fast the output of the function (signal intensity) changes compared to the independent variable (time) \cite{calculus} and seems to be a perfect solution to the problem, which boils down to the finding the most rapid signal change. 
+In next step, for every intensity time course under analysis, its derivative was calculated. The derivative describes the instantaneous rate of change of the function. It tells how fast the output of the function (signal intensity) changes compared to the independent variable (time) \cite{calculus} and seems to be a perfect solution to the problem, which boils down to finding the most rapid signal change. 
 Because of one's interests is detection only of the function's increases, not decreases, the points, in which the derivative is negative were neglected, $S'(t)<0\leftarrow0$. So modified derivative of the sample kidney and aorta are shown in Figure~\ref{fig:derivative}.
 
-Now, all that had to be done to find $t_{baseline}$ was to detect the point, in which the derivative of the signal intensity time course reaches its maximum, $t_{baseline}~=~argmax\;S'(t)$. Having it determined, the $S_0$ was calculated as the mean signal intensity value from the beginning of the measurement ($t=0$) to $t_{baseline}$. Finally, the CA concentration in the tissue and aorta were calculated according to the Formula~\ref{eq:conversion}. The results of intensity-concentration conversion for sample time curves are shown in Figure~\ref{fig:conversion}. 
+Now, all that had to be done to find $t_{baseline}$ was to detect the point, in which the derivative of the signal intensity time course reaches its maximum, $t_{baseline}=argmax\;S'(t)$. Having it determined, the $S_0$ was calculated as the mean signal intensity value from the beginning of the measurement ($t=0$) to $t_{baseline}$. Finally, the CA concentration in the tissue and aorta were calculated according to Formula~(\ref{eq:conversion}). The results of intensity-concentration conversion for sample time curves are shown in Figure~\ref{fig:conversion}. 
 \begin{figure}[H]
 %\captionsetup[subfloat]{captionskip=0.5cm}
 	\centering
@@ -262,7 +262,7 @@ Now, all that had to be done to find $t_{baseline}$ was to detect the point, in 
 %\captionsetup[subfloat]{captionskip=0.5cm}
 	\centering
 	\includegraphics[width = \textwidth]{derivative}
-\caption[Positive derivative of the sample kidney and aorta intensity time courses]{Positive derivative of a sample kidney and aorta intensity time courses. The horizontal line indicates the time point, in which the derivative reaches its maximal value}
+\caption[Positive derivative of the sample kidney and aorta intensity time courses]{Positive derivative of a sample kidney and aorta intensity time courses. The vertical line indicates the time point, in which the derivative reaches its maximal value}
 \label{fig:derivative}
 \end{figure}
 
@@ -288,9 +288,8 @@ Finally, PK modelling could have been performed. The models of choice were the T
  
 \paragraph{Tofts and Kermode model.}
 According to the \textit{Tofts and Kermode} (TK) model) \cite{tofts1991measurement} the tracer is distributed in two compartments: intravascular and \textit{Extravascular extra-cellular space} (EES).
-The tracer diffuses from the blood plasma at rate specified by the transfer constant $K_{trans}$ [min$^{-1}$] and returns at the reverse tranfer rate $k_{ep} = K_{trans}/v_e$ [min$^{-1}$]. This model assumes, however, that the amount of intravascular (plasma) tracer is negligible comparing to the tissue signal. The total tissue concentration, 
-\newpage
-\noindent $C_t(t)$, is then given by\cite{khalifa2014models}:
+The tracer diffuses from the blood plasma at rate specified by the transfer constant $K_{trans}$ [min$^{-1}$] and returns at the reverse transfer rate $k_{ep} = K_{trans}/v_e$ [min$^{-1}$]. This model assumes, however, that the amount of intravascular (plasma) tracer is negligible comparing to the tissue signal. 
+The tissue concentration, $C_t(t)$, is then given by \cite{khalifa2014models}:
 \begin{equation}
 C_t(t) = v_eC_e(t),
 \end{equation}
@@ -315,7 +314,7 @@ where $v_p$ is fractional plasma volume. The differential eqation decribing EES 
 	\label{eq:etoft}
 	v_e\frac{dC_{e}(t)}{dt} = K_{trans}(C_p(t)-C_e(t))
 \end{equation}
-Solving the equation and substituting to \ref{eq:etk} the tissue concentration comes up to \cite{khalifa2014models, tofts2010t1}:
+Solving the equation and substituting to (\ref{eq:etk}) the tissue concentration comes up to \cite{khalifa2014models, tofts2010t1}:
 \begin{align}
 	\label{eq:extended_toft}
 	C_{t}(t) &=v_pC_p(t) + C_p\circledast K_{trans}e^{-k_{ep}t} =\\
@@ -325,7 +324,7 @@ Solving the equation and substituting to \ref{eq:etk} the tissue concentration c
 
 In TK and ETK models the free parameters $K_{trans}$, $v_e$ and $v_p$ are estimated by fitting the model to obtained in DCE-MRI examinations time-concentration curves.  
 \paragraph{Patlak-Rutland model.}
-Unlike the TK and ETK models, the \textit{Patlak-Rutland} model \cite{patlak1983graphical} assumes that reverse transfer constant from EES to the plasma, $k_{ep}$, in negligibly small, because of the short time of the measurement (tracer do not have time to return) and low permeability \cite{khalifa2014models}. 
+Unlike the TK and ETK models, the \textit{Patlak-Rutland} model \cite{patlak1983graphical} assumes that reverse transfer constant from EES to the plasma, $k_{ep}$, in negligibly small, because of the short time of the measurement (tracer does not have time to return) and low permeability \cite{khalifa2014models}. 
 Similarly to the ETK, the tissue concentration is equal to the:
 \begin{equation}
 C_t(t) = v_pC_p(t) + v_eC_e(t),
@@ -336,23 +335,23 @@ However, the tracer change in EES is equal to \cite{thesis,patlak1983graphical}:
 	\label{eq:patlak2}
 	v_e\frac{dC_{e}(t)}{dt} = K_{trans}C_p(t)
 \end{equation}
-Solving the Equation \ref{eq:patlak2} and substituting into Formula \ref{eq:patlak2} \cite{khalifa2014models, patlak1983graphical}: 
+Solving the Equation (\ref{eq:patlak2}) and substituting into Formula (\ref{eq:patlak2}) \cite{khalifa2014models, patlak1983graphical}: 
 \begin{equation}
 	\label{eq:patlak}
 	C_{t}(t) =v_pC_p(t) + K_{trans}\int_{0}^{t}C_p(\tau)d\tau  
 \end{equation}
-To obtain the free parameters, the concentration time courses obtained from DCE-MRI examination can be fitted directly to the Formula \ref{eq:patlak} or the graphical approach called the \textit{Patlak plot} can be applied. In this approach the above equation is linearised as \cite{khalifa2014models, patlak1983graphical}:  
+To obtain the free parameters, the concentration time courses obtained from DCE-MRI examination can be fitted directly to Formula (\ref{eq:patlak}) or the graphical approach called the \textit{Patlak plot} can be applied. In this approach the above equation is linearised as \cite{khalifa2014models, patlak1983graphical}:  
 \begin{equation}
 	\label{eq:patlak_lin}
 	Y = K_{trans}X +v_p,  
 \end{equation}
 where $Y=C_t(t)/C_p(t)$ and $X=\int_{0}^{t}C_p(\tau)d\tau/C_p(t)$. The free parameters $K_{trans}$ and $v_p$ can be then estimating by constructing a linear plot and calculating its slope and intercept respectively.
-In this project, the data was fitted to the Formula \ref{eq:patlak}. 
+In this project, the data was fitted to Formula (\ref{eq:patlak}). 
 \newpage
-\paragraph{Two-Compartment Exchange Model}While the all previous described models allows for estimating transfer constant $K_{trans}$ incorporating both the plasma blood flow, $F_b$, and the surface permeability, $PS$, \textit{Two-Compartment Exchange Model} (2CXM) enables their separate estimation. 
-According to 2CXM The plasma compartment, the plasma compartment has an arterial inlet and a venous outlet of the same plasma flow, $Fp$. 
+\paragraph{Two-Compartment Exchange Model.}While all previous described models allow for estimating transfer constant $K_{trans}$ combining both the plasma blood flow, $F_b$, and the surface permeability, $PS$, \textit{Two-Compartment Exchange Model} (2CXM) enables their separate estimation. 
+According to 2CXM, the plasma compartment has an arterial inlet and a venous outlet of the same plasma flow, $Fp$. 
 The tracer exchanges between the two compartments: EES and intravascular plasma, at a symmetric rate quantified by the permeability surface product, $PS$.
-Because the CA leaves the system the model is referred to as an open system. 
+Because the CA leaves the system, the model is referred to as an open system. 
 Similarly to PR and ETK models the tissue concentration is expressed as \cite{khalifa2014models}:
 \begin{equation}
 C_t(t) = v_pC_p(t) + v_eC_e(t)
@@ -367,7 +366,7 @@ v_p\frac{dC_p(t)}{dt} = F_p(C_a(t)-C_p(t))+PS(C_e(t)-C_p(t))
 v_e\frac{dC_e(t)}{dt} = PS(C_p(t)-C_e(t))
 \label{eq:2cxm3}
 \end{equation}
-Note that in 2CXM the CA concentration in the plasma of the feeding artery is denotated as $C_a$ ($C_p$ in previous models) whereas $C_p$ is CA concentration in intravascular plasma. The solution comes up to \cite{khalifa2014models}:
+Note that in 2CXM the CA concentration in the plasma of the feeding artery is denoted as $C_a$ ($C_p$ in previous models) whereas $C_p$ is CA concentration in intravascular plasma. The solution comes up to \cite{khalifa2014models}:
 \begin{align}
 	\label{eq:2cxm4}
 	\nonumber C_{t}(t) &=F_p (Be^{-m_1t}+(1-B)e^{-m_2t})\circledast C_a =\\

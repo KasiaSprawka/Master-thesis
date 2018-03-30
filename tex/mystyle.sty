@@ -152,9 +152,20 @@
 \newcommand{\ang}[1]{ang.~\textit{{#1}}}
 
 \definecolor{beaublue}{rgb}{0.74, 0.83, 0.9}
+\definecolor{nectarine}{rgb}{1, 0.745, 0.462745}
+ % rgb(255, 175, 64)
+\definecolor{mandarin}{rgb}{1, 0.686, 0.25}
+\definecolor{middleblue}{rgb}{0.494, 0.839, 0.8745}
+
+% tables commands
+\newcolumntype{g}{>{\columncolor{middleblue!70}}l}
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcommand*\rot{\rotatebox{90}}
 
 
 
-
-
-
+\fancyhead[LE,RO]{{\small{\author}}\linebreak{\small\textsl{\title}}}
+\fancyhead[RE,LO]{}
+\renewcommand{\headrulewidth}{1pt}

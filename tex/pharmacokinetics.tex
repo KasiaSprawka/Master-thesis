@@ -89,16 +89,16 @@ When the only inlet of the examined tissue is an artery, the input function corr
 \newpage
 
 \subsection{One-compartment model}
-For better understanding, the above theory will be explained on an example one-compartment model, but the reasoning is similar to the all models used in this work. Given a~one-compartment system with a single inlet and outlet and taking into consideration that all substances in the system have constant volume, it is known that inflow have to level the outflow. On the basis of Formulas \ref{eq:pk5}, \ref{eq:pk7} the mass balance equation of the system can be formulated as follows \cite{thesis}:
+For better understanding, the above theory will be explained on an example one-compartment model, but the reasoning is similar for all models used in this work. Given a~one-compartment system with a single inlet and outlet and taking into consideration that all substances in the system have constant volume, it is known that inflow have to level the outflow. On the basis of Formulas (\ref{eq:pk5}), (\ref{eq:pk7}) the mass balance equation of the system can be formulated as follows \cite{thesis}:
 \begin{equation}
 v_1\frac{dC_1(t)}{dt} = K_{trans}(C_{in}(t)-C_1(t)),
 \end{equation}
-where the $v_1$ is the fractional volume of the compartment. From the Formula \ref{eq:pk3} \cite{thesis}:
+where the $v_1$ is the fractional volume of the compartment. From Formula (\ref{eq:pk3}) \cite{thesis}:
 \begin{equation}
 \frac{dC_t(t)}{dt} = K_{trans}(C_{in}(t)-C_t(t)/v_1)
 \label{eq:laplace}
 \end{equation}
-Assuming that $C_{in}$ is a short pulse of concentration, $C_{in}=\delta(t)$, the IRF of the tissue can be obtained by applying the Laplace transform to the Formula \ref{eq:laplace}: 
+Assuming that $C_{in}$ is a short pulse of concentration, $C_{in}=\delta(t)$, the IRF of the tissue can be obtained by applying the Laplace transform to Formula (\ref{eq:laplace}): 
 \begin{equation}
 \mathcal{L}\{\dot{h}\}(s) = K_{trans}(\mathcal{L}\{\delta\}(s)) - \frac{K_{trans}}{v_1}(\mathcal{L}\{h\}(s))
 \end{equation}
@@ -106,7 +106,7 @@ Making use of the properties of the Laplace transform, the solution is \cite{the
 \begin{equation}
 h(t) = K_{trans}e^{-k_{ep}t}
 \end{equation}
-Finally, according to the Formula~\ref{eq:convolution}, the tracer concentration in the tissue can be expressed as \cite{thesis}:
+Finally, according to Formula~(\ref{eq:convolution}), the tracer concentration in the tissue can be expressed as \cite{thesis}:
 \begin{equation}
 	C_{t}(t) = C_{in}(t)\circledast  K_{trans}e^{-k_{ep}t} 
 \end{equation}
@@ -123,7 +123,7 @@ In general there are three approaches of acquiring the AIF:
 \item{\textbf{Gold standard AIF}} is obtained by blood sampling during DCE-MRI examination.
 Although its accuracy strongly depends on the frequency of collected samples, this method usually allows for accurate measurement of the AIF, but is inconvenient for both the patient and the examiner.
 What is more, in some cases, for example during DCE-MRI of a breast, blood collection close to the tissue of interest is impossible to perform due to the lack of big vessels in this region \cite{khalifa2014models, barnes2012practical}. 
-\item{\textbf{DCE-MRI AIF}} is determined directly from the obtained DCE-MRI data. In this approach the time-varying signal intensity from the region containing large feeding artery is converted into the tracer concentration in this way estimating the AIF. The major limitation is that it is not always possible to cover the the desired artery in the DCE-MRI acquisition field, for example during imaging small lesions in a breast \cite{khalifa2014models}.   
+\item{\textbf{DCE-MRI AIF}} is determined directly from the obtained DCE-MRI data. In this approach the time-varying signal intensity from the region containing large feeding artery is converted into the tracer concentration in this way estimating the AIF. The major limitation is that it is not always possible to cover the desired artery in the DCE-MRI acquisition field, for example during imaging small lesions in a breast \cite{khalifa2014models}.   
 \item{\textbf{Population-based AIF}} is obtained by averaging the AIF of the group of subjects to be used in subsequent studies of the similar subjects. Because the need of acquiring subject-specific AIF is eliminated, the temporal resolution of the DCE-MRI can be decreased (CA tissue kinetics is slower than in the blood) in the same time increasing the quality of the images or the spatial resolution. The biggest disadvantage of this method is possible variance between individual AIFs \cite{jackson2005dynamic}. 
 \end{enumerate}
 
@@ -131,9 +131,9 @@ What is more, in some cases, for example during DCE-MRI of a breast, blood colle
 
 \section{Intensity to concentration conversion}
 Because the PK models describe kinetics of the system in terms of the CA concentration in the tissue and the output of DCE-MRI examination is the signal intensity as a~function of time, the conversion of the signal intensity to concentration is indispensable. 
-As long as the relationship between CA concentration and the signal intensity  is linear, and the same for both the tissue and the blood in case of acquiring AIF from DCE-MRI images, the conversion boils down to the substarcting the baseline so that the concentration before the tracer arrival is at the level of 0. This conditions are satisfied at low doses of CA \cite{khalifa2014models}.
+As long as the relationship between CA concentration and the signal intensity  is linear, and the same for both the tissue and the blood in case of acquiring AIF from DCE-MRI images, the conversion boils down to the substracting the baseline so that the concentration before the tracer arrival is at the level of 0. This conditions are satisfied at low doses of CA \cite{khalifa2014models}.
 
-At high doses of the CA, however, this linearity is not true anymore due to the saturation effect of the signal. Non-linearity adds one more complication to the DCE-MRI examination. In such case, in order to convert the signal intensity into the CA concentration, the maps of the native relaxation time, $T_{10}$, which is the value of $T_1$ before the tracer injection, have to be measured. Then, the values can be substituted to the Formulas \ref{eq:conversion2}, \ref{eq:conversion3} and the CA concentration can be obtained \cite{khalifa2014models, jackson2005dynamic, barnes2012practical}.
+At high doses of the CA, however, this linearity is not true anymore due to the saturation effect of the signal. Non-linearity adds one more complication to the DCE-MRI examination. In such case, in order to convert the signal intensity into the CA concentration, the maps of the native relaxation time, $T_{10}$, which is the value of $T_1$ before the tracer injection, have to be measured. Then, the values can be substituted to Formulas (\ref{eq:conversion2}), (\ref{eq:conversion3}) and the CA concentration can be obtained \cite{khalifa2014models, jackson2005dynamic, barnes2012practical}.
 
 
 The dependency between the CA concentration in the tissue, $C_t(t)$  and the relaxation rate, $1/T_1(t)$ is given by the Solomon-Bloembergen equation \cite{jackson2005dynamic}:
@@ -141,9 +141,9 @@ The dependency between the CA concentration in the tissue, $C_t(t)$  and the rel
  \frac{1}{T_1(t)} = \frac{1}{T_{10}}+r_1C_t(t),
  \label{eq:conversion2}
  \end{equation}
-where $r_1$ is the spin-lattice relaxation constant depending on temperature, field strength and the chemical structure of the tracer. On the other hand, under the certain assumptions, the magnitude of the signal during the standard DCE-MRI can be predicted by \cite{khalifa2014models, jackson2005dynamic}:
+where $r_1$ is the spin-lattice relaxation constant depending on temperature, field strength and the chemical structure of the tracer. On the other hand, under certain assumptions, the magnitude of the signal during the standard DCE-MRI can be predicted by \cite{khalifa2014models, jackson2005dynamic}:
   \begin{equation}
- S(t)  = M_0\frac{\sin\alpha(1-e^{-TR/T_1(t)})}      {1-(\cos\alpha)e^{-TR/T_1(t)}}
+ S(t)  = M_0\frac{\sin\alpha(1-e^{-TR/T_1(t)})}      {1-(\cos\alpha)e^{-TR/T_1(t)}},
  \label{eq:conversion3}
  \end{equation} 
 where $M_0$ is a scaling constant dependent i.e. on the scanner parameters and the proton density, $TR$ is the repetition time, $T_1$ is spin-lattice and relaxation time and $\alpha$~is the RF flip angle.

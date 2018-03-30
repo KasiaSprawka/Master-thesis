@@ -10,47 +10,79 @@ where |A| and |B| are the number of voxels in pelvis detected  in automatic segm
 The average accuracy of the pelvis segmentation was equal to DSC~=~0.87$\pm$0.06.
 
 
+
 \begin{landscape}
 \begin{table}
 \centering
 \caption[Clinical characteristic of the participants]{Clinical characteristic of the participant \cite{eikefjord2017dynamic}.}
 \label{tab:results}
 \begin{threeparttable}
-\rowcolors{4}{}{beaublue!50}
-\renewcommand{\arraystretch}{1.25}
-\begin{tabular}{c c c c c c c c c c c c c c c}
+\rowcolors{3}{}{middleblue!30}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{l r r c r r r c r r r c r r r c r r r}
 	\toprule
-	\multirow{2}{*}{\textbf{Subject no.}}&
-	\multirow{2}{*}{\textbf{mGFR}}&
-	\multirow{2}{*}{\textbf{eGFR}}&
-	\multicolumn{3}{c}{\textbf{TK}} &
-    \multicolumn{3}{c}{\textbf{ETK}} &
-    \multicolumn{3}{c}{\textbf{PR}}&
+	%\multirow{3}{*}{\shortstack[l]{\textbf{Subject}\\ \textbf{no.}}}&
+	\multirow{3}{*}{\textbf{No.}}&
+	\multirow{3}{*}{\textbf{mGFR}}&
+	\multirow{3}{*}{\textbf{eGFR}}& \phantom{abc}&
+	\multicolumn{15}{c}{\textbf{MRI GFR}}\\ \cmidrule{5-19}
+	&&&& \multicolumn{3}{c}{\textbf{TK}} & \phantom{abc}&
+    \multicolumn{3}{c}{\textbf{ETK}} & \phantom{abc}&
+    \multicolumn{3}{c}{\textbf{PR}} & \phantom{abc}&
     \multicolumn{3}{c}{\textbf{2CXM}}\\
-    &&& \textbf{L} & \textbf{P} & \textbf{T}  & \textbf{L} & \textbf{P} & \textbf{T} & \textbf{L} & \textbf{P} & \textbf{T} & \textbf{L} & \textbf{P} & \textbf{T}\\ 
-    \hline
-    
+    \cmidrule{5-7} \cmidrule{9-11} \cmidrule{13-15} \cmidrule{17-19}
+   \rowcolor{white} &&&& \textbf{L} & \textbf{R} & \textbf{T} & & \textbf{L} & \textbf{R} & \textbf{T} && \textbf{L} & \textbf{R} & \textbf{T} && \textbf{L} & \textbf{R} & \textbf{T}\\ 
+    \toprule
     %\rowcolors{2}{}{beaublue!50}
-  	1 &&&&&&&&&&&&&&\\
-  	2 &&&&&&&&&&&&&&\\
-  	3 &&&&&&&&&&&&&&\\
-  	4 &&&&&&&&&&&&&&\\
-  	5 &&&&&&&&&&&&&&\\
-  	6 &&&&&&&&&&&&&&\\
-  	7 &&&&&&&&&&&&&&\\
-  	8 &&&&&&&&&&&&&&\\
-  	9 &&&&&&&&&&&&&&\\
-  	10 &&&&&&&&&&&&&&\\
+  	1  & 107 & 138 & & 75 & 67 & 142 & & 63 & 55 & 118 & & &&&&&&\\
+  	2  & 98  & 109 & & 75 & 32 & 137 & & 61 & 53 & 115 & & &&&&&&\\
+  	3  & 90  & 108 & & 48 & 57 & 106 & & 42 & 50 & 92  & & &&&&&&\\
+  	4  & 93  & 107 & & 55 & 49 & 105 & & 47 & 42 & 89  & & &&&&&&\\
+  	5  & 94  & 83  & & 71 & 74 & 145 & & 61 & 62 & 123 & & &&&&&&\\
+  	6  & 103 & 107 & & 42 & 48 & 90  & & 34 & 40 & 74  & & &&&&&&\\
+  	7  & 112 & 125 & & 48 & 52 & 100 & & 36 & 39 & 75  & & &&&&&&\\
+  	8  & 119 & 142 & & 50 & 61 & 111 & & 38 & 47 & 85  & & &&&&&&\\
+  	9  & 96  & 110 & & 44 & 58 & 102 & & 35 & 52 & 87  & & &&&&&&\\
+  	10 & 112 & 133 & & 59 & 64 & 123 & & 46 & 50 & 96  & & &&&&&&\\
 
   \bottomrule
 
 \end{tabular}
 \begin{tablenotes}%
 \footnotesize{}%
-\item Values in parentheses are ranges.
-\item Plus minus values are means $\pm$ Standard Deviations (SD).
-\item L R are SKGFR for left and right kidneys respectively and T is total GFR
+\item L and R are SKGFR for left and right kidneys respectively whereas T is total GFR.
+\item Note that $L+R = T$ is not always satisfied because of the rounding error.
+\item All GFR values are expressed in ml/min$^{-1}$/1.73\,m$^2$.
     \end{tablenotes}
 	\end{threeparttable}
 \end{table}
 \end{landscape}
+
+\begin{table}
+\centering
+\caption{results2}
+\label{tab:results2}
+\begin{threeparttable}
+\rowcolors{2}{}{middleblue!30}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{L{3cm} R{3cm} R{3cm} R{3cm}}
+	\toprule
+
+	{\textbf{Method}} & \textbf{Absolute error}  & \textbf{R$^2$} & \textbf{P30} \\ \toprule
+				 TK   & 		      			 &				  &              \\
+				ETK   & 		      			 &				  & \\
+				 PK   & 		      			 &				  &\\
+			    2CXM  & 		      			 &				  &\\
+				eGFR  & 		      			 & \cellcolor{gray}				  &\\
+
+  	\bottomrule
+
+\end{tabular}
+\begin{tablenotes}%
+\footnotesize{}%
+\item L and R are SKGFR for left and right kidneys respectively whereas T is total GFR.
+\item Note that $L+R = T$ is not always satisfied because of the rounding error.
+\item All GFR values are expressed in ml/min$^{-1}$/1.73\,m$^2$.
+    \end{tablenotes}
+	\end{threeparttable}
+\end{table}
