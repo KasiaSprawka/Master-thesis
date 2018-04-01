@@ -14,10 +14,10 @@
 \usepackage{microtype}
 \usepackage{amsmath, amsfonts, amsthm, amssymb}
 \usepackage{fancyhdr}
-\usepackage{booktabs}
+\usepackage{booktabs, makecell}
 %\usepackage{float}
 
-
+\usepackage{floatrow}
 \usepackage{tabularx}
 \usepackage[flushleft]{threeparttable}
 
@@ -30,7 +30,6 @@
 \usepackage[linesnumbered,ruled]{algorithm2e}
 
 \usepackage{multirow}
-
 
 \setcounter{secnumdepth}{3}
 \setcounter{tocdepth}{3}
@@ -156,6 +155,8 @@
  % rgb(255, 175, 64)
 \definecolor{mandarin}{rgb}{1, 0.686, 0.25}
 \definecolor{middleblue}{rgb}{0.494, 0.839, 0.8745}
+\definecolor{magenta}{HTML}{D980FA}
+
 
 % tables commands
 \newcolumntype{g}{>{\columncolor{middleblue!70}}l}
@@ -164,8 +165,39 @@
 \newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 \newcommand*\rot{\rotatebox{90}}
 
+\usepackage{etoolbox}
+
+\makeatletter
+\patchcmd{\@classz}
+  {\CT@row@color}
+  {\oldCT@column@color}
+  {}
+  {}
+\patchcmd{\@classz}
+  {\CT@column@color}
+  {\CT@row@color}
+  {}
+  {}
+\patchcmd{\@classz}
+  {\oldCT@column@color}
+  {\CT@column@color}
+  {}
+  {}
+\makeatother
+
+
+
+
+
+\floatsetup[figure]{subcapbesideposition=top}
+\floatsetup[table]{capposition=top}
+\usepackage{afterpage}
+
+
 
 
 \fancyhead[LE,RO]{{\small{\author}}\linebreak{\small\textsl{\title}}}
 \fancyhead[RE,LO]{}
 \renewcommand{\headrulewidth}{1pt}
+
+
