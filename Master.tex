@@ -79,9 +79,9 @@
 
 
 %Appendices%
-%\phantomsection \label{sec:appendices}
-%\addcontentsline{toc}{chapter}{Appendices}
-%\include{tex/appendices}
+\phantomsection \label{sec:appendices}
+\addcontentsline{toc}{chapter}{Appendices}
+\include{tex/appendices}
 
 %List of Figures
 \newpage
@@ -92,12 +92,13 @@
 	\end{spacing}
 	
 %List of Tables
-{\let\clearpage\relax
+%{\let\clearpage\relax
 \phantomsection \label{sec:ListOfTables}
 	\addcontentsline{toc}{chapter}{List of Tables}
 	\begin{spacing}{1.0}
 		\listoftables
-	\end{spacing}}
+	\end{spacing}
+	%}
 
 %Oswiadczenie
 \include{tex/oswiadczenie}
