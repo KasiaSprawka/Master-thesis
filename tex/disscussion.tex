@@ -1,0 +1,36 @@
+\chapter{Discussion}
+The aim of the study described in the previous chapter was to examine the performance of four pharmacokinetic models: TK, ETK, PK and 2CXM models.   
+
+The results showed that all PK models but the PR model give the realistic, normal GFR values, whereas the latter one underestimates it at least twice, and therefore it will be excluded from further discussion. 
+
+Concerning the accuracy, with reference to mGFR, the bias was equal to 13 for eGFR, 23 for TK model, 0 for ETK model, and -5 for 2CXM. What follows, ETK and SCr test tend to slightly overestimate the true GFR. 
+ETK and 2CXM models in terms showed to be the most accurate ones with bias equal or close to 0. 
+What is more the high accuracy of 2CXM and ETK was confirmed by the small average absolute error. For 2CXM the obtained value was the smallest one, smaller even from eGFR, whereas for ETK model it was almost the same as for eGFR.
+
+Concerning the measurements dispersion, the broader limits of agreement for every of the PK model than those of eGFR indicates lower precision. 2CXM model was found the most precise one with LoA only broader by 5 mL/min/1.73\,m$^2$.     
+
+The accuracy and precision can be then combined in one metric, which is P30.  
+According to the National Kidney Foundation the estimated GFR value within $\pm30\%$ of the true GFR value is sufficient for the clinical use. In the same time, it advises that at least 90\% of the measurements obtained by the potential method should lay in this range to be considered as the accurate and precise enough ($P30\leqslant90\%$) \cite{levey2003national}. From the examined PK models, only 2CXM fulfils this condition with the $P30=100\%$ comparable with  the SCr blood test. The TK and ETK obtained 70\% and 80\% respectively.   
+
+Pearson correlations of eGFR, TK, ETK and 2CXM from mGFR were respectively $r=0.81$ , $r=-0.04$ , $r=-0.12$, $r=0.51$. Strong positive correlation was observed only for eGFR and 2CXM model, however, assuming the significance level of 5\% the linear dependency can be considered statistically significant only for eGFR. All p-values obtained for PK models much exceed 0.05.  
+
+Further, regarding the goodness of fit of the data, again 2CXM model showed the best results obtaining the smallest RMSE, which was equal only 5.15 ml/min/1.73\,m$^2$, which means that it provide the best description of renal parenchyma.  
+
+In conclusion, the 2CXM proved overall the best performance from the examined PK models in terms of both the accuracy and precision as well as the goodness of fit. Even though it obtained slightly worse precision that eGFR it can be considered a method of GFR estimating, however, the tests on more data are recommended.      
+
+
+
+
+
+There can be several factors identified as a source of error influencing accuracy and precision of all models. In some DCE-MRI sequences the inflow artifact of the aorta was observed distorting the true AIF being the basis of the PK modelling.   
+What is more, because of the lack of the $T_1$ values and low doses of CA, the linear relationship between the signal intensity and CA concentration was assumed, which is only an approximation not always perfectly true. More accurate measurements require conversion of signal intensity according to Formula \ref{eq:conversion2}.  
+Next, some studies suggest applying tracer kinetic theory separately to renal cortex and medulla \cite{baumann2000quantitative, lee2007renal}, however poor resolution of the MRI sequences disabled accurate segmentation of these compartments. In some cases it was even difficult to distinguish some regions of the kidney from the liver or adrenal gland organoleptically.   
+Further, the hematocrit value used for calculation of the CA concentration in blood plasma was fixed as the average value for the  healthy person. Tofts et al. showed that  1\% deviation of the hematocrit results in GFR error of 0.72\% \cite{tofts2012precise}. Although all the participants were reported healthy, hematocrit values can still vary as much as from 38\% to 54\% depending on the sex, age and diet \cite{hct}. Eliminating any of these factors should yet improve the performance of any PK model.   
+
+Last but not least, one should remember that physiological values such as blood pressure, temperature or GFR are continuously varying to some extent depending on the current diet or health and there are some differences observed even between two values obtained in iohexol-GFR test performed at some time interval.
+
+\section{Future work}
+As it was mentioned before, the overall long-term aim of the project is to develop the fast and accurate, entirely data-driven method of GFR estimation. As the most-time consuming stages in the assessment of renal function are the registration of DCE-MRI sequences (one dataset takes $\approx 6h\,$) and manual labelling of the kidneys it is inevitable to eliminate them from the target method.   
+
+This goal was already achieved by implementing the \textit{Convolutional Neural Network} for kidneys segmentation from raw unprocessed DCE-MRI images  and showed very promising results. 
+More on this topic can be found in Appendix A. Further plans include automatic segmentation of the aorta and renal pelvis with CNN. If it occurs to be a success, in the last step the developed package for PK modelling will be applied in order to fit obtained time-courses to 2CXM PK model.

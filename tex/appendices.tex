@@ -13,7 +13,7 @@
 		\ifvisible
 			\newpage%
 			\refstepcounter{zalacznik}\label{#1}%
-			\section*{Appendix~\thezalacznik}%
+			\chapter*{Appendix~\thezalacznik}%
 			\BODY
 		\fi
 	}
@@ -21,13 +21,23 @@
 
 
 	\begin{zalacznik}{appx:abstract}{\visibletrue}
-Abstract accepted for \textit{European Congress of Radiology} (ECR) 2018 \cite{abstract}. 	\\ 	
+Below attached the abstract accepted for \textit{European Congress of Radiology} 2018 \cite{abstract}: \\		
 		\begin{figure}[H]
 			\centering
-			\includegraphics[width=\linewidth]{abstract}
+			\includegraphics[width=\linewidth, height=13.5cm]{abstract}
 			
 			\label{fig:abstract}
 		\end{figure}
+	\end{zalacznik}
+	
+	
+		\begin{zalacznik}{appx:abstract}{\visibletrue}
+The CD attached to this thesis contains:
+\begin{itemize}
+\item{Electronic version of the thesis}
+\item{Excel file with the test results}
+\item{Nifti files of the sample subject: original DCE-MRI sequence, motion corrected sequence, file with the labels of both kidneys and aorta, file with the labels of both kidney with removed pelvis and aorta}
+\end{itemize}
 	\end{zalacznik}
 	
 
