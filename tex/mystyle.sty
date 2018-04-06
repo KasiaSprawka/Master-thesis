@@ -7,6 +7,10 @@
 \usepackage{graphicx}
 \graphicspath{ {img/} }
 
+
+%\renewcommand\cftchapafterpnum{\vskip10pt}
+%\renewcommand\cftsecafterpnum{\vskip15pt}
+
 \usepackage{lettrine}
 %\usepackage{lmodern}
 
@@ -30,6 +34,8 @@
 \usepackage[linesnumbered,ruled]{algorithm2e}
 
 \usepackage{multirow}
+
+
 
 \setcounter{secnumdepth}{3}
 \setcounter{tocdepth}{3}
@@ -199,4 +205,19 @@
 \fancyhead[LE,RO]{{\small{\author}}\linebreak{\small\textsl{\title}}}
 \fancyhead[RE,LO]{}
 \renewcommand{\headrulewidth}{1pt}
+
+%\makeatletter
+%\renewcommand\chapter{\addtocontents{toc}{\protect\addvspace{-5\p@}}%
+%  \if@openright\cleardoublepage\else\clearpage\fi
+%  \thispagestyle{plain}%
+%  \global\@topnum\z@
+%  \@afterindentfalse
+%  \secdef\@chapter\@schapter}
+%\renewcommand\section{\addtocontents{toc}{\protect\addvspace{0\p@}}%
+%  \@startsection {section}{1}{\z@}%
+%  {-3.5ex \@plus -1ex \@minus -.2ex}%
+%  {2.3ex \@plus.2ex}%
+%  {\normalfont\Large\bfseries}}
+%\makeatother
+
 

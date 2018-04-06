@@ -1,19 +1,19 @@
-\section{Results}
-The developed algorithm was evaluated on ten MRI sequences of ten different participants. For every of the participant one of the two  MRI sequences was chosen randomly.
+\chapter{Results}
+The algorithm developed within this thesis was evaluated on ten DCE-MRI sequences of ten different participants. For each of the participant one of the two  DCE-MRI sequences was chosen randomly.
 
 The segmentation of the pelvis was evaluated with \textit{Dice similarity coefficient} (DSC) given by the formula \cite{dice1945measures}:
 \begin{equation}
 	\label{eq:dice}
 	DSC = \dfrac{2|A\cap{}B|}{|A|+|B|},
 \end{equation}
-where |A| and |B| are the number of voxels in pelvis detected  in automatic segmentation and the number of voxels in ground truth labelled organoleptically respectively and $|A\cap{}B|$ is the number of common voxels.
+where |A| and |B| are the number of voxels in pelvis detected  in automatic segmentation and the numbers of voxels in ground truth labelled organoleptically respectively, whereas $|A\cap{}B|$ is the number of common voxels.
 The average accuracy of the pelvis segmentation was equal to DSC~=~0.86\,$\pm$\,0.06.
 
-The SKGFR values of the left and right kidney as well as total GFR for every of the participants obtained in the examination of the MRI sequences applying different PK models are shown in Table~\ref{tab:results}. For comparison the GFR values obtained with chemical methods were included in the table. \textit{Measured GFR} (mGFR) is a value obtained in iohexol-GFR test, whereas \textit{estimated GFR} (eGFR) the one derived from SCr blood test.
+The SKGFR values of the left and right kidney, as well as total GFR for each of the participants obtained in the examination of the MRI sequences applying different PK models are shown in Table~\ref{tab:results}. Also, the GFR values obtained with chemical methods were included in the table for comparison. \textit{Measured GFR} (mGFR) is a value obtained in iohexol-GFR test, whereas \textit{estimated GFR} (eGFR) is the one derived from the SCr blood test.
 
-For every of the method (different PK models and SCr blood test) its degree of agreement with the reference method  (iohexol-GFR test) was assessed. For this purpose the Bland–Altman plots were drawn \cite{bland1986statistical} as shown in Figure \ref{fig:baltman}. 
+For each of the method (different PK models and SCr blood test) its degree of agreement with the reference method  (iohexol-GFR test) was assessed. For this purpose the Bland–Altman plots \cite{bland1986statistical} were drawn as shown in Figure \ref{fig:baltman}. 
 This type of plot is a scatter one, in which the difference between the measurement of the examined method and the reference method is plotted against the average of these measurements.
-The plot indicates the central tendency (bias) as the robust grey line calculated as the mean difference of the measurements. The so called \textit{Limits of Agreement} (LoA) are denoted as grey dashed lines and indicate the interval, within which 95\% of the measurements is expected to lay.
+The plot indicates the central tendency (bias) as the robust grey line calculated as the mean difference of the measurements. The so-called \textit{limits of agreement} (LoA) are denoted as grey dashed lines and indicate the interval, within which 95\% of the measurements is expected to lay.
 
 \begin{landscape}
 \begin{table}[H]
@@ -71,17 +71,17 @@ The plot indicates the central tendency (bias) as the robust grey line calculate
  	\sidesubfloat[]{\includegraphics[width=0.42\linewidth]{baltman-tk}} \hfill \sidesubfloat[]{\includegraphics[width=0.42\linewidth]{baltman-etk}} \\ \vspace{10pt}   
 	\sidesubfloat[]{\includegraphics[width=0.42\linewidth]{baltman-pr}} \hfill \sidesubfloat[]{\includegraphics[width=0.42\linewidth]{baltman-2cxm}}
 
-\caption[Bland–Altman plots for different methods]{Bland–Altman plots for eGFR and different PK models with mGFR as a reference. TK, ETK, PR, 2CXM are particular models. All measurements are given in mL/min/1.73\,m$^2$. Note that for PR model the scale is different because of large shifts.} 
+\caption[Bland–Altman plots for different methods]{Bland–Altman plots for eGFR and different PK models with mGFR as a reference. TK, ETK, PR, 2CXM are particular models. All measurements are given in mL/min/1.73\,m$^2$. Note that for PR model the scale is different because of large shifts} 
 \label{fig:baltman}
 \end{figure}
 
-Table \ref{tab:results2} compares the performance of PK models and SCr blood test (eGFR). For each of the method the average absolute error, defined as the absolute difference between mGFR and GFR obtained by the particular method was calculated.
+Table \ref{tab:results2} compares the performance of PK models and SCr blood test (eGFR). For every of the method the average absolute error, defined as the absolute difference between mGFR and GFR obtained by the particular method was calculated.
 The goodness of fit of the model was evaluated with \textit{Root Mean Squared Error} (RMSE). 
 Additionally, for every of the GFR measurement method, the P30 value was calculated, which is the percent of the measurements lying within $\pm\,30\%$ of the true value (iohexol-GFR).
 
 \begin{table}[H]
 \centering
-\caption{Comparison of different GFR estimation methods}{Average absolute error, root mean square error, $P30$, bias and limits of agreement for different GFR estimation methods}. 
+\caption[Comparison of different GFR estimation methods]{Average absolute error, root mean square error, $P30$, bias and limits of agreement for different GFR estimation methods} 
 \label{tab:results2}
 \begin{threeparttable}
 \rowcolors{2}{}{middleblue!30}

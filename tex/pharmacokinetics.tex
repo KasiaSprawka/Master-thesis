@@ -3,7 +3,7 @@
 
 The ideal output obtained from DCE-MRI analysis would be some reliable quantitative physiological parameters of the tissue under examination. Numerical results, however, always call for some mathematical description of the system under examination. 
 
-The time-dependent distribution and deposition of a substance in a living system can be described by Phamacokinetic (PK) models~\cite{gerlowski1983physiologically}. First attempts of depicting the organism by a set of components were performed by Torsten Teorell in 1937. He then created a model of whole body shown in Figure \ref{fig:pk_draft} and described the processes inside by a set of differential equations in the same time presenting  their solutions~\cite{pkfather}. Teorell is now considered  a father of \textit{Pharmacokinetic} (PK) modelling. 
+The time-dependent distribution and deposition of a substance in a living system can be described by \textit{phamacokinetic} (PK) models~\cite{gerlowski1983physiologically}. First attempts of depicting the organism by a set of components were performed by Torsten Teorell in 1937. He then created a model of whole body shown in Figure \ref{fig:pk_draft} and described the processes inside by a set of differential equations in the same time presenting  their solutions~\cite{pkfather}. Teorell is now considered  a father of pharmacokinetic modelling. 
 
 \begin{figure}[t]
 		\centering
@@ -85,7 +85,7 @@ the tissue concentration can be obtained by convolving the concentration of trac
 	\label{eq:convolution}
 	C_{t}(t) = C_{in}(t)\circledast h(t) = \int_{0}^{t}C_{in}(\tau)h(t-\tau)d\tau 
 \end{equation}
-When the only inlet of the examined tissue is an artery, the input function corresponds to the function of plasma concentration at the entrance of the system and can be derived from so-called \textit{Arterial Input Function} (AIF), $C_{in} = C_{p}$. The IRF in terms can be found by applying the Laplace transform to the appropriate mass balance equations \cite{thesis}.
+When the only inlet of the examined tissue is an artery, the input function corresponds to the function of plasma concentration at the entrance of the system and can be derived from so-called \textit{arterial input function} (AIF), $C_{in} = C_{p}$. The IRF in terms can be found by applying the Laplace transform to the appropriate mass balance equations \cite{thesis}.
 \newpage
 
 \subsection{One-compartment model}
@@ -112,12 +112,12 @@ Finally, according to Formula~(\ref{eq:convolution}), the tracer concentration i
 \end{equation}
 
 
-The described above physical and mathematical background was shortened so that to indroduce very basics and explain enough but not too much on the theory of PK models. If the reader is interested, I kindly refer to the original sources \cite{sourbron2011scope, thesis}. 
+The described above physical and mathematical background was shortened so that to indroduce very basics and explain enough but not too much on the theory of PK models. If interested, the reader is kindly reffered to the original sources \cite{sourbron2011scope, thesis}. 
 
-There exist numerous PK compartment models used in DCE-MRI analysis and every of them is based on different assumptions and simplifications, which are not proper in all cases. The choice of the model depends on such factors as a type of a~tissue under concideration, the quality of data, the possibility of obtaining AIF and many more \cite{khalifa2014models}. One should, however, remember that no mathematical equations will ever describe the living organism accurately in 100\% as there are no two samples of tissue behaving exactly in the same way. The most widely used PK models include: \textit{Tofts and Kermode} (TK), \textit{Extended TK} (ETK), \textit{Two-compartment Exchange} (2CXM) and \textit{Patlak-Rutland} (PR) models.  
+There exist numerous PK compartment models used in DCE-MRI analysis and every of them is based on different assumptions and simplifications, which are not proper in all cases. The choice of the model depends on such factors as a type of a~tissue under concideration, the quality of data, the possibility of obtaining AIF and many more \cite{khalifa2014models}. One should, however, remember that no mathematical equations will ever describe the living organism accurately in 100\% as there are no two samples of tissue behaving exactly in the same way. The most widely used PK models include: \textit{Tofts and Kermode} (TK), \textit{extended TK} (ETK), \textit{two-compartment Exchange} (2CXM) and \textit{Patlak-Rutland} (PR) models \cite{khalifa2014models}.  
 
 \section{Arterial Input Function}
-The quantitative approaches of DCE-MRI analysis require obtaining the input function delivering the tracer to the system. From the physiological point of view, the tracer is delivered to the tissue of interest through the feeding blood vessels, so the input function becomes the plasma concentration, $C_p$ in these vessels. Plasma concentration can be obtained from so-called \textit{Arterial Input Function} (AIF), which describes the changes of the tracer concentration in the feeding blood source. Its tracer kinetics differs significantly from this of the tissue. The changes in plasma concentration are fast and sharp and it is of great importance to cover the rapid peak of the signal or else the important information about the tissue will be lost \cite{khalifa2014models, jackson2005dynamic, barnes2012practical}.   
+The quantitative approaches of DCE-MRI analysis require obtaining the input function delivering the tracer to the system. From the physiological point of view, the tracer is delivered to the tissue of interest through the feeding blood vessels, so the input function becomes the plasma concentration, $C_p$ in these vessels. Plasma concentration can be obtained from so-called \textit{arterial input function} (AIF), which describes the changes of the tracer concentration in the feeding blood source. Its tracer kinetics differs significantly from this of the tissue. The changes in plasma concentration are fast and sharp and it is of great importance to cover the rapid peak of the signal or else the important information about the tissue will be lost \cite{khalifa2014models, jackson2005dynamic, barnes2012practical}.   
 In general there are three approaches of acquiring the AIF:
 \begin{enumerate}
 \item{\textbf{Gold standard AIF}} is obtained by blood sampling during DCE-MRI examination.
@@ -131,8 +131,9 @@ What is more, in some cases, for example during DCE-MRI of a breast, blood colle
 
 \section{Intensity to concentration conversion}
 Because the PK models describe kinetics of the system in terms of the CA concentration in the tissue and the output of DCE-MRI examination is the signal intensity as a~function of time, the conversion of the signal intensity to concentration is indispensable. 
-As long as the relationship between CA concentration and the signal intensity  is linear, and the same for both the tissue and the blood in case of acquiring AIF from DCE-MRI images, the conversion boils down to the substracting the baseline so that the concentration before the tracer arrival is at the level of 0. This conditions are satisfied at low doses of CA \cite{khalifa2014models}.
-
+As long as the relationship between CA concentration and the signal intensity  is linear, and the same for both the tissue and the blood in case of acquiring AIF from DCE-MRI images, the conversion boils down to the substracting the baseline so that the concentration before the tracer arrival is at the level of 0. 
+\newpage
+\noindent This conditions are satisfied at low doses of CA \cite{khalifa2014models}.
 At high doses of the CA, however, this linearity is not true anymore due to the saturation effect of the signal. Non-linearity adds one more complication to the DCE-MRI examination. In such case, in order to convert the signal intensity into the CA concentration, the maps of the native relaxation time, $T_{10}$, which is the value of $T_1$ before the tracer injection, have to be measured. Then, the values can be substituted to Formulas (\ref{eq:conversion2}), (\ref{eq:conversion3}) and the CA concentration can be obtained \cite{khalifa2014models, jackson2005dynamic, barnes2012practical}.
 
 
