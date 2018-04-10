@@ -10,8 +10,10 @@
 %\thispagestyle{empty}
 %\pagenumbering{gobble}
 %%
-%\phantomsection \label{sec:Abbreviations}
-	%\addcontentsline{toc}{chapter}{List of Abbreviations}
+{\let\clearpage\relax
+\newpage
+\phantomsection \label{sec:Abbreviations}
+	\addcontentsline{toc}{chapter}{Abbreviations}
 
 
 %\thispagestyle{empty}
@@ -19,6 +21,7 @@
 
 %\thispagestyle{empty}
 \printglossary[ nogroupskip, style=super, type=\acronymtype, nonumberlist]
+}
 %
 %\thispagestyle{empty}
 

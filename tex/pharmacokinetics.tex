@@ -5,16 +5,19 @@ The ideal output obtained from DCE-MRI analysis would be some reliable quantitat
 
 The time-dependent distribution and deposition of a substance in a living system can be described by \textit{phamacokinetic} (PK) models~\cite{gerlowski1983physiologically}. First attempts of depicting the organism by a set of components were performed by Torsten Teorell in 1937. He then created a model of whole body shown in Figure \ref{fig:pk_draft} and described the processes inside by a set of differential equations in the same time presenting  their solutions~\cite{pkfather}. Teorell is now considered  a father of pharmacokinetic modelling. 
 
-\begin{figure}[t]
-		\centering
-		\includegraphics[height =11cm]{pk_draft}
-		\caption [Teorell's first PK model]{First PK model desribed by Teorell \cite{pkfather}}
-		\label{fig:pk_draft}
-	\end{figure}
 
 PK models aim to characterise a physiologic system, not necessarily the whole body, by decomposing it into interacting compartments. Every of them is a homogenous, well-mixed space with the uniform tracer distribution \cite{PMID:20540902}.
 Thus, the multicompartment system reaches the equilibrum in different time.  PK models have very wide clinical application: from estimating the optimal drug dose to determining safe working environment while working with toxins  \cite{gerlowski1983physiologically}.
 
+
+\begin{figure}[H]
+		\centering
+		\includegraphics[height =12cm]{pk_draft}
+		\caption [Teorell's first PK model]{First PK model desribed by Teorell \cite{pkfather}}
+		\label{fig:pk_draft}
+	\end{figure}
+
+\vspace{1cm}
 Given the fact that the contrast agent used in DCE-MRI examination can be considered as a substance flowing through the organism, Pharmacokintetic modelling can also be used in analysis of so obtained data.   
 This approach, called the quantitative one, is based on fitting mathematical model to acquired tissue concentration time courses \cite{khalifa2014models, jackson2005dynamic, barnes2012practical}. In this way, the quantitative parameters can be assessed, which cannot be overestimated while evaluating the tissue function. 
 
@@ -114,7 +117,7 @@ Finally, according to Formula~(\ref{eq:convolution}), the tracer concentration i
 
 The described above physical and mathematical background was shortened so that to indroduce very basics and explain enough but not too much on the theory of PK models. If interested, the reader is kindly reffered to the original sources \cite{sourbron2011scope, thesis}. 
 
-There exist numerous PK compartment models used in DCE-MRI analysis and every of them is based on different assumptions and simplifications, which are not proper in all cases. The choice of the model depends on such factors as a type of a~tissue under concideration, the quality of data, the possibility of obtaining AIF and many more \cite{khalifa2014models}. One should, however, remember that no mathematical equations will ever describe the living organism accurately in 100\% as there are no two samples of tissue behaving exactly in the same way. The most widely used PK models include: \textit{Tofts and Kermode} (TK), \textit{extended TK} (ETK), \textit{two-compartment Exchange} (2CXM) and \textit{Patlak-Rutland} (PR) models \cite{khalifa2014models}.  
+There exist numerous PK compartment models used in DCE-MRI analysis and every of them is based on different assumptions and simplifications, which are not proper in all cases. The choice of the model depends on such factors as a type of a~tissue under concideration, the quality of data, the possibility of obtaining AIF and many more \cite{khalifa2014models}. One should, however, remember that no mathematical equations will ever describe the living organism accurately in 100\% as there are no two samples of tissue behaving exactly in the same way. The most widely used PK models include: \textit{Tofts and Kermode} (TK) \cite{tofts1991measurement}, \textit{extended TK} (ETK) \cite{tofts1997modeling}, \textit{two-compartment Exchange} (2CXM) \cite{khalifa2014models} and \textit{Patlak-Rutland} (PR) \cite{patlak1983graphical} models.  
 
 \section{Arterial Input Function}
 The quantitative approaches of DCE-MRI analysis require obtaining the input function delivering the tracer to the system. From the physiological point of view, the tracer is delivered to the tissue of interest through the feeding blood vessels, so the input function becomes the plasma concentration, $C_p$ in these vessels. Plasma concentration can be obtained from so-called \textit{arterial input function} (AIF), which describes the changes of the tracer concentration in the feeding blood source. Its tracer kinetics differs significantly from this of the tissue. The changes in plasma concentration are fast and sharp and it is of great importance to cover the rapid peak of the signal or else the important information about the tissue will be lost \cite{khalifa2014models, jackson2005dynamic, barnes2012practical}.   

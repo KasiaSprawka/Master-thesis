@@ -1,6 +1,7 @@
 %
 % Streszczenie
 %
+\newgeometry{left = 3cm, right = 2.5cm, top=2.3cm, bottom = 3cm}
 
 \newpage	%░░░░░░░░░░░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░░░░░░░░░░░░░░░░░░
 \thispagestyle{empty}
@@ -11,13 +12,11 @@
 	\addcontentsline{toc}{chapter}{Abstract}
 
 	\begin{spacing}{1.0}
-	\ifantyplagiat
-	\else
 		\begin{center}
-			\vspace*{-3.35cm}
+			%\vspace*{-3.35cm}
 			{\scshape\normalsize Lodz University of Technology} \\ 
 			{\scshape\normalsize Faculty Of Electrical, Electronic, Computer And Control Engineering} \\
-			\vspace{1.15cm}	\textbf{\large\author{}} \\
+			\vspace{0.5cm}	\textbf{\large\author{}} \\
 			\vspace{0.3cm}
 			{\scshape\footnotesize Master of Engineering Thesis} \\
 			\vspace{0.25cm}
@@ -30,64 +29,39 @@
 			{\supervisor{}}\\
 			{\auxiliarySupervisor{}}\\
 		\end{flushleft}
-		\fi
+
 		
 		\begin{center}
 			{\bf\large Abstract}
 		\end{center}
 	\end{spacing}
 	
-	\begin{spacing}{1.15}
-		Tresc
-	\end{spacing}
-	
-	
-	
-	
+	\begin{spacing}{1.0}
+		\begin{small}
+
+The kidneys maintain whole body homeostasis enabling the organism to function in the optimal environment. The metrics of the renal function is glomerular filtration rate (GFR) and its monitoring is essential for prognosis, diagnosis and treatment of renal diseases. Clinically used chemical methods are cumbersome and do not allow for single kidney GFR estimation (SKGFR),  in contrary to the analysis of the dynamic contrast enhanced magnetic resonance imaging  (DCE-MRI), which enable a non-invasive examination of both renal function and structure in one imaging session. However, there is lack of methods enabling reliable renal function quantification without human interference.
+
+The works included in this thesis are a part of the project, which aims to develop entirely data-driven method of GFR estimation directly from DCE-MRI---fast, efficient and accurate enough to be used in a clinical practice. 
+The scope of this thesis was to develop an library for quantitative analysis of DCE-MRI in Python programming language to be used in the target method and to compare the performance of different pharmacokinetic (PK) models in renal function assessment applications.
+
+First, the labels of both kidneys and aorta were depicted on registered DCE-MRI sequences. In order to remove the region of the renal pelvis, the kidney voxel-wise segmentation on the basis of intensity time courses was performed with the use of principal component analysis (PCA) and k-means clustering algorithm. Average contrast agent concentration-time curves of the functional region of each kidney were then fitted to the four PK models: \textit{Tofts and Kermode} (TK), \textit{extended Tofts and Kermode} (ETK), \textit{Patlak-Rutland} (PR) and \textit{two-compartment exchange} (2CXM) models. From the obtained model parameters, the SKGFR and total GFR were calculated.   
+
+The developed method was tested on DCE-MRI sequences of ten healthy subjects. Obtained total GFR values were compared with the values obtained in iohexol-GFR and serum creatinine tests.
+The results showed that 2CXM is the most accurate and precise of tested PK models with reference to the iohexol-GFR and its performance is comparable with a serum-creatinine test. 
+
+The conclusion was drawn that 2CXM can be used in a final step of the GFR estimation in the target method and the developed library enables its implementation.   
+
+		
+		
+		\end{small}
+
+		
+		\vfill
+		\normalsize \noindent \textbf{Keywords:} DCE-MRI, kidney, glomerular filtration rate, pharmacokinetic modelling, quantitative analysis, kidney segmentation.  
+				
+				\end{spacing}	
+
 	\newpage
 \thispagestyle{empty}
-\mbox{}	%░░░░░░░░░░░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░░░░░░░░░░░░░░░░░░
+\mbox{}	
 
-	\newpage	
-	\thispagestyle{empty}
-	
-	\phantomsection \label{sec:Streszczenie}
-	\addcontentsline{toc}{chapter}{Streszczenie}
-	
-	\begin{spacing}{1.0}
-	\ifantyplagiat
-	\else
-		\begin{center}
-			\vspace*{-3.35cm}
-			{\scshape\normalsize Technical University of Łódź} \\ 
-			{\scshape\normalsize Wydział Elektrotechniki, Elektroniki, Informatyki i Automatyki} \\
-			\vspace{1.15cm}	\textbf{\large\author{}} \\
-			\vspace{0.3cm}
-			{\scshape\footnotesize Praca dyplomowa magisterska} \\
-			\vspace{0.25cm}
-			\textbf{\large\titlepl{}} \\
-			\vspace{0.25cm}
-			{Łódź, 2012}
-		\end{center}
-		
-		\begin{flushleft}
-			{Supervisor: \supervisor{}}\\
-			{Auxiliary supervisor: \auxiliarySupervisor{}}\\
-		\end{flushleft}
-		\fi
-		
-		\begin{center}
-			{\bf\large Streszczenie}
-		\end{center}
-	\end{spacing}
-	
-	\begin{spacing}{1.15}
-	tresc
-	\end{spacing}
-	
-	
-		\newpage
-\thispagestyle{empty}
-\mbox{}
-
-	\newpage	%░░░░░░░░░░░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░░░░░░░░░░░░░░░░░░

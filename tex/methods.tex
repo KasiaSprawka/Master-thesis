@@ -43,14 +43,14 @@ The few frames of the sample raw DCE-MRI sequence are shown in Figure~\ref{fig:s
 		\subfloat[$t  = 39\,Tp$]	{\includegraphics[height=0.26\linewidth]{img/preview/39}} \quad
 	\subfloat[$t  = 55\,Tp$]{\includegraphics[height=0.26\linewidth]{img/preview/55}} \quad
 	\subfloat[$t  = 73\, Tp$]{\includegraphics[height=0.26\linewidth]{img/preview/73}}
-\vspace{0.05cm}
+\vspace{0.2cm}
 \caption[Sample DCE-MRI sequence of the healthy kidneys.]{Sample DCE-MRI sequence of the healthy kidneys. $Tp$ is a given time point. Firstly, the signal enhancement is observed in the renal cortex. Then, the tracer travels to the renal medulla and finally is collected by the collecting system}
 \label{fig:set}
 \end{figure}
 
 \newpage
 \section{GFR reference values}
-Next to the DCE-MRI examinations, the participants had their GFR assessed by two chemical methods commonly used in the clinical practice: the \textit{Serum-creatinine} (SCr) blood test and \textit{iohexol-GFR} tests. Creatinine is an endogenous indicator, which allows for estimating GFR from validated algorithms.
+Next to the DCE-MRI examinations, the participants had their GFR assessed by two chemical methods commonly used in the clinical practice: the \textit{serum-creatinine} (SCr) blood test and \textit{iohexol-GFR} tests. Creatinine is an endogenous indicator, which allows for estimating GFR from validated algorithms.
 Iohexol in terms is an exogenous marker which is used for accurate GFR measurement. The clinical characteristic of the participants is included in Table~\ref{tab:participants}
 
 \begin{table}[h!]
@@ -199,7 +199,7 @@ To segment the kidney, the k-means algorithm was initiated with two clusters, $k
 Further, for each of the identified clusters, the average time point, $T_{max}$ in which signal intensity reaches its maximum was calculated. 
 Following the assumption that $T_{max\_pelvis}>T_{max\_parenchyma}$, the cluster with greater $T_{max}$ was marked as the pelvis and removed from the \textit{Region of Interest} (ROI).
 The average time-intensity curves for two detected clusters in k-means clustering algorithm for sample kidney are presented in Figure~\ref{fig:clusters}. One can easily note that the wash-in phase in pelvis takes place much later than in renal parenchyma. The results of the segmentation in turn are shown in Figure \ref{fig:segmentation}.  
-
+\vspace{1cm}
 
 \begin{figure}[H]
 %\captionsetup[subfloat]{captionskip=0.5cm}
@@ -209,7 +209,7 @@ The average time-intensity curves for two detected clusters in k-means clusterin
 \caption[Average time courses for two clusters detected in k-means algorithm]{Average time courses for two clusters detected in k-means algorithm performed for sample kidney}
 \label{fig:clusters}
 \end{figure}
-
+\vspace{1cm}
 \begin{figure}[H]
 \captionsetup[subfloat]{captionskip=0.5cm}
 	\centering
@@ -335,7 +335,7 @@ In TK and ETK models the free parameters $K_{trans}$, $v_e$ and $v_p$ are estima
 Unlike the TK and ETK models, the \textit{Patlak-Rutland} model \cite{patlak1983graphical} assumes that reverse transfer constant from EES to the plasma, $k_{ep}$, in negligibly small, because of the short time of the measurement (tracer does not have time to return) and low permeability \cite{khalifa2014models}. 
 Similarly to the ETK, the tissue concentration is equal to the:
 \begin{equation}
-C_t(t) = v_pC_p(t) + v_eC_e(t),
+C_t(t) = v_pC_p(t) + v_eC_e(t)
 \label{eq:patlak1}
 \end{equation}
 \newpage
@@ -357,7 +357,7 @@ To obtain the free parameters, the concentration time courses obtained from DCE-
 where $Y=C_t(t)/C_p(t)$ and $X=\int_{0}^{t}C_p(\tau)d\tau/C_p(t)$. The free parameters $K_{trans}$ and $v_p$ can be then estimating by constructing a linear plot and calculating its slope and intercept respectively.
 In this project, the data was fitted to Formula (\ref{eq:patlak}). 
 
-\paragraph{Two-compartment exchange model.}While all previous described models allow for estimating transfer constant $K_{trans}$ combining both the plasma blood flow, $F_b$, and the surface permeability, $PS$, \textit{two-compartment exchange model} (2CXM) enables their separate estimation. 
+\paragraph{Two-compartment exchange model.}While all previous described models allow for estimating transfer constant $K_{trans}$ combining both the plasma blood flow, $F_b$ [min$^{-1}$], and the surface permeability area product, $PS$ [min$^{-1}$], \textit{two-compartment exchange model} (2CXM) enables their separate estimation. 
 According to 2CXM, the plasma compartment has an arterial inlet and a venous outlet of the same plasma flow, $Fp$. 
 The tracer is exchanged between the two compartments: EES and intravascular plasma, at a symmetric rate quantified by the permeability surface product, $PS$.
 Because the CA leaves the system, the model is referred to as an open system. 
@@ -406,10 +406,10 @@ Sample concentration time course fitted to different models is shown in Figure~\
 \captionsetup[subfloat]{captionskip=0.5cm}
 	\centering
 	\subfloat[TK model fit; $K_{trans}$ = 0.52 min$^{-1}$ ]{\includegraphics [width=0.48\linewidth]{tk2}}\hspace{0.03\linewidth}
-	\subfloat[ETK model fit; $K_{trans}$ = 0.45 min$^{-1}$]{\includegraphics[width=0.48\linewidth]{etk2}}\\ \vspace{0.5cm}	
+	\subfloat[ETK model fit; $K_{trans}$ = 0.45 min$^{-1}$]{\includegraphics[width=0.48\linewidth]{etk2}}\\ \vspace{1cm}	
 	\subfloat[PR model fit; $K_{trans}$ = 0.19 min$^{-1}$]{\includegraphics [width=0.48\linewidth]{pr2}}\hspace{0.03\linewidth}
 	\subfloat[2CXM model fit; $K_{trans}$ = 0.37 min$^{-1}$]{\includegraphics[width=0.48\linewidth]{2cxm2}}\\	
-\vspace{0.5cm}
+\vspace{1cm}
 \caption[An example of models fit]{Sample concentration time course fitted to different PK models: (a) Tofts and Kermode model (b) Extended Tofts and Kermode model (c) Patlak-Rutland model (d) Two-Compartment Exchange Model}
 \label{fig:fit}
 \end{figure}
