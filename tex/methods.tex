@@ -12,7 +12,7 @@ This part of the thesis describes in details the implemented method of the quant
 
 \section{DCE-MRI acquisition}
 The dataset used in this project consists of forty DCE-MRI sequences. Each of the twenty healthy, non-smoking participants underwent two MRI examinations at a~time interval of 7 days.
-Gd-DOTA (\textit{gadoteric acid}), which is a gadolinium-based CA,  at a dose of 0.025\,mmol/kg was administrated as a bolus injection at 3\,ml/s in an antecubital vein followed by a 20\,mL saline flush.
+Gd-DOTA (\textit{gadoteric acid}), which is a gadolinium-based CA,  at a dose of 0.025\,mmol/kg was administrated as a bolus injection at 3\,mL/s in an antecubital vein followed by a 20\,mL saline flush.
 The examinations were performed on the 32 channel 1.5\,T whole-body scanner (Siemens Magnetom Avanto \cite{simens}) with a gradient strength\,=\,45\,mT/m and slew rate\,=\,200\,mT/m/ms using a~standard six-channel body matrix coil and table-mounted six-channel spine matrix coil for signal reception.
 The 74 volumes, each consisting of 30 slices, covering the kidneys and the aorta were continuously acquired every 2.3\,s for approximately 6\,min in coronal-oblique plane.
 The acquisition matrix was 192\,$\times$\,192 whereas the voxel size was equal to 2.2\,$\times$\,2.2\,$\times$\,3\,mm$^3$.
@@ -70,8 +70,8 @@ Iohexol in terms is an exogenous marker which is used for accurate GFR measureme
   	Weight [kg] & 66.2\,$\pm$\,8.7\\
   	Body Mass Index (BMI) [kg/m\textsuperscript{2}] & 22.6\,$\pm$\,2.1\\
   	Body Surface Area (BSA) [m\textsuperscript{2}]& 1.77\,$\pm$\,0.14 (1.5--2.0) \\
-  	Iohexol GFR [ml/min/m\textsuperscript{2}] &103\,$\pm$\,10 (87--125)\\
-  	SCr GFR [ml/min/m\textsuperscript{2}] & 110\,$\pm$\,15 (81--128)\\
+  	Iohexol GFR [mL/min/m\textsuperscript{2}] &103\,$\pm$\,10 (87--125)\\
+  	SCr GFR [mL/min/m\textsuperscript{2}] & 110\,$\pm$\,15 (81--128)\\
   \bottomrule
 
 \end{tabular}
@@ -86,7 +86,7 @@ Iohexol in terms is an exogenous marker which is used for accurate GFR measureme
 \section{Image processing and analysis}
 
 \subsection{Motion correction}
-One of the first fundamental problem encountered during DCE-MRI analysis is misalignment of the 3D volumes across time slices. This misalignment of organs is a result of the patient's respiratory motion as well as the heartbeat and bowel peristalsis and is unavoidable during examination. Studies have shown that even slight misalignment can lead to significant differences in intensity time-courses \cite{KidneySubsegmentation} and thus, motion correction of time series is essential for further analysis.
+One of the first fundamental problem encountered during DCE-MRI analysis is misalignment of the 3D volumes across time slices. This misalignment of organs is a result of the patient's respiratory motion as well as the heartbeat and bowel peristalsis and is unavoidable during examination. Studies have shown that even slight misalignment can lead to significant differences in intensity time courses \cite{KidneySubsegmentation} and thus, motion correction of time series is essential for further analysis.
 
 In order to remove 	the motion artifact, all files were motion-corrected across time points. For this purpose the R programming language for statistical computing and graphics was used \cite{R} together with the package ANTsR \cite{ANTsR}, which provides quantification tools for biomedical images. 
 
@@ -118,7 +118,7 @@ Consequently, it can be separated by unsupervised clustering.
 \begin{figure}
 	\centering
 	\includegraphics[width=10cm]{img/timecourses}
-	\caption[Example kidney compartments timecourses]{Example kidney compartments timecourses \cite{KidneySubsegmentation}}
+	\caption[Example kidney compartments time courses]{Example kidney compartments time courses \cite{KidneySubsegmentation}}
 	\label{fig:timecourses}
 \end{figure}
 
@@ -223,7 +223,7 @@ The average time-intensity curves for two detected clusters in k-means clusterin
 \newpage
 \subsection{Concentration-time curves}
 Having labelled the proper ROI, the time has come for the principal part of the analysis, namely pharmacokinetic modelling.
-The whole PK part was implemented in Python programming language from the scratch and no ready toolboxes for PK modelling were used.
+The whole PK part was implemented in the Python programming language from the scratch and no ready toolboxes for PK modelling were used.
 
 All PK models used during quantitative DCE-MRI analysis call for determining both the tissue, $C_t(t)$, and blood plasma, $C_p(t)$, concentration as a~function of time. In our case, the $C_t(t)$ is the mean concentration in renal parenchyma, whereas the
 $C_p(t)$, can be derived from the AIF, which is a concentration in a blood vessel feeding the kidney (aorta).
@@ -291,7 +291,7 @@ Having determined the AIF and the concentration time course for the renal pa\-re
 \end{equation}
 where $C_p$ is CA plasma concentration, $C_a$ is concentration in the aorta defined by the AIF and $Hct$ is the fractional volume of red blood cells in the blood. In this study, its value was taken from the literature as an average population value and was equal to $Hct=0.42$ \cite{tofts2010t1}.
 
-Finally, PK modelling could have been performed. The models of choice were the Tofts and Kermode model, extended Tofts and Kermode model, Patlak-Rutland model and two-compartment exchange model. The aim is to obtain value of the transfer constant $K_{trans}$ [min$^-1$], which corresponds to the GFR per unit tissue volume. The fit was performed by using a non-linear least squares analysis.
+Finally, PK modelling could have been performed. The models of choice were the Tofts and Kermode model, extended Tofts and Kermode model, Patlak-Rutland model and two-compartment exchange model. The aim was to obtain value of the transfer constant $K_{trans}$ [min$^-1$], which corresponds to the GFR per unit tissue volume. The fit was performed by using a non-linear least squares analysis.
  
 \paragraph{Tofts and Kermode model.}
 According to the \textit{Tofts and Kermode} (TK) model) \cite{tofts1991measurement} the tracer is distributed in two compartments: intravascular and \textit{Extravascular extra-cellular space} (EES).
@@ -400,7 +400,7 @@ The $K_{trans}$ can be then obtained by:
 K_{trans} = \frac{PS\cdot{}F_p}{PS+F_p}
 \end{equation}
 
-Sample concentration time course fitted to different models is shown in Figure~\ref{fig:fit}. 
+A sample concentration time course fitted to different models is shown in Figure~\ref{fig:fit}. 
 
 \begin{figure}
 \captionsetup[subfloat]{captionskip=0.5cm}
@@ -410,7 +410,7 @@ Sample concentration time course fitted to different models is shown in Figure~\
 	\subfloat[PR model fit; $K_{trans}$ = 0.19 min$^{-1}$]{\includegraphics [width=0.48\linewidth]{pr2}}\hspace{0.03\linewidth}
 	\subfloat[2CXM model fit; $K_{trans}$ = 0.37 min$^{-1}$]{\includegraphics[width=0.48\linewidth]{2cxm2}}\\	
 \vspace{1cm}
-\caption[An example of models fit]{Sample concentration time course fitted to different PK models: (a) Tofts and Kermode model (b) Extended Tofts and Kermode model (c) Patlak-Rutland model (d) Two-Compartment Exchange Model}
+\caption[An example of models fit]{A sample concentration time course fitted to different PK models: (a) Tofts and Kermode model (b) Extended Tofts and Kermode model (c) Patlak-Rutland model (d) Two-Compartment Exchange Model}
 \label{fig:fit}
 \end{figure}
 

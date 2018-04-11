@@ -4,10 +4,10 @@ The algorithm developed within this thesis was evaluated on ten DCE-MRI sequence
 The segmentation of the pelvis was evaluated with \textit{Dice similarity coefficient} (DSC) given by the formula \cite{dice1945measures}:
 \begin{equation}
 	\label{eq:dice}
-	DSC = \dfrac{2|A\cap{}B|}{|A|+|B|},
+	DC = \dfrac{2|A\cap{}B|}{|A|+|B|},
 \end{equation}
 where |A| and |B| are the number of voxels in pelvis detected  in the automatic segmentation routine and the number of voxels in ground truth labelled organoleptically, respectively, whereas $|A\cap{}B|$ is the number of common voxels.
-The average accuracy of the pelvis segmentation was equal to DSC~=~0.86\,$\pm$\,0.06.
+The average accuracy of the pelvis segmentation was equal to DC~=~0.86\,$\pm$\,0.06.
 
 The SKGFR values of the left and right kidney, as well as total GFR for each of the participants obtained in the examination of the MRI sequences applying different PK models are shown in Table~\ref{tab:results}. Also, the GFR values obtained with chemical methods were included in the table for comparison. \textit{Measured GFR} (mGFR) is a value obtained in iohexol-GFR test, whereas \textit{estimated GFR} (eGFR) is the one derived from the SCr blood test.
 
@@ -57,7 +57,7 @@ The plot indicates the central tendency (bias) as the robust grey line calculate
 \item L and R are SKGFR for left and right kidneys, respectively, whereas T is the total GFR.
 \item TK, ETK, PR, 2CXM are particular PK models. 
 \item Note that $L+R = T$ is not always satisfied because of the rounding error.
-\item All GFR values are expressed in ml/min$^{-1}$/1.73\,m$^2$.
+\item All GFR values are expressed in mL/min$^{-1}$/1.73\,m$^2$.
     \end{tablenotes}
 	\end{threeparttable}
 \end{table}
@@ -102,7 +102,7 @@ Additionally, for every of the GFR measurement method, the P30 value was calcula
 \end{tabular}
 \begin{tablenotes}%
 \footnotesize{}%
-\item Average absolute error, RMSE, bias and LoA are given in ml/min$^{-1}$/1.73\,m$^2$
+\item Average absolute error, RMSE, bias and LoA are given in mL/min$^{-1}$/1.73\,m$^2$
     \end{tablenotes}
 	\end{threeparttable}
 \end{table}
