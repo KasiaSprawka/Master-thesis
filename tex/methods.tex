@@ -10,16 +10,16 @@ This chapter describes in details the implemented method of the quantitative ana
 
 This part of the thesis describes in details the implemented method of the quantitative analysis of the kidney's function from DCE-MRI. The chapter leads the reader through the subsequent steps of image processing and analysis to finally compare the performance of the chosen PK models. The aim is to choose the model, which allows for obtaining the best results for GFR estimation on the given data and to draw a conclusion if it can be considered a robust, reliable method for the future applications. 
 
-\section{DCE-MRI aquisition}
-The dataset used in this project consists of forty DCE-MRI sequences. Each of the twenty healthy, non-smoking participants underwent two MRI examination at a~time interval of 7 days.
-GdDOTA (Gadoteric Acid), which is a Gadolinium-based CA,  at a dose of 0.025\,mmol/kg was administrated as a bolus injection at 3\,ml/s in an antecubital vein followed by a 20\,mL saline flush.
-The examinations were performed on 32 channel 1.5\,T whole-body scanner (Siemens Magnetom Avanto \cite{simens}) with a gradient strength\,=\,45\,mT/m and slew rate\,=\,200\,mT/m/ms using a~standard six-channel body matrix coil and table-mounted six-channel spine matrix coil for signal reception.
+\section{DCE-MRI acquisition}
+The dataset used in this project consists of forty DCE-MRI sequences. Each of the twenty healthy, non-smoking participants underwent two MRI examinations at a~time interval of 7 days.
+Gd-DOTA (\textit{gadoteric acid}), which is a gadolinium-based CA,  at a dose of 0.025\,mmol/kg was administrated as a bolus injection at 3\,ml/s in an antecubital vein followed by a 20\,mL saline flush.
+The examinations were performed on the 32 channel 1.5\,T whole-body scanner (Siemens Magnetom Avanto \cite{simens}) with a gradient strength\,=\,45\,mT/m and slew rate\,=\,200\,mT/m/ms using a~standard six-channel body matrix coil and table-mounted six-channel spine matrix coil for signal reception.
 The 74 volumes, each consisting of 30 slices, covering the kidneys and the aorta were continuously acquired every 2.3\,s for approximately 6\,min in coronal-oblique plane.
 The acquisition matrix was 192\,$\times$\,192 whereas the voxel size was equal to 2.2\,$\times$\,2.2\,$\times$\,3\,mm$^3$.
 The parameters of the used spoiled gradient recalled 3D FLASH pulse-sequence with echo time, $TE=0.8$\,ms, repetition time, $TR=2.36$\,ms, flip angle, $\alpha= 20^{\circ}$.
 
-More information about aquisition of DCE-MRI data used in this project can be found in \cite{eikefjord2017dynamic}.
-The few frames of the sample raw DCE-MRI sequence are shown in Figure~\ref{fig:set}.
+More information about the acquisition of DCE-MRI data used in this project can be found in \cite{eikefjord2017dynamic}.
+A few frames of the sample raw DCE-MRI sequence are shown in Figure~\ref{fig:set}.
 \newpage
 
 \begin{figure}[H]
@@ -51,11 +51,11 @@ The few frames of the sample raw DCE-MRI sequence are shown in Figure~\ref{fig:s
 \newpage
 \section{GFR reference values}
 Next to the DCE-MRI examinations, the participants had their GFR assessed by two chemical methods commonly used in the clinical practice: the \textit{serum-creatinine} (SCr) blood test and \textit{iohexol-GFR} tests. Creatinine is an endogenous indicator, which allows for estimating GFR from validated algorithms.
-Iohexol in terms is an exogenous marker which is used for accurate GFR measurement. The clinical characteristic of the participants is included in Table~\ref{tab:participants}
+Iohexol in terms is an exogenous marker which is used for accurate GFR measurement. The clinical characteristics of all the participants are included in Table~\ref{tab:participants}
 
 \begin{table}[h!]
 \centering
-\caption[Clinical characteristic of the participants]{Clinical characteristic of the participants \cite{eikefjord2017dynamic}}
+\caption[Clinical characteristics of the participants]{Clinical characteristics of the participants \cite{eikefjord2017dynamic}}
 \label{tab:participants}
 \begin{threeparttable}
 \rowcolors{2}{}{middleblue!30}
@@ -86,16 +86,16 @@ Iohexol in terms is an exogenous marker which is used for accurate GFR measureme
 \section{Image processing and analysis}
 
 \subsection{Motion correction}
-One of the first fundamental problem encountered during DCE-MRI analysis is misalignment of 3D volumes across time slices. This misalignment of organs is a result of the patiens's respiratory motion as well as the heartbeat and bowel peristalsis and is unavoidable during examination. Studies have shown that even slight misalignment can lead to significant differences in intensity time-courses \cite{KidneySubsegmentation} and thus, motion correction of time series is essential for further analysis.
+One of the first fundamental problem encountered during DCE-MRI analysis is misalignment of the 3D volumes across time slices. This misalignment of organs is a result of the patient's respiratory motion as well as the heartbeat and bowel peristalsis and is unavoidable during examination. Studies have shown that even slight misalignment can lead to significant differences in intensity time-courses \cite{KidneySubsegmentation} and thus, motion correction of time series is essential for further analysis.
 
-In order to remove 	the motion artifact, all files were motion-corrected across time points. For this purpose R programming language for statistical computing and graphics was used \cite{R} together with the package ANTsR \cite{ANTsR}, which provides quantification tools for biomedical images. 
+In order to remove 	the motion artifact, all files were motion-corrected across time points. For this purpose the R programming language for statistical computing and graphics was used \cite{R} together with the package ANTsR \cite{ANTsR}, which provides quantification tools for biomedical images. 
 
 As an initial step, for every time series, the algorithm extracts the 3D volumes. Each extracted volume corresponds to the data obtained in one time point. Next, the average image of the temporal volumes is calculated, which serves as a target image for image registration. Every temporal volume is then aligned to it and at the end they are combined back together into the 4D time series.
 As the misalignment concerns the inner structures, not the whole body and various organs have spatially variant geometric differences, the modality of choice was the  \textit{symmetric normalisation} algorithm (SyN), which is the non-rigid deformable transformation utilizing \textit{cross-correlation} (CC) as a similarity metric \cite{avants2011reproducible, avants2008symmetric, el2016current}. 
 
 \subsection{Manual labelling}
-In the next step, the labels of the whole left and right kidney were created. For this purpose 3D volumes were extracted for every time frame and the slice with maximal signal enhancement of the kidneys was chosen (usually between 12--17 time slice). In this image, left and right kidney were manually delineated in coronal plane using ITK-Snap software \cite{itk-snap}. Additionally, a few voxels of aorta (15--20) were labelled on maximal aortic enhancement time slice (9--10). So obtained labels were then combined and propagated across the time points. The sample labels are shown in Figure~\ref{fig:labels}.
-All further analysis was implemented in Python programming language~v.~3.6 \cite{python}.
+In the next step, the labels of the whole left and right kidney were created. For this purpose the 3D volumes were extracted for each time frame and the slice with maximal signal enhancement of the kidneys was chosen (usually between 12--17 time slice). In this image, left and right kidney were manually delineated in coronal plane using the ITK-Snap software \cite{itk-snap}. Additionally, a few voxels of aorta (15--20) were labelled on maximal aortic enhancement time slice (9--10). So obtained labels were then combined and propagated across the time points. The sample labels are shown in Figure~\ref{fig:labels}.
+All further analysis was implemented in the Python programming language~v.~3.6 \cite{python}.
 
 \begin{figure}
 \captionsetup[subfloat]{captionskip=0.5cm}
@@ -108,7 +108,7 @@ All further analysis was implemented in Python programming language~v.~3.6 \cite
 \end{figure}
 
 \subsection{Pelvis region removal}
-Due to the fact that glomerular filtration takes place in renal renal parenchyma, pelvis had to be removed from further analysis. 
+Due to the fact that glomerular filtration takes place in renal parenchyma, the region of pelvis had to be removed from further analysis. 
 
 Resulting from the physiology of the process, the three renal compartments (cortex, medulla, pelvis) can be distinguished from each other on the basis of their time courses, as shown in Figure~\ref{fig:timecourses}. Depending on the compartment, the rapid enhancement of the signal occurs in different periods, which makes the shapes of the time intensity curves very unique.
 From the Figure~\ref{fig:timecourses} it can be seen that the highest variation is observed between pelvis and two other renal compartments.
@@ -145,14 +145,14 @@ The amount of PCs, $n$, was chosen as a minimum number of dimensions required to
 \begin{figure}[H]
 		\centering
 		\includegraphics [height = 10cm]{pca}
-		\caption [Principal Component Analysis for a sample kidney]{Principal Component Analysis for sample kidney. The values in brackets are the ratios of explained variance for the given PCs. Note that the number of PCs was reduced to three for visualisation purpose}
+		\caption [Principal Component Analysis for a sample kidney]{Principal Component Analysis for a sample kidney. The values in brackets are the ratios of explained variance for the given PCs. Note that the number of PCs was reduced to three for visualisation purpose}
 		\label{fig:pca_plot}
 	\end{figure}
 
 To the dimensionally reduced data, the \textit{k-means clustering}} was applied in order to separate voxels into two groups: pelvis and renal parenchyma. 
 The k-means is an unsupervised clustering algorithm aiming to divide the data into groups so that the diversity between the groups is maximised whereas the similarity within the single group is maximised  \cite{kmeans}. 
 
-Given a data set $X=\{ \vec{x_1}...\vec{x_n}$\} in $m$-dimensional space (what actually corresponds to the $m$ features of a sample) the algoritm's objective is to minimize the square error function given by  \cite{kmeans, alsabti1997efficient}:
+Given a data set $X=\{ \vec{x_1}...\vec{x_n}$\} in $m$-dimensional space (what actually corresponds to the $m$ features of a sample) the algorithm's objective is to minimize the square error function given by  \cite{kmeans, alsabti1997efficient}:
 
 \begin{equation}
 	\label{eq:kmeans}
@@ -216,7 +216,7 @@ The average time-intensity curves for two detected clusters in k-means clusterin
 	\subfloat[Kidney segmentation]{\includegraphics[width=0.48\textwidth ]{kidney_pelvis}}\hspace{0.02\textwidth}
 	\subfloat[Renal parenchyma]{\includegraphics[width=0.48\textwidth]{no_pelvis}}\\	
 \vspace{0.5cm}
-\caption[Sample kidney segmentation with k-means clustering]{The results of the segmentation obtained with k-means clustering. Figure (a) shows two regions of sample kidney: the pelvis (cyan) and the renal parenchyma (magenta); Figure (b) presents the kidney after pelvis removal. The images were intentionally presented at Time point $Tp$ = 73, when the enhancement of the pelvis is high, for better visualisation}
+\caption[Sample kidney segmentation with k-means clustering]{The results of the segmentation obtained with k-means clustering. Figure (a) shows two regions of a sample kidney: the pelvis (cyan) and the renal parenchyma (magenta); Figure (b) presents the kidney after pelvis removal. The images were intentionally presented at Time point $Tp$ = 73, when the enhancement of the pelvis is high, for better visualisation}
 \label{fig:segmentation}
 \end{figure}
 
@@ -261,7 +261,7 @@ Now, all that had to be done to find $t_{baseline}$ was to detect the point, in 
 %\captionsetup[subfloat]{captionskip=0.5cm}
 	\centering
 	\includegraphics[width = \textwidth]{median2}
-\caption[Sample average time-intensity curves for a kidney and aorta with applied median filter]{Sample average time-intensity curves for a kidney and aorta with applied median filter. Note that cut peak of the aorta's signal is a result of the median filter and is present only during baseline removal step}
+\caption[Sample average time-intensity curves for a kidney and aorta with applied median filter]{Sample average time-intensity curves for a kidney and aorta with applied median filter. Note that cut peak of the aorta's signal is a result of the median filter and it is present only during the baseline removal step}
 \label{fig:median}
 \end{figure}
 
@@ -277,19 +277,19 @@ Now, all that had to be done to find $t_{baseline}$ was to detect the point, in 
 %\captionsetup[subfloat]{captionskip=0.5cm}
 	\centering
 	\includegraphics[width = \textwidth]{conversion}
-\caption[Time courses of a sample kidney and aorta after intensity-concentration conversion]{Time-intensity curves of a sample kidney and aorta converted into concentration-time curves}
+\caption[Time courses of a sample kidney and aorta after intensity-concentration conversion]{Time-intensity curves of a sample kidney and aorta converted into the concentration-time curves}
 \label{fig:conversion}
 \end{figure}
 
 
 \subsection{Pharmacokinetic modelling}
 
-Having determined the AIF and the concentration time course for the renal pa\-ren\-chy\-ma, almost all components necessary for the renal quantitative evaluation were obtained. Almost, but not all. One should take into consideration the fact that AIF is the concentration of CA in the blood of the aorta, which consist of both the red blood cells and the blood plasma. Gadolinium-based Contrast Agents, however, distribute in plasma rather than whole blood, so their effective plasma concentrations must be considered. Thus the \textit{Hematocrit} (Hct) correction were performed as follows \cite{tofts2010t1}:
+Having determined the AIF and the concentration time course for the renal pa\-ren\-chy\-ma, almost all components necessary for the renal quantitative evaluation were obtained. Almost, but not all. One should take into consideration the fact that AIF is the concentration of CA in the blood of the aorta, which consist of both the red blood cells and the blood plasma. Gadolinium-based Contrast Agents, however, distribute in plasma rather than whole blood, so their effective plasma concentrations must be considered. Thus, the \textit{hematocrit} (Hct) correction was performed as follows \cite{tofts2010t1}:
 \begin{equation}
 	\label{eq:hematocrit}
 	C_{p}(t) = \frac{C_{a}(t)} {1-Hct},
 \end{equation}
-where $C_p$ is plasma concentartion, $C_a$ is concentration in the aorta defined by the AIF and $Hct$ is s the fractional volume of red blood cells in the blood. In this study, the value was taken from the literature as an average population value and was equal to $Hct=0.42$ \cite{tofts2010t1}.
+where $C_p$ is CA plasma concentration, $C_a$ is concentration in the aorta defined by the AIF and $Hct$ is the fractional volume of red blood cells in the blood. In this study, its value was taken from the literature as an average population value and was equal to $Hct=0.42$ \cite{tofts2010t1}.
 
 Finally, PK modelling could have been performed. The models of choice were the Tofts and Kermode model, extended Tofts and Kermode model, Patlak-Rutland model and two-compartment exchange model. The aim is to obtain value of the transfer constant $K_{trans}$ [min$^-1$], which corresponds to the GFR per unit tissue volume. The fit was performed by using a non-linear least squares analysis.
  
@@ -317,12 +317,12 @@ While the Tofts model neglects intravascular contribution assuming weak vascular
 C_t(t) = v_pC_p(t) + v_eC_e(t),
 \label{eq:etk}
 \end{equation}
-where $v_p$ is fractional plasma volume. The differential eqation decribing EES compartment is \cite{sourbron2011scope}:
+where $v_p$ is fractional plasma volume. The differential equation describing the EES compartment is \cite{sourbron2011scope}:
 \begin{equation}
 	\label{eq:etoft}
 	v_e\frac{dC_{e}(t)}{dt} = K_{trans}(C_p(t)-C_e(t))
 \end{equation}
-Solving the equation and substituting to (\ref{eq:etk}) the tissue concentration comes up to \cite{khalifa2014models, tofts2010t1}:
+Solving the equation and substituting to (\ref{eq:etk}) the tissue concentration boils down to \cite{khalifa2014models, tofts2010t1}:
 \begin{align}
 	\label{eq:extended_toft}
 	C_{t}(t) &=v_pC_p(t) + C_p\circledast K_{trans}e^{-k_{ep}t} =\\
@@ -332,8 +332,8 @@ Solving the equation and substituting to (\ref{eq:etk}) the tissue concentration
 
 In TK and ETK models the free parameters $K_{trans}$, $v_e$ and $v_p$ are estimated by fitting the model to obtained in DCE-MRI examinations time-concentration curves.  
 \paragraph{Patlak-Rutland model.}
-Unlike the TK and ETK models, the \textit{Patlak-Rutland} model \cite{patlak1983graphical} assumes that reverse transfer constant from EES to the plasma, $k_{ep}$, in negligibly small, because of the short time of the measurement (tracer does not have time to return) and low permeability \cite{khalifa2014models}. 
-Similarly to the ETK, the tissue concentration is equal to the:
+Unlike the TK and ETK models, the \textit{Patlak-Rutland} model \cite{patlak1983graphical} assumes that reverse transfer constant from the EES to the plasma, $k_{ep}$, is negligibly small, because of the short time of the measurement (tracer does not have time to return) and low permeability \cite{khalifa2014models}. 
+Similarly to the ETK, the tissue concentration is equal to:
 \begin{equation}
 C_t(t) = v_pC_p(t) + v_eC_e(t)
 \label{eq:patlak1}
@@ -357,7 +357,7 @@ To obtain the free parameters, the concentration time courses obtained from DCE-
 where $Y=C_t(t)/C_p(t)$ and $X=\int_{0}^{t}C_p(\tau)d\tau/C_p(t)$. The free parameters $K_{trans}$ and $v_p$ can be then estimating by constructing a linear plot and calculating its slope and intercept respectively.
 In this project, the data was fitted to Formula (\ref{eq:patlak}). 
 
-\paragraph{Two-compartment exchange model.}While all previous described models allow for estimating transfer constant $K_{trans}$ combining both the plasma blood flow, $F_b$ [min$^{-1}$], and the surface permeability area product, $PS$ [min$^{-1}$], \textit{two-compartment exchange model} (2CXM) enables their separate estimation. 
+\paragraph{Two-compartment exchange model.}While all the previously described models allow for estimating transfer constant $K_{trans}$ combining both the plasma blood flow, $F_b$ [min$^{-1}$], and the surface permeability area product, $PS$ [min$^{-1}$], \textit{two-compartment exchange model} (2CXM) enables their separate estimation. 
 According to 2CXM, the plasma compartment has an arterial inlet and a venous outlet of the same plasma flow, $Fp$. 
 The tracer is exchanged between the two compartments: EES and intravascular plasma, at a symmetric rate quantified by the permeability surface product, $PS$.
 Because the CA leaves the system, the model is referred to as an open system. 
@@ -375,7 +375,7 @@ v_p\frac{dC_p(t)}{dt} = F_p(C_a(t)-C_p(t))+PS(C_e(t)-C_p(t))
 v_e\frac{dC_e(t)}{dt} = PS(C_p(t)-C_e(t))
 \label{eq:2cxm3}
 \end{equation}
-Note that in 2CXM the CA concentration in the plasma of the feeding artery is denoted as $C_a$ ($C_p$ in previous models) whereas $C_p$ is CA concentration in intravascular plasma. The solution comes up to \cite{khalifa2014models}:
+Note that in 2CXM the CA concentration in the plasma of the feeding artery is denoted as $C_a$ ($C_p$ in previous models) whereas $C_p$ is CA concentration in intravascular plasma. The solution boils down to \cite{khalifa2014models}:
 \begin{align}
 	\label{eq:2cxm4}
 	\nonumber C_{t}(t) &=F_p (Be^{-m_1t}+(1-B)e^{-m_2t})\circledast C_a =\\
@@ -423,4 +423,4 @@ where $V_{parenchyma}$ is the parenchymal volume (in mL) of the examined kidney 
 \begin{equation}
 V_{parenchyma} = nV_{voxel},
 \end{equation}
-where $n$ is the number of voxels included in the kidney label whereas $V_{voxel}$ is the volume of the voxel (2.2\,x\,2.2\,x\,3\,mm$^3$ = 0.14252 mL). Total GFR for each dataset was then calculated by summing SKGFR of the left and right kidneys. All obtained GFR values were normalised for standard BSA (1.73\,m$^2$).
+where $n$ is the number of voxels included in the kidney label whereas $V_{voxel}$ is the volume of the voxel (2.2\,$\times$\,2.2\,$\times$\,3\,mm$^3$ = 0.14252 mL). Total GFR for each dataset was then calculated by summing up the SKGFR of the left and right kidneys. All obtained GFR values were normalised for standard BSA (1.73\,m$^2$).
