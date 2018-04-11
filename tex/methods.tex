@@ -96,8 +96,8 @@ As the misalignment concerns the inner structures, not the whole body and variou
 \subsection{Manual labelling}
 In the next step, the labels of the whole left and right kidney were created. For this purpose the 3D volumes were extracted for each time frame and the slice with maximal signal enhancement of the kidneys was chosen (usually between 12--17 time slice). In this image, left and right kidney were manually delineated in coronal plane using the ITK-Snap software \cite{itk-snap}. Additionally, a few voxels of aorta (15--20) were labelled on maximal aortic enhancement time slice (9--10). So obtained labels were then combined and propagated across the time points. The sample labels are shown in Figure~\ref{fig:labels}.
 All further analysis was implemented in the Python programming language~v.~3.6 \cite{python}.
-
-\begin{figure}
+\vspace{1cm}
+\begin{figure}[H]
 \captionsetup[subfloat]{captionskip=0.5cm}
 	\centering
 	\subfloat[Labels of the left and right kidneys]{\includegraphics[width=0.48\textwidth ]{kidneys}}\hspace{0.02\textwidth}
@@ -256,7 +256,9 @@ To achieve it, firstly, for the purposes of the examination of the function chan
 In next step, for every intensity time course under analysis, its derivative was calculated. The derivative describes the instantaneous rate of change of the function. It tells how fast the output of the function (signal intensity) changes compared to the independent variable (time) \cite{calculus} and seems to be a perfect solution to the problem, which boils down to finding the most rapid signal change. 
 Because of one's interests is detection only of the function's increases, not decreases, the points, in which the derivative is negative were neglected, $S'(t)<0\leftarrow0$. So modified derivative of the sample kidney and aorta are shown in Figure~\ref{fig:derivative}.
 
-Now, all that had to be done to find $t_{baseline}$ was to detect the point, in which the derivative of the signal intensity time course reaches its maximum, $t_{baseline}=argmax\;S'(t)$. Having it determined, the $S_0$ was calculated as the mean signal intensity value from the beginning of the measurement ($t=0$) to $t_{baseline}$. Finally, the CA concentration in the tissue and aorta were calculated according to Formula~(\ref{eq:conversion}). The results of intensity-concentration conversion for sample time curves are shown in Figure~\ref{fig:conversion}. 
+Now, all that had to be done to find $t_{baseline}$ was to detect the point, in which the derivative of the signal intensity time course reaches its maximum, $t_{baseline}=argmax\;S'(t)$. Having it determined, the $S_0$ was calculated as the mean signal intensity value from the beginning of the measurement ($t=0$) to $t_{baseline}$. Finally, the CA concentration in the tissue and aorta were calculated according to Formula~(\ref{eq:conversion}). The results of intensity-concentration conversion for sample time curves are shown in Figure~\ref{fig:conversion}.
+\newpage 
+\vspace*{0cm}
 \begin{figure}[H]
 %\captionsetup[subfloat]{captionskip=0.5cm}
 	\centering
