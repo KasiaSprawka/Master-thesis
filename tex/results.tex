@@ -1,7 +1,7 @@
 \chapter{Results}
 The algorithm developed within this thesis was evaluated on ten DCE-MRI sequences of ten different participants. For each of the participant one of the two  DCE-MRI sequences was chosen randomly.
 
-The segmentation of the pelvis was evaluated with \textit{Dice similarity coefficient} (DSC) given by the formula \cite{dice1945measures}:
+The segmentation of the pelvis was evaluated with \textit{Dice similarity coefficient} (\textit{DC}) given by the formula \cite{dice1945measures}:
 \begin{equation}
 	\label{eq:dice}
 	DC = \dfrac{2|A\cap{}B|}{|A|+|B|},
@@ -71,12 +71,12 @@ The plot indicates the central tendency (bias) as the robust grey line calculate
  	\sidesubfloat[]{\includegraphics[width=0.42\linewidth]{baltman-tk}} \hfill \sidesubfloat[]{\includegraphics[width=0.42\linewidth]{baltman-etk}} \\ \vspace{10pt}   
 	\sidesubfloat[]{\includegraphics[width=0.42\linewidth]{baltman-pr}} \hfill \sidesubfloat[]{\includegraphics[width=0.42\linewidth]{baltman-2cxm}}
 %\vspace{0.25cm}
-\caption[Bland–Altman plots for different methods]{Bland–Altman plots for eGFR and different PK models with mGFR as a reference. TK, ETK, PR, 2CXM are particular models. All measurements are given in mL/min/1.73\,m$^2$. Note that for PR model the scale is different because of large shifts} 
+\caption[Bland–Altman plots for different methods]{Bland–Altman plots for eGFR and different PK models with mGFR as a~reference. TK, ETK, PR, 2CXM are particular models. All measurements are given in mL/min/1.73\,m$^2$. Note that for PR model the scale is different because of large shifts} 
 \label{fig:baltman}
 \end{figure}
 
 Table \ref{tab:results2} compares the performance of PK models and SCr blood test (eGFR). For every of the method the average absolute error, defined as the absolute difference between mGFR and GFR obtained by the particular method was calculated.
-The goodness of fit of the model was evaluated with \textit{Root Mean Squared Error} (RMSE). 
+The goodness of fit of the model was evaluated with \textit{root mean squared error} (RMSE). 
 Additionally, for every of the GFR measurement method, the P30 value was calculated, which is the percent of the measurements lying within $\pm\,30\%$ of the true value (iohexol-GFR).
 
 \begin{table}[H]
@@ -108,7 +108,7 @@ Additionally, for every of the GFR measurement method, the P30 value was calcula
 \end{table}
 
 
-Additionally, the correlations of the GFR values obtained by PK modelling and SCr test from mGFR were evaluated with the Pearson correlation coefficient, $r$. Additionally the p-value, $p$ for this test was determined. Obtained values as well as the best linear fits are presented in Figure~\ref{fig:regression}.  
+Additionally, the correlations of the GFR values obtained by PK modelling and SCr test from mGFR were evaluated with the Pearson correlation coefficient, $r$ and the p-value, $p$ for this test was determined. Obtained values as well as the best linear fits are presented in Figure~\ref{fig:regression}.  
 \newpage
 
 \begin{figure}[H]
